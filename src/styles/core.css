@@ -1,0 +1,18 @@
+@import 'reset';
+@import 'variables';
+@import 'mixins';
+@import 'fonts';
+
+body {
+  background: var(--color-white);
+  font-family: var(--font-family-default);
+  font-size: var(--font-base-size);
+  color: var(--color-black);
+}
+
+html,
+body,
+.root {
+  min-height: 100%;
+  height: 100%;
+}

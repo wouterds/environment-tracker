@@ -1,0 +1,12 @@
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-transparent: rgba(var(--color-white), 0);
+
+  --font-family-default: Roboto, Helvetica, Arial, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  --font-base-size: 1.4em;
+}
