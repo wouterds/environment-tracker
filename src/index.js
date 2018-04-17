@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import type { Node } from 'react';
+import App from 'components/App';
 import styles from 'styles/core.css';
 
 /**
@@ -11,7 +12,7 @@ import styles from 'styles/core.css';
  */
 const Index = (): Node => {
   return (
-    <h1>Hello World</h1>
+    <App />
   );
 };
 
