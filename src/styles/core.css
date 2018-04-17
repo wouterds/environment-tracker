@@ -4,10 +4,11 @@
 @import 'fonts';
 
 body {
-  background: var(--color-white);
+  background: var(--color-black);
   font-family: var(--font-family-default);
   font-size: var(--font-base-size);
-  color: var(--color-black);
+  line-height: var(--font-base-line-height);
+  color: var(--color-white);
 }
 
 html,
