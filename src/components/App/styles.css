@@ -1,0 +1,25 @@
+@import 'variables';
+
+.container {
+  padding: 25px;
+  margin: 50px;
+  color: var(--color-black);
+  background: var(--color-white);
+}
+
+.list {
+  list-style: inside disc;
+}
+
+.heading {
+  color: var(--color-black);
+
+  &:after {
+    content: '';
+    display: block;
+    max-width: 35px;
+    height: 4px;
+    background: var(--color-black);
+    margin: 10px 0 25px;
+  }
+}
