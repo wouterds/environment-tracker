@@ -49,7 +49,7 @@ class App extends Component<{}, State> {
   }
 
   componentDidMount() {
-    const websocket = new WebSocket('ws://raspberrypi2:3000');
+    const websocket = new WebSocket(`ws://${location.host}:3000`);
 
     websocket.onmessage = (data: Object) => this.handleSensorData(JSON.parse(data.data));
   }
