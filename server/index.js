@@ -1,6 +1,16 @@
 import redis from 'redis';
 import { promisify } from 'util';
 import WebSocket from 'ws';
+import Sequelize from 'sequelize';
+
+// Init Sequelize client
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  host: 'postgres',
+  database: 'demo',
+  username: 'demo',
+  password: 'demo',
+});
 
 // Init Redis clients
 const client = redis.createClient({ host: 'redis' });
@@ -65,3 +75,37 @@ wss.on('connection', (ws) => {
 
 // Subscribe to sensor publish event
 sub.subscribe('sensor');
+
+// Measurements model
+const Measurement = sequelize.define('measurement', {
+  id: {
+    primaryKey: true,
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+  },
+  sensor: Sequelize.STRING(8),
+  type: Sequelize.STRING(16),
+  value: Sequelize.STRING(16),
+}, {
+  indexes: [
+    {
+      fields: ['createdAt'],
+    },
+  ],
+});
+
+// Sync
+sequelize.sync();
+
+// Keep historical data
+setInterval(() => {
+  Object.entries(sensors).forEach(([sensor, data]) => {
+    Object.entries(data).forEach(([type, data]) => {
+      Measurement.create({
+        sensor,
+        type,
+        value: data.value,
+      });
+    });
+  });
+}, 1000 * 60);
