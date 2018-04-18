@@ -1,0 +1,7 @@
+@import 'variables';
+
+.container {
+  background: var(--color-white);
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(var(--color-black), 0.25);
+}
