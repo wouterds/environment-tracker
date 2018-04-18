@@ -67,10 +67,6 @@ class App extends Component<{}, State> {
       case 'bh1750':
         this.handleLightSensorData(data.data);
         break;
-      case 'tmp102':
-        break; // tmp102 seems to be less accurate
-        // this.handleTemperatureSensorData(data.data);
-        // break;
       case 'pir':
         this.handleActivitySensorData(data.data);
         break;
