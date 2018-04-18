@@ -18,6 +18,8 @@ services:
       - POSTGRES_DB=demo
       - POSTGRES_USER=demo
       - POSTGRES_PASSWORD=demo
+    ports:
+      - '5432:5432'
 
   node:
     image: node:9-slim
