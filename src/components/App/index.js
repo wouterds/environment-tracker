@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 import styles from './styles.css';
 
+declare var __PRODUCTION__:boolean;
+
 type State = {
   temperature: {
     value: ?number,
@@ -49,7 +51,7 @@ class App extends Component<{}, State> {
   }
 
   componentDidMount() {
-    const websocket = new WebSocket(`ws://${location.host}:3000`);
+    const websocket = new WebSocket(`ws://${__PRODUCTION__ ? location.host : 'raspberrypi2'}:3000`);
 
     websocket.onmessage = (data: Object) => this.handleSensorData(JSON.parse(data.data));
   }
