@@ -20,3 +20,14 @@ services:
       - '3000:3000'
     depends_on:
       - redis
+
+  nginx:
+    image: nginx:1.13
+    container_name: nginx
+    restart: unless-stopped
+    volumes:
+      - ./public:/usr/share/nginx/html
+    ports:
+      - '80:80'
+    depends_on:
+      - node
