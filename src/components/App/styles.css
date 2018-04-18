@@ -2,7 +2,7 @@
 
 .container {
   padding: 25px;
-  margin: 50px;
+  margin: 15px;
   color: var(--color-black);
   background: var(--color-white);
 }
