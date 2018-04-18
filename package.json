@@ -8,6 +8,8 @@
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --mode production --progress --colors"
   },
   "dependencies": {
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "redis": "^2.8.0",
