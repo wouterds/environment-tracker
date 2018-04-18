@@ -1,5 +1,5 @@
 import path from 'path';
-import { LoaderOptionsPlugin } from 'webpack';
+import { DefinePlugin, LoaderOptionsPlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import FlowBabelWebpackPlugin from 'flow-babel-webpack-plugin';
 
@@ -78,6 +78,9 @@ let config =  {
     new LoaderOptionsPlugin({
       minimize: production,
       sourceMap: !production,
+    }),
+    new DefinePlugin({
+      __PRODUCTION__: JSON.stringify(production),
     }),
   ],
   devServer: {
