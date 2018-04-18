@@ -1,10 +1,10 @@
 @import 'variables';
 
 .container {
-  padding: 25px;
-  margin: 15px;
-  color: var(--color-black);
-  background: var(--color-white);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
 }
 
 .list {
@@ -12,14 +12,16 @@
 }
 
 .heading {
-  color: var(--color-black);
+  color: rgba(var(--color-white), 0.9);
+  font-weight: var(--font-weight-medium);
+  border-bottom: 1px solid rgba(var(--color-white), 0.1);
+  padding: 15px 25px;
+  font-size: 1.4em;
+}
 
-  &:after {
-    content: '';
-    display: block;
-    max-width: 35px;
-    height: 4px;
-    background: var(--color-black);
-    margin: 10px 0 25px;
-  }
+.content {
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  margin: -10px;
 }

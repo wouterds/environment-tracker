@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import type { Node } from 'react';
 import styles from './styles.css';
+import SensorBox from 'components/SensorBox';
 
 declare var __PRODUCTION__:boolean;
 
@@ -170,13 +171,32 @@ class App extends Component<{}, State> {
     return (
       <div className={styles.container}>
         <h1 className={styles.heading}>Raspberry Pi Environment Tracker</h1>
-        <ul className={styles.list}>
-          <li>Temperature: {temperature.value && temperature.value.toFixed(2)} {temperature.unit}</li>
-          <li>Humidity: {humidity.value && humidity.value.toFixed(2)}{humidity.unit}</li>
-          <li>Pressure: {pressure.value && pressure.value.toFixed(2)} {pressure.unit}</li>
-          <li>Light: {light.value && light.value.toFixed(2)} {light.unit}</li>
-          <li>Activity: {activity ? 'Yes' : 'No'}</li>
-        </ul>
+        <div className={styles.content}>
+          <SensorBox
+            label="Temperature"
+            unit={temperature.unit}
+            value={temperature.value ? temperature.value.toFixed(2) : null}
+          />
+          <SensorBox
+            label="Humidity"
+            unit={humidity.unit}
+            value={humidity.value ? humidity.value.toFixed(2) : null}
+          />
+          <SensorBox
+            label="Pressure"
+            unit={pressure.unit}
+            value={pressure.value ? pressure.value.toFixed(2) : null}
+          />
+          <SensorBox
+            label="Light"
+            unit={light.unit}
+            value={light.value ? light.value.toFixed(2) : null}
+          />
+          <SensorBox
+            label="Activity"
+            value={activity ? 'Yes' : 'No'}
+          />
+        </div>
       </div>
     );
   }
