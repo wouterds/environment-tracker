@@ -25,3 +25,25 @@
   flex-direction: row;
   margin: -10px;
 }
+
+@media(max-width: 1320px) {
+  .sensorBox {
+    font-size: 0.9em;
+  }
+}
+
+@media(max-width: 1220px) {
+  .sensorBox {
+    font-size: 0.8em;
+  }
+}
+
+@media(max-width: 1120px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .sensorBox {
+    font-size: 1em;
+  }
+}

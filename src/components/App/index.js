@@ -169,26 +169,31 @@ class App extends Component<{}, State> {
         <h1 className={styles.heading}>Raspberry Pi Environment Tracker</h1>
         <div className={styles.content}>
           <SensorBox
+            className={styles.sensorBox}
             label="Temperature"
             unit={temperature.unit}
             value={temperature.value ? temperature.value.toFixed(2) : null}
           />
           <SensorBox
+            className={styles.sensorBox}
             label="Humidity"
             unit={humidity.unit}
             value={humidity.value ? humidity.value.toFixed(2) : null}
           />
           <SensorBox
+            className={styles.sensorBox}
             label="Pressure"
             unit={pressure.unit}
             value={pressure.value ? pressure.value.toFixed(2) : null}
           />
           <SensorBox
+            className={styles.sensorBox}
             label="Light"
             unit={light.unit}
             value={light.value ? light.value.toFixed(2) : null}
           />
           <SensorBox
+            className={styles.sensorBox}
             label="Activity"
             value={activity ? 'Yes' : 'No'}
           />

@@ -4,7 +4,10 @@
 @import 'fonts';
 
 body {
-  background: linear-gradient(130deg, #143B73, #3373AD);
+  background-color: #143B73;
+  background-image: linear-gradient(130deg, #143B73, #3373AD);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: var(--font-family-default);
   font-size: var(--font-base-size);
   line-height: var(--font-base-line-height);
