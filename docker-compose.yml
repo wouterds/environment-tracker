@@ -12,8 +12,8 @@ services:
     image: node:9-slim
     container_name: node
     restart: unless-stopped
-    command: node .
-    working_dir: /code/server
+    command: npm start
+    working_dir: /code
     volumes:
       - ./:/code
     ports:
