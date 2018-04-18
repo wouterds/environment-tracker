@@ -2,6 +2,8 @@
   --color-white: #fff;
   --color-black: #000;
   --color-transparent: rgba(var(--color-white), 0);
+  --color-light-gray-blue: #7F96B4;
+  --color-dark-gray-blue: #4F5C6C;
 
   --font-family-default: Roboto, Helvetica, Arial, sans-serif;
   --font-weight-light: 300;

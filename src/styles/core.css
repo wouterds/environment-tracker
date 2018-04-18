@@ -4,11 +4,11 @@
 @import 'fonts';
 
 body {
-  background: var(--color-black);
+  background: linear-gradient(130deg, #143B73, #3373AD);
   font-family: var(--font-family-default);
   font-size: var(--font-base-size);
   line-height: var(--font-base-line-height);
-  color: var(--color-white);
+  color: var(--color-dark-gray-blue);
 }
 
 html,
@@ -19,12 +19,6 @@ body,
 }
 
 b,
-strong,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+strong {
   font-weight: var(--font-weight-medium);
 }
