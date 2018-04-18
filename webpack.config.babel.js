@@ -86,4 +86,13 @@ let config =  {
   },
 };
 
+// Unwanted production plugins (flow doesn't work on arm)
+if (production) {
+  config.plugins = config.plugins.filter((plugin) => {
+    return !(
+      plugin instanceof FlowBabelWebpackPlugin
+    );
+  });
+}
+
 module.exports = config;
