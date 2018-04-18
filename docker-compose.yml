@@ -8,6 +8,17 @@ services:
     ports:
       - '6379:6379'
 
+  postgres:
+    image: postgres:10
+    container_name: postgres
+    restart: unless-stopped
+    volumes:
+      - ./docker/data/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=demo
+      - POSTGRES_USER=demo
+      - POSTGRES_PASSWORD=demo
+
   node:
     image: node:9-slim
     container_name: node
@@ -20,6 +31,7 @@ services:
       - '3000:3000'
     depends_on:
       - redis
+      - postgres
 
   nginx:
     image: nginx:1.13
