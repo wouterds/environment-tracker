@@ -54,7 +54,18 @@ class App extends Component<{}, State> {
   componentDidMount() {
     const websocket = new WebSocket(`ws://${__PRODUCTION__ ? location.host : 'raspberrypi2'}:3000`);
 
-    websocket.onmessage = (data: Object) => this.handleSensorData(JSON.parse(data.data));
+    websocket.onmessage = (data: Object) => this.socketMessage(JSON.parse(data.data));
+  }
+
+  socketMessage(data: Object) {
+    switch (data.type) {
+      case 'sensor-update':
+        this.handleSensorData(data);
+        break;
+      case 'sensor-chart-update':
+        this.handleSensorChartData(data);
+        break;
+    }
   }
 
   handleSensorData(data: Object) {
@@ -153,6 +164,10 @@ class App extends Component<{}, State> {
     this.setState({
       activity: data,
     });
+  }
+
+  handleSensorChartData(data: Object) {
+    console.log(data);
   }
 
   render(): Node {

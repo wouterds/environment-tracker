@@ -11,6 +11,7 @@ type Props = {
   label: ?string,
   value: ?string,
   unit?: ?string,
+  chartData?: Array<number>,
 };
 
 class SensorBox extends Component<Props> {
@@ -20,16 +21,11 @@ class SensorBox extends Component<Props> {
       label,
       value,
       unit,
+      chartData,
     } = this.props;
-    const data = [
-      {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
-      {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-      {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
-      {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
-      {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
-      {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
-      {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
-    ];
+    const formattedChartData = chartData ? chartData.map(value => {
+      return { uv: value };
+    }) : null;
 
     return (
       <div className={cx(styles.container, className)}>
@@ -37,14 +33,15 @@ class SensorBox extends Component<Props> {
           <span className={styles.value}>{value}</span>
           <span className={styles.unit}>{unit}</span>
           <label className={styles.label}>{label}</label>
-
-          <div className={styles.chart}>
-            <ResponsiveContainer height={75}>
-              <AreaChart data={data}>
-                <Area type='monotone' dataKey='uv' stroke='#eeeeee' fill='#fafafa' />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+          {formattedChartData &&
+            <div className={styles.chart}>
+              <ResponsiveContainer height={75}>
+                <AreaChart data={formattedChartData}>
+                  <Area type='monotone' dataKey='uv' stroke='#eeeeee' fill='#fafafa' />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          }
         </Box>
       </div>
     );

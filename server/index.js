@@ -59,17 +59,17 @@ sub.on('message', async (channel, message) => {
   sensors[sensor] = value;
 
   // Broadcast
-  wss.broadcast({ sensor, data: value });
+  wss.broadcast({ type: 'sensor-data', sensor, data: value });
 
   // Debugging output
-  console.log({ sensor, data: value });
+  console.log({ type: 'sensor-data', sensor, data: value });
 });
 
 // New connection
 wss.on('connection', (ws) => {
   // Send all sensor data
   Object.entries(sensors).forEach(([sensor, data]) => {
-    ws.send(JSON.stringify({ sensor, data }));
+    ws.send(JSON.stringify({ type: 'sensor-data', sensor, data }));
   });
 });
 
@@ -128,7 +128,7 @@ setInterval(() => {
 
 // Keep historical data
 setInterval(() => {
-  Object.entries(sensorsLastMinute).forEach(([sensor, sensorData]) => {
+  Object.entries(sensorsLastMinute).forEach(async ([sensor, sensorData]) => {
     if (sensor === 'pir') {
       let value = false;
 
@@ -156,5 +156,21 @@ setInterval(() => {
         });
       });
     }
+
+    let measurements = await Measurement.findAll({
+      attributes: [ 'value', 'type', ],
+      where: {
+        sensor,
+        createdAt: {
+          [Sequelize.Op.gte]: new Date(new Date() - 24 * 60 * 60 * 1000),
+        },
+      },
+      order: [
+        ['createdAt', 'DESC'],
+      ],
+    });
+
+    // Chart events
+    wss.broadcast({ type: 'sensor-chart-data', sensor, data: measurements });
   });
 }, 1000 * 60);
