@@ -32,3 +32,15 @@
     margin-top: 5px;
   }
 }
+
+@media(max-width: 900px) {
+  .container {
+    .label {
+      margin-top: 0;
+    }
+
+    .content {
+      padding: 20px 15px;
+    }
+  }
+}
