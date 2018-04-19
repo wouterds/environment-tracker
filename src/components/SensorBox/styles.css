@@ -5,7 +5,7 @@
   padding: 10px;
 
   .content {
-    padding: 25px 15px;
+    padding: 20px 15px;
     text-align: center;
   }
 
@@ -30,6 +30,12 @@
     font-size: 0.9em;
     font-weight: var(--font-weight-medium);
     margin-top: 5px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .chart {
+    margin: -50px -20px -30px;
   }
 }
 

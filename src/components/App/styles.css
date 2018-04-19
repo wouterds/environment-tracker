@@ -1,9 +1,6 @@
 @import 'variables';
 
 .container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
   height: 100%;
 }
 
@@ -22,7 +19,10 @@
 .content {
   padding: 25px 15px;
   display: flex;
-  flex-direction: row;
+}
+
+.sensorBox {
+  max-width: 20%;
 }
 
 @media(max-width: 1100px) {
@@ -44,5 +44,6 @@
 
   .sensorBox {
     font-size: 1em;
+    max-width: 100%;
   }
 }
