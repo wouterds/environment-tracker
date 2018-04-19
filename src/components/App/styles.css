@@ -20,25 +20,24 @@
 }
 
 .content {
-  padding: 25px;
+  padding: 25px 15px;
   display: flex;
   flex-direction: row;
-  margin: -10px;
 }
 
-@media(max-width: 1320px) {
+@media(max-width: 1100px) {
   .sensorBox {
     font-size: 0.9em;
   }
 }
 
-@media(max-width: 1220px) {
+@media(max-width: 960px) {
   .sensorBox {
     font-size: 0.8em;
   }
 }
 
-@media(max-width: 1120px) {
+@media(max-width: 900px) {
   .content {
     flex-direction: column;
   }
