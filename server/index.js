@@ -70,11 +70,10 @@ wss.on('connection', (ws) => {
   // Send all sensor data
   Object.entries(sensors).forEach(([sensor, data]) => {
     ws.send(JSON.stringify({ type: 'sensor-data', sensor, data }));
+
+    broadcastChartForSensor(sensor);
   });
 });
-
-// Subscribe to sensor publish event
-sub.subscribe('sensor');
 
 // Measurements model
 const Measurement = sequelize.define('measurement', {
@@ -94,8 +93,23 @@ const Measurement = sequelize.define('measurement', {
   ],
 });
 
-// Sync
-sequelize.sync();
+const broadcastChartForSensor = async (sensor) => {
+  let measurements = await Measurement.findAll({
+    attributes: [ 'value', 'type', ],
+    where: {
+      sensor,
+      createdAt: {
+        [Sequelize.Op.gte]: new Date(new Date() - 24 * 60 * 60 * 1000),
+      },
+    },
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+  });
+
+  // Chart events
+  wss.broadcast({ type: 'sensor-chart-data', sensor, data: measurements });
+};
 
 // Calculate minute averages
 let sensorsLastMinute = {};
@@ -128,7 +142,7 @@ setInterval(() => {
 
 // Keep historical data
 setInterval(() => {
-  Object.entries(sensorsLastMinute).forEach(async ([sensor, sensorData]) => {
+  Object.entries(sensorsLastMinute).forEach(([sensor, sensorData]) => {
     if (sensor === 'pir') {
       let value = false;
 
@@ -157,20 +171,12 @@ setInterval(() => {
       });
     }
 
-    let measurements = await Measurement.findAll({
-      attributes: [ 'value', 'type', ],
-      where: {
-        sensor,
-        createdAt: {
-          [Sequelize.Op.gte]: new Date(new Date() - 24 * 60 * 60 * 1000),
-        },
-      },
-      order: [
-        ['createdAt', 'DESC'],
-      ],
-    });
-
-    // Chart events
-    wss.broadcast({ type: 'sensor-chart-data', sensor, data: measurements });
+    broadcastChartForSensor(sensor);
   });
 }, 1000 * 60);
+
+// Sync DB
+sequelize.sync();
+
+// Subscribe to events
+sub.subscribe('sensor');
