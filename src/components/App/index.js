@@ -184,13 +184,13 @@ class App extends Component<{}, State> {
             className={styles.sensorBox}
             label="Pressure"
             unit={pressure.unit}
-            value={pressure.value ? pressure.value.toFixed(2) : null}
+            value={pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null}
           />
           <SensorBox
             className={styles.sensorBox}
             label="Light"
             unit={light.unit}
-            value={light.value ? light.value.toFixed(2) : null}
+            value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
           />
           <SensorBox
             className={styles.sensorBox}
