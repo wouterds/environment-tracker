@@ -179,20 +179,20 @@ class App extends Component<{}, State> {
       case 'bme280':
         this.setState({
           temperatureChart: data.data
-            .map(measurement => measurement.type === ' temperature' ? parseFloat(measurement.value) : null)
+            .map(measurement => measurement.type === 'temperature' ? parseFloat(measurement.value) : null)
             .filter(measurement => measurement !== null),
           pressureChart: data.data
-            .map(measurement => measurement.type === ' pressure' ? parseFloat(measurement.value) : null)
+            .map(measurement => measurement.type === 'pressure' ? parseFloat(measurement.value) : null)
             .filter(measurement => measurement !== null),
           humidityChart: data.data
-            .map(measurement => measurement.type === ' humidity' ? parseFloat(measurement.value) : null)
+            .map(measurement => measurement.type === 'humidity' ? parseFloat(measurement.value) : null)
             .filter(measurement => measurement !== null),
         });
         break;
       case 'bh1750':
         this.setState({
           lightChart: data.data
-            .map(measurement => measurement.type === ' light' ? parseFloat(measurement.value) : null)
+            .map(measurement => measurement.type === 'light' ? parseFloat(measurement.value) : null)
             .filter(measurement => measurement !== null),
           });
         break;
