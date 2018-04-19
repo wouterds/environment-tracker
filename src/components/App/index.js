@@ -7,6 +7,10 @@ import SensorBox from 'components/SensorBox';
 declare var __PRODUCTION__:boolean;
 
 type State = {
+  temperatureChart: Array<number>,
+  pressureChart: Array<number>,
+  humidityChart: Array<number>,
+  lightChart: Array<number>,
   temperature: {
     value: ?number,
     unit: ?string,
@@ -31,6 +35,10 @@ class App extends Component<{}, State> {
     super(...arguments);
 
     this.state = {
+      temperatureChart: [],
+      pressureChart: [],
+      humidityChart: [],
+      lightChart: [],
       temperature: {
         value: null,
         unit: null,
@@ -59,10 +67,10 @@ class App extends Component<{}, State> {
 
   socketMessage(data: Object) {
     switch (data.type) {
-      case 'sensor-update':
+      case 'sensor-data':
         this.handleSensorData(data);
         break;
-      case 'sensor-chart-update':
+      case 'sensor-chart-data':
         this.handleSensorChartData(data);
         break;
     }
@@ -167,15 +175,40 @@ class App extends Component<{}, State> {
   }
 
   handleSensorChartData(data: Object) {
-    console.log(data);
+    switch(data.sensor) {
+      case 'bme280':
+        this.setState({
+          temperatureChart: data.data
+            .map(measurement => measurement.type === ' temperature' ? parseFloat(measurement.value) : null)
+            .filter(measurement => measurement !== null),
+          pressureChart: data.data
+            .map(measurement => measurement.type === ' pressure' ? parseFloat(measurement.value) : null)
+            .filter(measurement => measurement !== null),
+          humidityChart: data.data
+            .map(measurement => measurement.type === ' humidity' ? parseFloat(measurement.value) : null)
+            .filter(measurement => measurement !== null),
+        });
+        break;
+      case 'bh1750':
+        this.setState({
+          lightChart: data.data
+            .map(measurement => measurement.type === ' light' ? parseFloat(measurement.value) : null)
+            .filter(measurement => measurement !== null),
+          });
+        break;
+    }
   }
 
   render(): Node {
     const {
       temperature,
+      temperatureChart,
       pressure,
+      pressureChart,
       humidity,
+      humidityChart,
       light,
+      lightChart,
       activity,
     } = this.state;
 
@@ -188,24 +221,28 @@ class App extends Component<{}, State> {
             label="Temperature"
             unit={temperature.unit}
             value={temperature.value ? temperature.value.toFixed(2) : null}
+            chartData={temperatureChart}
           />
           <SensorBox
             className={styles.sensorBox}
             label="Humidity"
             unit={humidity.unit}
             value={humidity.value ? humidity.value.toFixed(2) : null}
+            chartData={humidityChart}
           />
           <SensorBox
             className={styles.sensorBox}
             label="Pressure"
             unit={pressure.unit}
             value={pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null}
+            chartData={pressureChart}
           />
           <SensorBox
             className={styles.sensorBox}
             label="Light"
             unit={light.unit}
             value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
+            chartData={lightChart}
           />
           <SensorBox
             className={styles.sensorBox}
