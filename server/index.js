@@ -97,15 +97,64 @@ const Measurement = sequelize.define('measurement', {
 // Sync
 sequelize.sync();
 
-// Keep historical data
+// Calculate minute averages
+let sensorsLastMinute = {};
 setInterval(() => {
   Object.entries(sensors).forEach(([sensor, data]) => {
-    Object.entries(data).forEach(([type, data]) => {
+    if (!sensorsLastMinute.hasOwnProperty(sensor)) {
+      sensorsLastMinute[sensor] = sensor === 'pir' ? [] : {};
+    }
+
+    if (sensor === 'pir') {
+      sensorsLastMinute[sensor].push(data);
+    } else {
+      Object.entries(data).forEach(([type, data]) => {
+        if (!sensorsLastMinute[sensor].hasOwnProperty(type)) {
+          sensorsLastMinute[sensor][type] = {
+            values: [],
+            unit: data.unit,
+          };
+        }
+
+        sensorsLastMinute[sensor][type].values.push(data.value);
+
+        if (sensorsLastMinute[sensor][type].values.length > 60) {
+          sensorsLastMinute[sensor][type].values.shift();
+        }
+      });
+    }
+  });
+}, 1000);
+
+// Keep historical data
+setInterval(() => {
+  Object.entries(sensorsLastMinute).forEach(([sensor, sensorData]) => {
+    if (sensor === 'pir') {
+      let value = false;
+
+      sensorData.forEach(v => {
+        if (v === true) {
+          value = true;
+        }
+      });
+
       Measurement.create({
         sensor,
-        type,
-        value: data.value,
+        type: 'activity',
+        value,
       });
-    });
+    } else {
+      Object.entries(sensorData).forEach(([type, data]) => {
+        let value = data.values.reduce((total, current) => total + current);
+        value = value / data.values.length;
+        value = Math.round(value * 100) / 100;
+
+        Measurement.create({
+          sensor,
+          type,
+          value,
+        });
+      });
+    }
   });
 }, 1000 * 60);
