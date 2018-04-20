@@ -103,7 +103,7 @@ const broadcastChartForSensor = async (sensor) => {
     FROM measurements
     WHERE sensor = '${sensor}'
     GROUP BY sensor, type, time_interval
-    ORDER BY time_interval DESC;
+    ORDER BY time_interval ASC;
   `, { type: Sequelize.QueryTypes.SELECT });
 
   // Chart events
