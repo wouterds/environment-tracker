@@ -35,7 +35,15 @@
   }
 
   .chart {
-    margin: -50px -20px -30px;
+    margin: -50px -20px -25px;
+
+    &:after {
+      content: '';
+      display: block;
+      background: #fafafa;
+      height: 15px;
+      margin-top: -5px;
+    }
   }
 }
 
