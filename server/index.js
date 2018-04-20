@@ -101,7 +101,7 @@ const broadcastChartForSensor = async (sensor) => {
       AVG(CAST(value AS DECIMAL)) AS value,
       TO_TIMESTAMP(FLOOR((EXTRACT(EPOCH FROM "createdAt") / 900 )) * 900) AT TIME ZONE 'UTC' as time_interval
     FROM measurements
-    WHERE sensor = '${sensor}'
+    WHERE sensor = '${sensor}' AND "createdAt" >= NOW() - '1 DAY'::INTERVAL
     GROUP BY sensor, type, time_interval
     ORDER BY time_interval ASC;
   `, { type: Sequelize.QueryTypes.SELECT });
