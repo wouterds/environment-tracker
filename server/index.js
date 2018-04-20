@@ -94,18 +94,17 @@ const Measurement = sequelize.define('measurement', {
 });
 
 const broadcastChartForSensor = async (sensor) => {
-  let measurements = await Measurement.findAll({
-    attributes: [ 'value', 'type', ],
-    where: {
+  let measurements = await sequelize.query(`
+    SELECT
       sensor,
-      createdAt: {
-        [Sequelize.Op.gte]: new Date(new Date() - 24 * 60 * 60 * 1000),
-      },
-    },
-    order: [
-      ['createdAt', 'DESC'],
-    ],
-  });
+      type,
+      AVG(CAST(value AS DECIMAL)) AS value,
+      TO_TIMESTAMP(FLOOR((EXTRACT(EPOCH FROM "createdAt") / 900 )) * 900) AT TIME ZONE 'UTC' as time_interval
+    FROM measurements
+    WHERE sensor = '${sensor}'
+    GROUP BY sensor, type, time_interval
+    ORDER BY time_interval DESC;
+  `, { type: Sequelize.QueryTypes.SELECT });
 
   // Chart events
   wss.broadcast({ type: 'sensor-chart-data', sensor, data: measurements });
