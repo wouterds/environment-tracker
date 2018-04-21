@@ -209,7 +209,6 @@ class App extends Component<{}, State> {
       humidityChart,
       light,
       lightChart,
-      activity,
     } = this.state;
 
     return (
@@ -243,11 +242,6 @@ class App extends Component<{}, State> {
             unit={light.unit}
             value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
             chartData={lightChart}
-          />
-          <SensorBox
-            className={styles.sensorBox}
-            label="Activity"
-            value={activity ? 'Yes' : 'No'}
           />
         </div>
       </div>
