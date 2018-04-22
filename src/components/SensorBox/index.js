@@ -23,8 +23,10 @@ class SensorBox extends Component<Props> {
       unit,
       chartData,
     } = this.props;
+
+    const low = Math.min(...chartData);
     const formattedChartData = chartData ? chartData.map(value => {
-      return { uv: value };
+      return { uv: value - low }; // Subtract low, we'll render the delta
     }) : null;
 
     return (
