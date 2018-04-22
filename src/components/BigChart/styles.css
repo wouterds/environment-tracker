@@ -1,0 +1,21 @@
+@import 'variables';
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.chart {
+  position: absolute;
+  bottom: 0;
+  left: -5px;
+  right: -5px;
+
+  &:after {
+    content: '';
+    display: block;
+    background: #fafafa;
+    height: 15px;
+    margin-top: -5px;
+  }
+}

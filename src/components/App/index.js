@@ -2,7 +2,10 @@
 import React, { Component } from 'react';
 import type { Node } from 'react';
 import styles from './styles.css';
+import Box from 'components/Box';
 import SensorBox from 'components/SensorBox';
+import BigChart from 'components/BigChart';
+import cx from 'classnames';
 
 declare var __PRODUCTION__:boolean;
 
@@ -215,34 +218,47 @@ class App extends Component<{}, State> {
       <div className={styles.container}>
         <h1 className={styles.heading}>Raspberry Pi Environment Tracker</h1>
         <div className={styles.content}>
-          <SensorBox
-            className={styles.sensorBox}
-            label="Temperature"
-            unit={temperature.unit}
-            value={temperature.value ? temperature.value.toFixed(2) : null}
-            chartData={temperatureChart}
-          />
-          <SensorBox
-            className={styles.sensorBox}
-            label="Humidity"
-            unit={humidity.unit}
-            value={humidity.value ? humidity.value.toFixed(2) : null}
-            chartData={humidityChart}
-          />
-          <SensorBox
-            className={styles.sensorBox}
-            label="Pressure"
-            unit={pressure.unit}
-            value={pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null}
-            chartData={pressureChart}
-          />
-          <SensorBox
-            className={styles.sensorBox}
-            label="Light"
-            unit={light.unit}
-            value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
-            chartData={lightChart}
-          />
+          <div className={styles.row}>
+            <SensorBox
+              className={styles.sensorBox}
+              label="Temperature"
+              unit={temperature.unit}
+              value={temperature.value ? temperature.value.toFixed(2) : null}
+              chartData={temperatureChart}
+            />
+            <SensorBox
+              className={styles.sensorBox}
+              label="Humidity"
+              unit={humidity.unit}
+              value={humidity.value ? humidity.value.toFixed(2) : null}
+              chartData={humidityChart}
+            />
+            <SensorBox
+              className={styles.sensorBox}
+              label="Pressure"
+              unit={pressure.unit}
+              value={pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null}
+              chartData={pressureChart}
+            />
+            <SensorBox
+              className={styles.sensorBox}
+              label="Light"
+              unit={light.unit}
+              value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
+              chartData={lightChart}
+            />
+          </div>
+          <div className={cx(styles.row, styles.bigChartRow)}>
+            <Box className={styles.bigChartBox}>
+              <BigChart
+                className={styles.bigChart}
+                label="Light"
+                unit={light.unit}
+                value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
+                chartData={lightChart}
+              />
+            </Box>
+          </div>
         </div>
       </div>
     );

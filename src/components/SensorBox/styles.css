@@ -40,7 +40,7 @@
     &:after {
       content: '';
       display: block;
-      background: #f7f7f7;
+      background: #fafafa;
       height: 15px;
       margin-top: -5px;
     }
