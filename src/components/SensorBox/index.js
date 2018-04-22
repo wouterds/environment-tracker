@@ -39,7 +39,7 @@ class SensorBox extends Component<Props> {
             <div className={styles.chart}>
               <ResponsiveContainer height={65}>
                 <AreaChart data={formattedChartData}>
-                  <Area type='monotone' dataKey='uv' stroke='#eeeeee' fill='#fafafa' />
+                  <Area type='monotone' dataKey='uv' stroke='#eeeeee' fill='#f7f7f7' />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
