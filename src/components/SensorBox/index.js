@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 import styles from './styles.css';
 import Box from 'components/Box';
+import _ from 'lodash';
 import cx from 'classnames';
 import { ResponsiveContainer, AreaChart, Area } from 'recharts';
 
@@ -15,6 +16,17 @@ type Props = {
 };
 
 class SensorBox extends Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
+    const { value, chartData } = this.props;
+    const { value: newValue, chartData: newChartData } = nextProps;
+
+    if (_.isEqual(chartData, newChartData) && value === newValue) {
+      return false;
+    }
+
+    return true;
+  }
+
   render(): Node {
     const {
       className,
