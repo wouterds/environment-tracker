@@ -7,15 +7,7 @@
 
 .chart {
   position: absolute;
-  bottom: 0;
+  bottom: -5px;
   left: -5px;
   right: -5px;
-
-  &:after {
-    content: '';
-    display: block;
-    background: #fafafa;
-    height: 15px;
-    margin-top: -5px;
-  }
 }

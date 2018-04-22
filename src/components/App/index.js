@@ -10,6 +10,7 @@ import cx from 'classnames';
 declare var __PRODUCTION__:boolean;
 
 type State = {
+  activeChart: string,
   temperatureChart: Array<number>,
   pressureChart: Array<number>,
   humidityChart: Array<number>,
@@ -37,7 +38,13 @@ class App extends Component<{}, State> {
   constructor() {
     super(...arguments);
 
+    let activeChart = 'temperature';
+    if (location && location.hash) {
+      activeChart = location.hash.replace('#', '');
+    }
+
     this.state = {
+      activeChart: activeChart,
       temperatureChart: [],
       pressureChart: [],
       humidityChart: [],
@@ -66,6 +73,12 @@ class App extends Component<{}, State> {
     const websocket = new WebSocket(`ws://${__PRODUCTION__ ? location.host : 'raspberrypi2'}:3000`);
 
     websocket.onmessage = (data: Object) => this.socketMessage(JSON.parse(data.data));
+  }
+
+  componentDidUpdate() {
+    const { activeChart } = this.state;
+
+    window.location.hash = `#${activeChart}`;
   }
 
   socketMessage(data: Object) {
@@ -204,6 +217,7 @@ class App extends Component<{}, State> {
 
   render(): Node {
     const {
+      activeChart,
       temperature,
       temperatureChart,
       pressure,
@@ -214,48 +228,100 @@ class App extends Component<{}, State> {
       lightChart,
     } = this.state;
 
+    const temperatureValue = temperature.value ? temperature.value.toFixed(2) : null;
+    const humidityValue = humidity.value ? humidity.value.toFixed(2) : null;
+    const pressureValue = pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null;
+    const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
+
+    let activeChartLabel = null;
+    let activeChartColors = null;
+    let activeChartData = null;
+    switch (activeChart) {
+      case 'temperature':
+        activeChartLabel = 'Temperature';
+        activeChartColors = ['#ffb8b8', '#ffcccc'];
+        activeChartData = temperatureChart;
+        break;
+      case 'humidity':
+        activeChartLabel = 'Humidity';
+        activeChartColors = ['#a6cff7', '#c0ddfa'];
+        activeChartData = humidityChart;
+        break;
+      case 'pressure':
+        activeChartLabel = 'Pressure';
+        activeChartColors = ['#d6a6f7', '#e9c0fa'];
+        activeChartData = pressureChart;
+        break;
+      case 'light':
+        activeChartLabel = 'Light';
+        activeChartColors = ['#f7d487', '#fcebc4'];
+        activeChartData = lightChart;
+        break;
+    }
+
     return (
       <div className={styles.container}>
         <h1 className={styles.heading}>Raspberry Pi Environment Tracker</h1>
         <div className={styles.content}>
           <div className={styles.row}>
             <SensorBox
+              onClick={() => this.setState({ activeChart: 'temperature' })}
               className={styles.sensorBox}
               label="Temperature"
               unit={temperature.unit}
-              value={temperature.value ? temperature.value.toFixed(2) : null}
+              value={temperatureValue}
               chartData={temperatureChart}
             />
             <SensorBox
+              onClick={() => this.setState({ activeChart: 'humidity' })}
               className={styles.sensorBox}
               label="Humidity"
               unit={humidity.unit}
-              value={humidity.value ? humidity.value.toFixed(2) : null}
+              value={humidityValue}
               chartData={humidityChart}
             />
             <SensorBox
+              onClick={() => this.setState({ activeChart: 'pressure' })}
               className={styles.sensorBox}
               label="Pressure"
               unit={pressure.unit}
-              value={pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null}
+              value={pressureValue}
               chartData={pressureChart}
             />
             <SensorBox
+              onClick={() => this.setState({ activeChart: 'light' })}
               className={styles.sensorBox}
               label="Light"
               unit={light.unit}
-              value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
+              value={lightValue}
               chartData={lightChart}
             />
           </div>
           <div className={cx(styles.row, styles.bigChartRow)}>
             <Box className={styles.bigChartBox}>
+              <ul className={styles.legend}>
+                <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
+                  Temperature &middot; {temperatureValue}
+                  <span className={styles.legendUnit}>{temperature.unit}</span>
+                </li>
+                <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
+                  Humidity &middot; {humidityValue}
+                  <span className={styles.legendUnit}>{humidity.unit}</span>
+                </li>
+                <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
+                  Pressure &middot; {pressureValue}
+                  <span className={styles.legendUnit}>{pressure.unit}</span>
+                </li>
+                <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
+                  Light &middot; {lightValue}
+                  <span className={styles.legendUnit}>{light.unit}</span>
+                </li>
+              </ul>
               <BigChart
                 className={styles.bigChart}
-                label="Light"
-                unit={light.unit}
-                value={light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null}
-                chartData={lightChart}
+                label={activeChartLabel}
+                data={activeChartData}
+                colors={activeChartColors}
               />
             </Box>
           </div>

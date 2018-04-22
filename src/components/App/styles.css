@@ -40,10 +40,42 @@
 
 .bigChart {
   display: flex;
+  flex: 1;
 }
 
 .bigChartBox {
   display: flex;
+  flex-direction: column;
+}
+
+.legend {
+  color: #7F96B4;
+  display: block;
+  border-bottom: 1px solid #DAE1E9;
+  padding-left: 5px;
+  font-size: 1.2em;
+
+  .legendItem {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+
+    .legendUnit {
+      display: inline-block;
+      font-size: 0.8em;
+      vertical-align: top;
+      padding-top: 2px;
+      padding-left: 2px;
+    }
+
+    &:hover {
+      color: #3974A8;
+    }
+
+    &.active {
+      color: #1D6CCA;
+    }
+  }
 }
 
 @media(max-width: 900px) {

@@ -14,7 +14,9 @@ type State = {
 
 type Props = {
   className?: ?string,
-  chartData?: Array<number>,
+  label: ?string,
+  colors: ?Array<string>,
+  data: ?Array<number>,
 };
 
 class BigChart extends Component<Props, State> {
@@ -29,12 +31,12 @@ class BigChart extends Component<Props, State> {
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
-    const { chartData } = this.props;
-    const { chartData: newChartData } = nextProps;
+    const { data } = this.props;
+    const { data: newData } = nextProps;
     const { height } = this.state;
     const { height: newHeight } = nextState;
 
-    if (height === newHeight && _.isEqual(chartData, newChartData)) {
+    if (height === newHeight && _.isEqual(data, newData)) {
       return false;
     }
 
@@ -68,12 +70,14 @@ class BigChart extends Component<Props, State> {
     const { height } = this.state;
     const {
       className,
-      chartData,
+      colors,
+      data,
     } = this.props;
 
-    const low = chartData ? Math.min(...chartData) : 0;
-    const formattedChartData = chartData ? chartData.map(value => {
-      return { uv: value - low }; // Subtract low, we'll render the delta
+    const low = data ? Math.min(...data) : 0;
+    const high = data ? Math.max(...data) : 0;
+    const formattedChartData = data ? data.map(value => {
+      return { uv: value - low + high * 0.05 }; // Render nice delta chart
     }) : null;
 
     return (
@@ -82,7 +86,7 @@ class BigChart extends Component<Props, State> {
           <div className={styles.chart}>
             <ResponsiveContainer height={height * 0.9}>
               <AreaChart data={formattedChartData} strokeWidth={1.5}>
-                <Area type='monotone' dataKey='uv' stroke='#eeeeee' fill='#f7f7f7' />
+                <Area type='monotone' dataKey='uv' stroke={colors ? colors[0] : null} fill={colors ? colors[1] : null} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
