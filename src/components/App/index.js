@@ -31,7 +31,6 @@ type State = {
     value: ?number,
     unit: ?string,
   },
-  activity: boolean,
 };
 
 class App extends Component<{}, State> {
@@ -65,7 +64,6 @@ class App extends Component<{}, State> {
         value: null,
         unit: null,
       },
-      activity: false,
     };
   }
 
@@ -101,9 +99,6 @@ class App extends Component<{}, State> {
         break;
       case 'bh1750':
         this.handleLightSensorData(data.data);
-        break;
-      case 'pir':
-        this.handleActivitySensorData(data.data);
         break;
     }
   }
@@ -181,12 +176,6 @@ class App extends Component<{}, State> {
 
     this.setState({
       light: newLight,
-    });
-  }
-
-  handleActivitySensorData(data: boolean) {
-    this.setState({
-      activity: data,
     });
   }
 
