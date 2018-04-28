@@ -34,14 +34,19 @@ type State = {
 };
 
 class App extends Component<{}, State> {
+  /**
+   * Constructor
+   */
   constructor() {
     super(...arguments);
 
+    // Default active chart, fallback to temperature
     let activeChart = 'temperature';
     if (location && location.hash) {
       activeChart = location.hash.replace('#', '');
     }
 
+    // Default state
     this.state = {
       activeChart: activeChart,
       temperatureChart: [],
@@ -67,18 +72,30 @@ class App extends Component<{}, State> {
     };
   }
 
+  /**
+   * Component did mount
+   */
   componentDidMount() {
     const websocket = new WebSocket(`ws://${__PRODUCTION__ ? location.host : 'raspberrypi2'}:3000`);
 
     websocket.onmessage = (data: Object) => this.socketMessage(JSON.parse(data.data));
   }
 
+  /**
+   * Component did update
+   */
   componentDidUpdate() {
     const { activeChart } = this.state;
 
+    // Update hash on update
     window.location.hash = `#${activeChart}`;
   }
 
+  /**
+   * New message from socket
+   *
+   * @param {Object} rawData
+   */
   socketMessage(data: Object) {
     switch (data.type) {
       case 'sensor-data':
@@ -90,6 +107,11 @@ class App extends Component<{}, State> {
     }
   }
 
+  /**
+   * Parse sensor data
+   *
+   * @param {Object} data
+   */
   handleSensorData(data: Object) {
     switch (data.sensor) {
       case 'bme280':
@@ -103,6 +125,11 @@ class App extends Component<{}, State> {
     }
   }
 
+  /**
+   * Handle temperature sensor data
+   *
+   * @param {Object} data
+   */
   handleTemperatureSensorData(data: Object) {
     const { temperature } = this.state;
 
@@ -122,6 +149,11 @@ class App extends Component<{}, State> {
     });
   }
 
+  /**
+   * Handle pressure sensor data
+   *
+   * @param {Object} data
+   */
   handlePressureSensorData(data: Object) {
     const { pressure } = this.state;
 
@@ -141,6 +173,11 @@ class App extends Component<{}, State> {
     });
   }
 
+  /**
+   * Handle humidity sensor data
+   *
+   * @param {Object} data
+   */
   handleHumiditySensorData(data: Object) {
     const { humidity } = this.state;
 
@@ -160,6 +197,11 @@ class App extends Component<{}, State> {
     });
   }
 
+  /**
+   * Handle light sensor data
+   *
+   * @param {Object} data
+   */
   handleLightSensorData(data: Object) {
     const { light } = this.state;
 
@@ -179,6 +221,11 @@ class App extends Component<{}, State> {
     });
   }
 
+  /**
+   * Parse sensor chart data
+   *
+   * @param {Object} data
+   */
   handleSensorChartData(data: Object) {
     switch(data.sensor) {
       case 'bme280':
@@ -204,6 +251,11 @@ class App extends Component<{}, State> {
     }
   }
 
+  /**
+   * Render component
+   *
+   * @return {Node}
+   */
   render(): Node {
     const {
       activeChart,
