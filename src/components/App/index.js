@@ -256,13 +256,12 @@ class App extends Component<{}, State> {
   }
 
   /**
-   * Render component
+   * Render sensors
    *
-   * @return {Node}
+   * @type {string} className
    */
-  render(): Node {
+  renderSensors(className: string): Node {
     const {
-      activeChart,
       temperature,
       temperatureChart,
       pressure,
@@ -277,6 +276,99 @@ class App extends Component<{}, State> {
     const humidityValue = humidity.value ? humidity.value.toFixed(2) : null;
     const pressureValue = pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null;
     const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
+
+    return (
+      <div className={className}>
+        <SensorBox
+          onClick={() => this.setState({ activeChart: 'temperature' })}
+          className={styles.sensorBox}
+          label="Temperature"
+          unit={temperature.unit}
+          value={temperatureValue}
+          chartData={temperatureChart}
+        />
+        <SensorBox
+          onClick={() => this.setState({ activeChart: 'humidity' })}
+          className={styles.sensorBox}
+          label="Humidity"
+          unit={humidity.unit}
+          value={humidityValue}
+          chartData={humidityChart}
+        />
+        <SensorBox
+          onClick={() => this.setState({ activeChart: 'pressure' })}
+          className={styles.sensorBox}
+          label="Pressure"
+          unit={pressure.unit}
+          value={pressureValue}
+          chartData={pressureChart}
+        />
+        <SensorBox
+          onClick={() => this.setState({ activeChart: 'light' })}
+          className={styles.sensorBox}
+          label="Light"
+          unit={light.unit}
+          value={lightValue}
+          chartData={lightChart}
+        />
+      </div>
+    );
+  }
+
+  /**
+   * Render navigation
+   *
+   * @type {string} className
+   */
+  renderNavigation(className: string): Node {
+    const {
+      activeChart,
+      temperature,
+      pressure,
+      humidity,
+      light,
+    } = this.state;
+
+    const temperatureValue = temperature.value ? temperature.value.toFixed(2) : null;
+    const humidityValue = humidity.value ? humidity.value.toFixed(2) : null;
+    const pressureValue = pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null;
+    const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
+
+    return (
+      <ul className={className}>
+        <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
+          Temperature &middot; {temperatureValue}
+          <span className={styles.legendUnit}>{temperature.unit}</span>
+        </li>
+        <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
+          Humidity &middot; {humidityValue}
+          <span className={styles.legendUnit}>{humidity.unit}</span>
+        </li>
+        <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
+          Pressure &middot; {pressureValue}
+          <span className={styles.legendUnit}>{pressure.unit}</span>
+        </li>
+        <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
+          Light &middot; {lightValue}
+          <span className={styles.legendUnit}>{light.unit}</span>
+        </li>
+      </ul>
+    );
+  }
+
+  /**
+   * Render component
+   *
+   * @return {Node}
+   */
+  render(): Node {
+    const {
+      activeChart,
+      temperatureChart,
+      pressureChart,
+      humidityChart,
+      lightChart,
+    } = this.state;
 
     let activeChartLabel = null;
     let activeChartColors = null;
@@ -308,60 +400,12 @@ class App extends Component<{}, State> {
       <div className={styles.container}>
         <h1 className={styles.heading}>Raspberry Pi Environment Tracker</h1>
         <div className={styles.content}>
-          <div className={styles.row}>
-            <SensorBox
-              onClick={() => this.setState({ activeChart: 'temperature' })}
-              className={styles.sensorBox}
-              label="Temperature"
-              unit={temperature.unit}
-              value={temperatureValue}
-              chartData={temperatureChart}
-            />
-            <SensorBox
-              onClick={() => this.setState({ activeChart: 'humidity' })}
-              className={styles.sensorBox}
-              label="Humidity"
-              unit={humidity.unit}
-              value={humidityValue}
-              chartData={humidityChart}
-            />
-            <SensorBox
-              onClick={() => this.setState({ activeChart: 'pressure' })}
-              className={styles.sensorBox}
-              label="Pressure"
-              unit={pressure.unit}
-              value={pressureValue}
-              chartData={pressureChart}
-            />
-            <SensorBox
-              onClick={() => this.setState({ activeChart: 'light' })}
-              className={styles.sensorBox}
-              label="Light"
-              unit={light.unit}
-              value={lightValue}
-              chartData={lightChart}
-            />
-          </div>
+          {this.renderSensors(styles.row)}
+
           <div className={cx(styles.row, styles.bigChartRow)}>
             <Box className={styles.bigChartBox}>
-              <ul className={styles.legend}>
-                <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
-                  Temperature &middot; {temperatureValue}
-                  <span className={styles.legendUnit}>{temperature.unit}</span>
-                </li>
-                <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
-                  Humidity &middot; {humidityValue}
-                  <span className={styles.legendUnit}>{humidity.unit}</span>
-                </li>
-                <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
-                  Pressure &middot; {pressureValue}
-                  <span className={styles.legendUnit}>{pressure.unit}</span>
-                </li>
-                <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
-                  Light &middot; {lightValue}
-                  <span className={styles.legendUnit}>{light.unit}</span>
-                </li>
-              </ul>
+              {this.renderNavigation(styles.legend)}
+
               <BigChart
                 className={styles.bigChart}
                 label={activeChartLabel}
