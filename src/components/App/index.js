@@ -76,9 +76,11 @@ class App extends Component<{}, State> {
    * Component did mount
    */
   componentDidMount() {
+    // Connect to socket
     const websocket = new WebSocket(`ws://${__PRODUCTION__ ? location.host : 'raspberrypi2'}:3000`);
 
-    websocket.onmessage = (data: Object) => this.socketMessage(JSON.parse(data.data));
+    // Subscribe to new messages
+    websocket.onmessage = this.newSocketMessage;
   }
 
   /**
@@ -94,9 +96,11 @@ class App extends Component<{}, State> {
   /**
    * New message from socket
    *
-   * @param {Object} rawData
+   * @param  {Object} rawData
    */
-  socketMessage(data: Object) {
+  newSocketMessage = (rawData: Object) => {
+    const data = JSON.parse(rawData.data);
+
     switch (data.type) {
       case 'sensor-data':
         this.handleSensorData(data);
