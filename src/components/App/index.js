@@ -9,6 +9,7 @@ import cx from 'classnames';
 
 type State = {
   activeChart: string,
+  activePeriod: string,
   temperatureChart: Array<number>,
   pressureChart: Array<number>,
   humidityChart: Array<number>,
@@ -47,6 +48,7 @@ class App extends Component<{}, State> {
     // Default state
     this.state = {
       activeChart: activeChart,
+      activePeriod: '1D',
       temperatureChart: [],
       pressureChart: [],
       humidityChart: [],
@@ -319,6 +321,7 @@ class App extends Component<{}, State> {
   renderNavigation(): Node {
     const {
       activeChart,
+      activePeriod,
       temperature,
       pressure,
       humidity,
@@ -332,31 +335,46 @@ class App extends Component<{}, State> {
 
     return (
       <div className={styles.legend}>
-        <select className={styles.mobileSelect} onChange={(event) => this.setState({ activeChart: event.target.value })}>
-          <option value="temperature">Temperature</option>
-          <option value="humidity">Humidity</option>
-          <option value="pressure">Pressure</option>
-          <option value="light">Light</option>
-        </select>
+        <div className={styles.left}>
+          <select className={styles.mobileSelect} onChange={(event) => this.setState({ activeChart: event.target.value })}>
+            <option value="temperature">Temperature</option>
+            <option value="humidity">Humidity</option>
+            <option value="pressure">Pressure</option>
+            <option value="light">Light</option>
+          </select>
 
-        <ul>
-          <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
-            Temperature &middot; {temperatureValue}
-            <span className={styles.legendUnit}>{temperature.unit}</span>
-          </li>
-          <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
-            Humidity &middot; {humidityValue}
-            <span className={styles.legendUnit}>{humidity.unit}</span>
-          </li>
-          <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
-            Pressure &middot; {pressureValue}
-            <span className={styles.legendUnit}>{pressure.unit}</span>
-          </li>
-          <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
-            Light &middot; {lightValue}
-            <span className={styles.legendUnit}>{light.unit}</span>
-          </li>
-        </ul>
+          <ul>
+            <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
+              Temperature &middot; {temperatureValue}
+              <span className={styles.legendUnit}>{temperature.unit}</span>
+            </li>
+            <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
+              Humidity &middot; {humidityValue}
+              <span className={styles.legendUnit}>{humidity.unit}</span>
+            </li>
+            <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
+              Pressure &middot; {pressureValue}
+              <span className={styles.legendUnit}>{pressure.unit}</span>
+            </li>
+            <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
+              Light &middot; {lightValue}
+              <span className={styles.legendUnit}>{light.unit}</span>
+            </li>
+          </ul>
+        </div>
+        <div className={styles.right}>
+          <ul>
+            <li className={cx(styles.legendItem, activePeriod === '1D' ? styles.active : null)} onClick={() => alert('🚧 🛠 🔜')}>
+              1D
+            </li>
+            <li className={cx(styles.legendItem, activePeriod === '1W' ? styles.active : null)} onClick={() => alert('🚧 🛠 🔜')}>
+              1W
+            </li>
+            <li className={cx(styles.legendItem, activePeriod === '1M' ? styles.active : null)} onClick={() => alert('🚧 🛠 🔜')}>
+              1M
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }

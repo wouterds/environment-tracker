@@ -52,9 +52,25 @@
   color: #7F96B4;
   display: block;
   border-bottom: 1px solid #DAE1E9;
-  padding-left: 5px;
   font-size: 1.2em;
-  position: relative;
+  display: flex;
+
+  .left {
+    position: relative;
+    flex: 1;
+    padding-left: 5px;
+  }
+
+  .right {
+    font-size: 0.85em;
+    font-weight: var(--font-weight-medium);
+    opacity: 0.8;
+    padding-right: 5px;
+
+    .legendItem {
+      padding: 12px;
+    }
+  }
 
   .mobileSelect {
     display: none;
@@ -112,8 +128,10 @@
   }
 
   .legend {
-    .legendItem:not(.active) {
-      display: none;
+    .left {
+      .legendItem:not(.active) {
+        display: none;
+      }
     }
 
     .mobileSelect {
