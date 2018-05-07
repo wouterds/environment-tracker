@@ -102,6 +102,15 @@
 }
 
 @media(max-width: 700px) {
+  .heading {
+    padding: 10px 15px;
+    font-size: 1.1em;
+  }
+
+  .content {
+    padding: 5px;
+  }
+
   .legend {
     .legendItem:not(.active) {
       display: none;
