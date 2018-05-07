@@ -11,4 +11,4 @@ node_modules: package.json
 dependencies: node_modules
 
 build: dependencies
-	docker run --rm --volume=$(PWD):/code -w=/code node:9-slim npm run build
+	docker run --rm --volume=$(PWD):/code -w=/code node:9.11-slim npm run build
