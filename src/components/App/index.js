@@ -315,10 +315,8 @@ class App extends Component<{}, State> {
 
   /**
    * Render navigation
-   *
-   * @type {string} className
    */
-  renderNavigation(className: string): Node {
+  renderNavigation(): Node {
     const {
       activeChart,
       temperature,
@@ -333,7 +331,7 @@ class App extends Component<{}, State> {
     const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
 
     return (
-      <ul className={className}>
+      <ul className={styles.legend}>
         <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
           Temperature &middot; {temperatureValue}
           <span className={styles.legendUnit}>{temperature.unit}</span>
@@ -402,7 +400,7 @@ class App extends Component<{}, State> {
 
           <div className={cx(styles.row, styles.bigChartRow)}>
             <Box className={styles.bigChartBox}>
-              {this.renderNavigation(styles.legend)}
+              {this.renderNavigation()}
 
               <BigChart
                 className={styles.bigChart}
