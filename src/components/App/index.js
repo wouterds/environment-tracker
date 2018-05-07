@@ -331,24 +331,33 @@ class App extends Component<{}, State> {
     const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
 
     return (
-      <ul className={styles.legend}>
-        <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
-          Temperature &middot; {temperatureValue}
-          <span className={styles.legendUnit}>{temperature.unit}</span>
-        </li>
-        <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
-          Humidity &middot; {humidityValue}
-          <span className={styles.legendUnit}>{humidity.unit}</span>
-        </li>
-        <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
-          Pressure &middot; {pressureValue}
-          <span className={styles.legendUnit}>{pressure.unit}</span>
-        </li>
-        <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
-          Light &middot; {lightValue}
-          <span className={styles.legendUnit}>{light.unit}</span>
-        </li>
-      </ul>
+      <div className={styles.legend}>
+        <select className={styles.mobileSelect} onChange={(event) => this.setState({ activeChart: event.target.value })}>
+          <option value="temperature">Temperature</option>
+          <option value="humidity">Humidity</option>
+          <option value="pressure">Pressure</option>
+          <option value="light">Light</option>
+        </select>
+
+        <ul>
+          <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
+            Temperature &middot; {temperatureValue}
+            <span className={styles.legendUnit}>{temperature.unit}</span>
+          </li>
+          <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
+            Humidity &middot; {humidityValue}
+            <span className={styles.legendUnit}>{humidity.unit}</span>
+          </li>
+          <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
+            Pressure &middot; {pressureValue}
+            <span className={styles.legendUnit}>{pressure.unit}</span>
+          </li>
+          <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
+            Light &middot; {lightValue}
+            <span className={styles.legendUnit}>{light.unit}</span>
+          </li>
+        </ul>
+      </div>
     );
   }
 
