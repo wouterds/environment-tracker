@@ -77,7 +77,7 @@ class App extends Component<{}, State> {
    */
   componentDidMount() {
     // Connect to socket
-    const websocket = new WebSocket(`ws://${__PRODUCTION__ ? location.host : 'raspberrypi2'}:3000`);
+    const websocket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${__PRODUCTION__ ? location.host : 'raspberrypi2'}/api}`);
 
     // Subscribe to new messages
     websocket.onmessage = this.newSocketMessage;
