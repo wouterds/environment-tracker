@@ -7,8 +7,6 @@ import SensorBox from 'components/SensorBox';
 import BigChart from 'components/BigChart';
 import cx from 'classnames';
 
-declare var __PRODUCTION__:boolean;
-
 type State = {
   activeChart: string,
   temperatureChart: Array<number>,
@@ -77,7 +75,7 @@ class App extends Component<{}, State> {
    */
   componentDidMount() {
     // Connect to socket
-    const websocket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${__PRODUCTION__ ? location.host : 'raspberrypi2'}/api}`);
+    const websocket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`);
 
     // Subscribe to new messages
     websocket.onmessage = this.newSocketMessage;
