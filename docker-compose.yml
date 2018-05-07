@@ -2,15 +2,15 @@ version: '2'
 
 services:
   redis:
-    image: redis:4
-    container_name: redis
+    image: redis:4.0
+    container_name: rpi-tracker-redis
     restart: unless-stopped
     ports:
       - '6379:6379'
 
   postgres:
-    image: postgres:10
-    container_name: postgres
+    image: postgres:10.3
+    container_name: rpi-tracker-postgres
     restart: unless-stopped
     volumes:
       - ./docker/data/postgres:/var/lib/postgresql/data
@@ -22,8 +22,8 @@ services:
       - '5432:5432'
 
   node:
-    image: node:9-slim
-    container_name: node
+    image: node:9.11-slim
+    container_name: rpi-tracker-node
     restart: unless-stopped
     command: npm start
     working_dir: /code
