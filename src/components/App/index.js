@@ -337,10 +337,10 @@ class App extends Component<{}, State> {
       <div className={styles.legend}>
         <div className={styles.left}>
           <select className={styles.mobileSelect} onChange={(event) => this.setState({ activeChart: event.target.value })}>
-            <option value="temperature">Temperature</option>
-            <option value="humidity">Humidity</option>
-            <option value="pressure">Pressure</option>
-            <option value="light">Light</option>
+            <option value="temperature" selected={activeChart === 'temperature'}>Temperature</option>
+            <option value="humidity" selected={activeChart === 'humidity'}>Humidity</option>
+            <option value="pressure" selected={activeChart === 'pressure'}>Pressure</option>
+            <option value="light" selected={activeChart === 'light'}>Light</option>
           </select>
 
           <ul>
