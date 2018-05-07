@@ -12,6 +12,7 @@ body {
   font-size: var(--font-base-size);
   line-height: var(--font-base-line-height);
   color: var(--color-dark-gray-blue);
+  overflow: hidden;
 }
 
 html,
