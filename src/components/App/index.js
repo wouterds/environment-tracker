@@ -276,7 +276,7 @@ class App extends Component<{}, State> {
     const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
 
     return (
-      <div className={className}>
+      <div className={cx(styles.rowSensors, className)}>
         <SensorBox
           onClick={() => this.setState({ activeChart: 'temperature' })}
           className={styles.sensorBox}

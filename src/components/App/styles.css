@@ -83,7 +83,8 @@
     flex-direction: column;
   }
 
-  .sensorBox {
-    max-width: 100%;
+
+  .rowSensors {
+    display: none;
   }
 }
