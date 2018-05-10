@@ -8,6 +8,13 @@ import { setActiveSensor } from 'store/actions/activeSensor';
 const App = (WrappedComponent) => {
   class App extends Component {
     /**
+     * Component did mount
+     */
+    componentDidMount() {
+      this.connect();
+    }
+
+    /**
      * Component will receive props
      *
      * @param {Object} nextProps
@@ -18,6 +25,38 @@ const App = (WrappedComponent) => {
       // No active sensor yet but we do have temperature sensor
       if (nextProps.sensors.temperature && !nextProps.activeSensor) {
         setActiveSensor('temperature');
+      }
+    }
+
+    /**
+     * Connect to websocket
+     */
+    connect() {
+      // Source
+      // const source = `${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`;
+      const source = 'wss://tracker.wouterdeschuyter.be/api';
+
+      // Open connection
+      const websocket = new WebSocket(source);
+
+      // Subscribe to new messages
+      websocket.onmessage = this.newMessage;
+    };
+
+    /**
+     * New message from socket
+     *
+     * @param {Object} rawData
+     */
+    newMessage = (event: Object) => {
+      const { setSensors } = this.props;
+      const data = JSON.parse(event.data);
+
+      switch (data.type) {
+        // Sensor data
+        case 'sensor-data':
+          setSensors(data);
+          break;
       }
     }
 
