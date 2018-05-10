@@ -20,11 +20,15 @@ const App = (WrappedComponent) => {
      * @param {Object} nextProps
      */
     componentWillReceiveProps(nextProps) {
-      const { setActiveSensor } = this.props;
+      const { setActiveSensor, activeSensor } = this.props;
 
       // No active sensor yet but we do have temperature sensor
       if (nextProps.sensors.temperature && !nextProps.activeSensor) {
         setActiveSensor('temperature');
+      }
+
+      if (activeSensor !== nextProps.activeSensor) {
+        window.location.hash = `#${nextProps.activeSensor}`;
       }
     }
 

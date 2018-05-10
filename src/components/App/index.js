@@ -45,12 +45,6 @@ class App extends Component<{}, State> {
   constructor() {
     super(...arguments);
 
-    // Default active chart, fallback to temperature
-    let activeChart = 'temperature';
-    if (location && location.hash) {
-      activeChart = location.hash.replace('#', '');
-    }
-
     // Default state
     this.state = {
       activeChart: activeChart,
@@ -76,16 +70,6 @@ class App extends Component<{}, State> {
         unit: null,
       },
     };
-  }
-
-  /**
-   * Component did update
-   */
-  componentDidUpdate() {
-    const { activeChart } = this.state;
-
-    // Update hash on update
-    window.location.hash = `#${activeChart}`;
   }
 
   /**
