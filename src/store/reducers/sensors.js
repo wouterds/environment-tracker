@@ -1,8 +1,8 @@
 import { SET_SENSORS } from 'store/actions/sensors';
 
-const EMPTY_SENSORS = {};
+const DEFAULT_SENSORS = {};
 
-const sensors = (state = EMPTY_SENSORS, action) => {
+const sensors = (state = DEFAULT_SENSORS, action) => {
   switch (action.type) {
     case SET_SENSORS:
       return {
