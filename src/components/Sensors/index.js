@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from 'react';
 import type { Node } from 'react';
-import SensorBox from 'components/SensorBox';
+import SensorComponent from 'components/Sensor';
 import { format as formatTemperature } from 'formatters/temperature';
 import { format as formatPressure } from 'formatters/pressure';
 import { format as formatHumidity } from 'formatters/humidity';
@@ -40,7 +40,7 @@ class Sensors extends Component<Props> {
     return (
       <div className={cx(styles.container, className)}>
         {temperature && (
-          <SensorBox
+          <SensorComponent
             className={styles.sensorBox}
             label="Temperature"
             unit={temperature.unit}
@@ -48,7 +48,7 @@ class Sensors extends Component<Props> {
           />
         )}
         {humidity && (
-          <SensorBox
+          <SensorComponent
             className={styles.sensorBox}
             label="Humidity"
             unit={humidity.unit}
@@ -56,7 +56,7 @@ class Sensors extends Component<Props> {
           />
         )}
         {pressure && (
-          <SensorBox
+          <SensorComponent
             className={styles.sensorBox}
             label="Pressure"
             unit={pressure.unit}
@@ -64,7 +64,7 @@ class Sensors extends Component<Props> {
           />
         )}
         {light && (
-          <SensorBox
+          <SensorComponent
             className={styles.sensorBox}
             label="Light"
             unit={light.unit}

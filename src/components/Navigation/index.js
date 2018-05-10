@@ -1,7 +1,6 @@
 //@flow
 import React, { Component } from 'react';
 import type { Node } from 'react';
-import SensorBox from 'components/SensorBox';
 import { format as formatTemperature } from 'formatters/temperature';
 import { format as formatPressure } from 'formatters/pressure';
 import { format as formatHumidity } from 'formatters/humidity';

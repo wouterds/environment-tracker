@@ -16,7 +16,7 @@ type Props = {
   chartData?: Array<number>,
 };
 
-class SensorBox extends Component<Props> {
+class Sensor extends Component<Props> {
   shouldComponentUpdate(nextProps: Props) {
     const { value, chartData } = this.props;
     const { value: newValue, chartData: newChartData } = nextProps;
@@ -65,4 +65,4 @@ class SensorBox extends Component<Props> {
   }
 }
 
-export default SensorBox;
+export default Sensor;
