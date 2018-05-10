@@ -391,31 +391,40 @@ class App extends Component<{}, State> {
       pressureChart,
       humidityChart,
       lightChart,
+      temperature,
+      pressure,
+      humidity,
+      light,
     } = this.state;
 
     let activeChartLabel = null;
     let activeChartColors = null;
     let activeChartData = null;
+    let activeChartUnit = null;
     switch (activeChart) {
       case 'temperature':
         activeChartLabel = 'Temperature';
         activeChartColors = ['#ffb8b8', '#ffcccc'];
         activeChartData = temperatureChart;
+        activeChartUnit = temperature.unit;
         break;
       case 'humidity':
         activeChartLabel = 'Humidity';
         activeChartColors = ['#a6cff7', '#c0ddfa'];
         activeChartData = humidityChart;
+        activeChartUnit = humidity.unit;
         break;
       case 'pressure':
         activeChartLabel = 'Pressure';
         activeChartColors = ['#d6a6f7', '#e9c0fa'];
         activeChartData = pressureChart;
+        activeChartUnit = pressure.unit;
         break;
       case 'light':
         activeChartLabel = 'Light';
         activeChartColors = ['#f7d487', '#fcebc4'];
         activeChartData = lightChart;
+        activeChartUnit = light.unit;
         break;
     }
 
@@ -434,6 +443,7 @@ class App extends Component<{}, State> {
                 label={activeChartLabel}
                 data={activeChartData}
                 colors={activeChartColors}
+                unit={activeChartUnit}
               />
             </Box>
           </div>

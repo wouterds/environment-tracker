@@ -11,3 +11,19 @@
   left: -5px;
   right: -5px;
 }
+
+.chartValue {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 3px;
+
+  .unit {
+    display: inline-block;
+    font-size: 0.8em;
+    vertical-align: top;
+    padding-top: 2px;
+    padding-left: 2px;
+  }
+}
