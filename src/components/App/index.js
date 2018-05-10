@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 import styles from './styles.css';
 import Box from 'components/Box';
-import BigChart from 'components/BigChart';
+import Chart from 'components/Chart';
 import wrapSensors from 'containers/Sensors';
 import Sensors from 'components/Sensors';
 import wrapNavigation from 'containers/Navigation';
@@ -161,7 +161,7 @@ class App extends Component<{}, State> {
             <Box className={styles.bigChartBox}>
               <WrappedNavigation  />
 
-              <BigChart
+              <Chart
                 className={styles.bigChart}
                 label={activeChartLabel}
                 data={activeChartData}

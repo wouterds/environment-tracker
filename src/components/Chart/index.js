@@ -20,7 +20,7 @@ type Props = {
   unit: ?string,
 };
 
-class BigChart extends Component<Props, State> {
+class Chart extends Component<Props, State> {
   ref: ?HTMLDivElement;
 
   constructor() {
@@ -106,7 +106,7 @@ class BigChart extends Component<Props, State> {
                   data = data.pop();
 
                   return (
-                    <div className={styles.chartValue}>
+                    <div className={styles.value}>
                       {(Math.round(formattedChartDataMap[data.value] * 100) / 100).toFixed(2)}
                       <span className={styles.unit}>{unit}</span>
                     </div>
@@ -121,4 +121,4 @@ class BigChart extends Component<Props, State> {
   }
 }
 
-export default BigChart;
+export default Chart;
