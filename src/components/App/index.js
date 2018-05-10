@@ -6,9 +6,12 @@ import Box from 'components/Box';
 import BigChart from 'components/BigChart';
 import wrapSensors from 'containers/Sensors';
 import Sensors from 'components/Sensors';
+import wrapNavigation from 'containers/Navigation';
+import Navigation from 'components/Navigation';
 import cx from 'classnames';
 
 const WrappedSensors = wrapSensors(Sensors);
+const WrappedNavigation = wrapNavigation(Navigation);
 
 type State = {
   activeChart: string,
@@ -116,70 +119,6 @@ class App extends Component<{}, State> {
   }
 
   /**
-   * Render navigation
-   */
-  renderNavigation(): Node {
-    const {
-      activeChart,
-      activePeriod,
-      temperature,
-      pressure,
-      humidity,
-      light,
-    } = this.state;
-
-    const temperatureValue = temperature.value ? temperature.value.toFixed(2) : null;
-    const humidityValue = humidity.value ? humidity.value.toFixed(2) : null;
-    const pressureValue = pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null;
-    const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
-
-    return (
-      <div className={styles.legend}>
-        <div className={styles.left}>
-          <select className={styles.mobileSelect} defaultValue={activeChart} onChange={(event) => this.setState({ activeChart: event.target.value })}>
-            <option value="temperature">Temperature</option>
-            <option value="humidity">Humidity</option>
-            <option value="pressure">Pressure</option>
-            <option value="light">Light</option>
-          </select>
-
-          <ul>
-            <li className={cx(styles.legendItem, activeChart === 'temperature' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'temperature' })}>
-              Temperature &middot; {temperatureValue}
-              <span className={styles.legendUnit}>{temperature.unit}</span>
-            </li>
-            <li className={cx(styles.legendItem, activeChart === 'humidity' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'humidity' })}>
-              Humidity &middot; {humidityValue}
-              <span className={styles.legendUnit}>{humidity.unit}</span>
-            </li>
-            <li className={cx(styles.legendItem, activeChart === 'pressure' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'pressure' })}>
-              Pressure &middot; {pressureValue}
-              <span className={styles.legendUnit}>{pressure.unit}</span>
-            </li>
-            <li className={cx(styles.legendItem, activeChart === 'light' ? styles.active : null)} onClick={() => this.setState({ activeChart: 'light' })}>
-              Light &middot; {lightValue}
-              <span className={styles.legendUnit}>{light.unit}</span>
-            </li>
-          </ul>
-        </div>
-        <div className={styles.right}>
-          <ul>
-            <li className={cx(styles.legendItem, activePeriod === '1D' ? styles.active : null)} onClick={() => alert('🚧 🛠 🔜')}>
-              1D
-            </li>
-            <li className={cx(styles.legendItem, activePeriod === '1W' ? styles.active : null)} onClick={() => alert('🚧 🛠 🔜')}>
-              1W
-            </li>
-            <li className={cx(styles.legendItem, activePeriod === '1M' ? styles.active : null)} onClick={() => alert('🚧 🛠 🔜')}>
-              1M
-            </li>
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
-  /**
    * Render component
    *
    * @return {Node}
@@ -236,7 +175,7 @@ class App extends Component<{}, State> {
 
           <div className={cx(styles.row, styles.bigChartRow)}>
             <Box className={styles.bigChartBox}>
-              {this.renderNavigation()}
+              <WrappedNavigation  />
 
               <BigChart
                 className={styles.bigChart}
