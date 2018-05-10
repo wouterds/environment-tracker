@@ -28,7 +28,7 @@ const App = (WrappedComponent) => {
       }
 
       if (activeSensor !== nextProps.activeSensor) {
-        window.location.hash = `#${nextProps.activeSensor}`;
+        location.hash = `#${nextProps.activeSensor}`;
       }
     }
 
