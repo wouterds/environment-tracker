@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import type { Node } from 'react';
 import { Provider } from 'react-redux';
-import { store } from 'store';
-import { connect } from 'services/socket';
+import { createStore } from 'redux';
+import { reducers } from 'store/reducers';
+import wrapApp from 'containers/App';
 import App from 'components/App';
 import styles from 'styles/core.css';
+
+const WrappedApp = wrapApp(App);
 
 /**
  * Render the component
@@ -15,8 +18,8 @@ import styles from 'styles/core.css';
  */
 const Index = (): Node => {
   return (
-    <Provider store={store}>
-      <App />
+    <Provider store={createStore(reducers)}>
+      <WrappedApp />
     </Provider>
   );
 };
@@ -34,6 +37,3 @@ root.className = styles.root;
 
 // Render React application
 ReactDOM.render(<Index />, root);
-
-// Connect to socket
-connect();

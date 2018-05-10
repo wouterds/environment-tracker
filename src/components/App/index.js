@@ -13,6 +13,10 @@ import cx from 'classnames';
 const WrappedSensors = wrapSensors(Sensors);
 const WrappedNavigation = wrapNavigation(Navigation);
 
+type Props = {
+  setSensors: Function,
+};
+
 type State = {
   activeChart: string,
   activePeriod: string,
@@ -38,7 +42,7 @@ type State = {
   },
 };
 
-class App extends Component<{}, State> {
+class App extends Component<Props, State> {
   /**
    * Constructor
    */
@@ -76,6 +80,45 @@ class App extends Component<{}, State> {
         unit: null,
       },
     };
+  }
+
+  /**
+   * Component did mount
+   */
+  componentDidMount() {
+    this.connect();
+  }
+
+  /**
+   * Connect to websocket
+   */
+  connect() {
+    // Source
+    // const source = `${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`;
+    const source = 'wss://tracker.wouterdeschuyter.be/api';
+
+    // Open connection
+    const websocket = new WebSocket(source);
+
+    // Subscribe to new messages
+    websocket.onmessage = this.newMessage;
+  };
+
+  /**
+   * New message from socket
+   *
+   * @param {Object} rawData
+   */
+  newMessage = (event: Object) => {
+    const { setSensors } = this.props;
+    const data = JSON.parse(event.data);
+
+    switch (data.type) {
+      // Sensor data
+      case 'sensor-data':
+        setSensors(data);
+        break;
+    }
   }
 
   /**
