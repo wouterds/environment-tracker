@@ -99,7 +99,7 @@ const broadcastChartForSensor = async (sensor) => {
       sensor,
       type,
       AVG(CAST(value AS DECIMAL)) AS value,
-      TO_TIMESTAMP(FLOOR((EXTRACT(EPOCH FROM "createdAt") / 900 )) * 900) AT TIME ZONE 'UTC' as time_interval
+      TO_TIMESTAMP(FLOOR((EXTRACT(EPOCH FROM "createdAt") / 600 )) * 600) AT TIME ZONE 'UTC' as time_interval
     FROM measurements
     WHERE sensor = '${sensor}' AND "createdAt" >= NOW() - '1 DAY'::INTERVAL
     GROUP BY sensor, type, time_interval
