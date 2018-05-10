@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 import styles from './styles.css';
 import Box from 'components/Box';
-import SensorBox from 'components/SensorBox';
 import BigChart from 'components/BigChart';
+import wrapSensors from 'containers/Sensors';
+import Sensors from 'components/Sensors';
 import cx from 'classnames';
+
+const WrappedSensors = wrapSensors(Sensors);
 
 type State = {
   activeChart: string,
@@ -73,17 +76,6 @@ class App extends Component<{}, State> {
   }
 
   /**
-   * Component did mount
-   */
-  componentDidMount() {
-    // Connect to socket
-    const websocket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`);
-
-    // Subscribe to new messages
-    websocket.onmessage = this.newSocketMessage;
-  }
-
-  /**
    * Component did update
    */
   componentDidUpdate() {
@@ -91,138 +83,6 @@ class App extends Component<{}, State> {
 
     // Update hash on update
     window.location.hash = `#${activeChart}`;
-  }
-
-  /**
-   * New message from socket
-   *
-   * @param  {Object} rawData
-   */
-  newSocketMessage = (rawData: Object) => {
-    const data = JSON.parse(rawData.data);
-
-    switch (data.type) {
-      case 'sensor-data':
-        this.handleSensorData(data);
-        break;
-      case 'sensor-chart-data':
-        this.handleSensorChartData(data);
-        break;
-    }
-  }
-
-  /**
-   * Parse sensor data
-   *
-   * @param {Object} data
-   */
-  handleSensorData(data: Object) {
-    switch (data.sensor) {
-      case 'bme280':
-        this.handleTemperatureSensorData(data.data);
-        this.handlePressureSensorData(data.data);
-        this.handleHumiditySensorData(data.data);
-        break;
-      case 'bh1750':
-        this.handleLightSensorData(data.data);
-        break;
-    }
-  }
-
-  /**
-   * Handle temperature sensor data
-   *
-   * @param {Object} data
-   */
-  handleTemperatureSensorData(data: Object) {
-    const { temperature } = this.state;
-
-    let newTemperature = {
-      value: data.temperature.value,
-      unit: data.temperature.unit,
-    };
-
-    if (temperature.value !== null) {
-      newTemperature.value = newTemperature.value + temperature.value;
-      newTemperature.value = newTemperature.value / 2;
-      newTemperature.value = Math.round(newTemperature.value * 100) / 100;
-    }
-
-    this.setState({
-      temperature: newTemperature,
-    });
-  }
-
-  /**
-   * Handle pressure sensor data
-   *
-   * @param {Object} data
-   */
-  handlePressureSensorData(data: Object) {
-    const { pressure } = this.state;
-
-    let newPressure = {
-      value: data.pressure.value,
-      unit: data.pressure.unit,
-    };
-
-    if (pressure.value !== null) {
-      newPressure.value = newPressure.value + pressure.value;
-      newPressure.value = newPressure.value / 2;
-      newPressure.value = Math.round(newPressure.value * 100) / 100;
-    }
-
-    this.setState({
-      pressure: newPressure,
-    });
-  }
-
-  /**
-   * Handle humidity sensor data
-   *
-   * @param {Object} data
-   */
-  handleHumiditySensorData(data: Object) {
-    const { humidity } = this.state;
-
-    let newHumidity = {
-      value: data.humidity.value,
-      unit: data.humidity.unit,
-    };
-
-    if (humidity.value !== null) {
-      newHumidity.value = newHumidity.value + humidity.value;
-      newHumidity.value = newHumidity.value / 2;
-      newHumidity.value = Math.round(newHumidity.value * 100) / 100;
-    }
-
-    this.setState({
-      humidity: newHumidity,
-    });
-  }
-
-  /**
-   * Handle light sensor data
-   *
-   * @param {Object} data
-   */
-  handleLightSensorData(data: Object) {
-    const { light } = this.state;
-
-    let newLight = {
-      value: data.light.value,
-      unit: data.light.unit,
-    };
-
-    if (light.value !== null) {
-      newLight.value = newLight.value + light.value;
-      newLight.value = newLight.value / 2;
-      newLight.value = Math.round(newLight.value * 100) / 100;
-    }
-
-    this.setState({
-      light: newLight,
-    });
   }
 
   /**
@@ -253,66 +113,6 @@ class App extends Component<{}, State> {
           });
         break;
     }
-  }
-
-  /**
-   * Render sensors
-   *
-   * @type {string} className
-   */
-  renderSensors(className: string): Node {
-    const {
-      temperature,
-      temperatureChart,
-      pressure,
-      pressureChart,
-      humidity,
-      humidityChart,
-      light,
-      lightChart,
-    } = this.state;
-
-    const temperatureValue = temperature.value ? temperature.value.toFixed(2) : null;
-    const humidityValue = humidity.value ? humidity.value.toFixed(2) : null;
-    const pressureValue = pressure.value ? pressure.value.toFixed(pressure.value > 100 ? 0 : 2) : null;
-    const lightValue = light.value ? light.value.toFixed(light.value > 100 ? 0 : 2) : null;
-
-    return (
-      <div className={cx(styles.rowSensors, className)}>
-        <SensorBox
-          onClick={() => this.setState({ activeChart: 'temperature' })}
-          className={styles.sensorBox}
-          label="Temperature"
-          unit={temperature.unit}
-          value={temperatureValue}
-          chartData={temperatureChart}
-        />
-        <SensorBox
-          onClick={() => this.setState({ activeChart: 'humidity' })}
-          className={styles.sensorBox}
-          label="Humidity"
-          unit={humidity.unit}
-          value={humidityValue}
-          chartData={humidityChart}
-        />
-        <SensorBox
-          onClick={() => this.setState({ activeChart: 'pressure' })}
-          className={styles.sensorBox}
-          label="Pressure"
-          unit={pressure.unit}
-          value={pressureValue}
-          chartData={pressureChart}
-        />
-        <SensorBox
-          onClick={() => this.setState({ activeChart: 'light' })}
-          className={styles.sensorBox}
-          label="Light"
-          unit={light.unit}
-          value={lightValue}
-          chartData={lightChart}
-        />
-      </div>
-    );
   }
 
   /**
@@ -432,7 +232,7 @@ class App extends Component<{}, State> {
       <div className={styles.container}>
         <h1 className={styles.heading}>Raspberry Pi Environment Tracker</h1>
         <div className={styles.content}>
-          {this.renderSensors(styles.row)}
+          <WrappedSensors className={(cx(styles.row, styles.rowSensors))} />
 
           <div className={cx(styles.row, styles.bigChartRow)}>
             <Box className={styles.bigChartBox}>

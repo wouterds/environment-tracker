@@ -29,10 +29,6 @@
   display: flex;
 }
 
-.sensorBox {
-  max-width: 25%;
-}
-
 .bigChartRow {
   flex: 1;
   padding: 10px;
@@ -110,7 +106,6 @@
   .content {
     flex-direction: column;
   }
-
 
   .rowSensors {
     display: none;
