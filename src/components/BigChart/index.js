@@ -78,16 +78,16 @@ class BigChart extends Component<Props, State> {
 
     const low = data ? Math.min(...data) : 0;
     const high = data ? Math.max(...data) : 0;
-    const formattedData = {};
-    if (data && data.length) {
-        data.forEach(value => {
-        const mutatedData = value - low + high * 0.05; // Will render better charts
-        formattedData[mutatedData] = value;
-      });
-    }
-    const formattedChartData = Object.keys(formattedData).map(value => {
-      return { v: parseFloat(value) };
-    });
+    let formattedChartDataMap = {};
+    const formattedChartData = data ? data.map(value => {
+      // Will render fancier charts
+      const mutatedData = value - low + high * 0.05;
+
+      // Also add to map so we can display real value
+      formattedChartDataMap[mutatedData] = value;
+
+      return { v: parseFloat(mutatedData) };
+    }) : null;
 
     return (
       <div className={cx(styles.container, className)} ref={el => this.ref = el}>
@@ -107,7 +107,7 @@ class BigChart extends Component<Props, State> {
 
                   return (
                     <div className={styles.chartValue}>
-                      {(Math.round(formattedData[data.value] * 100) / 100).toFixed(2)}
+                      {(Math.round(formattedChartDataMap[data.value] * 100) / 100).toFixed(2)}
                       <span className={styles.unit}>{unit}</span>
                     </div>
                   );
