@@ -59,17 +59,17 @@ sub.on('message', async (channel, message) => {
   sensors[sensor] = value;
 
   // Broadcast
-  wss.broadcast({ type: 'sensor-data', sensor, data: value });
+  wss.broadcast({ type: 'sensor', sensor, data: value });
 
   // Debugging output
-  console.log({ type: 'sensor-data', sensor, data: value });
+  console.log({ type: 'sensor', sensor, data: value });
 });
 
 // New connection
 wss.on('connection', (ws) => {
   // Send all sensor data
   Object.entries(sensors).forEach(([sensor, data]) => {
-    ws.send(JSON.stringify({ type: 'sensor-data', sensor, data }));
+    ws.send(JSON.stringify({ type: 'sensor', sensor, data }));
 
     broadcastChartForSensor(sensor);
   });
@@ -107,7 +107,7 @@ const broadcastChartForSensor = async (sensor) => {
   `, { type: Sequelize.QueryTypes.SELECT });
 
   // Chart events
-  wss.broadcast({ type: 'sensor-chart-data', sensor, data: measurements });
+  wss.broadcast({ type: 'chart', sensor, data: measurements });
 };
 
 // Calculate minute averages
