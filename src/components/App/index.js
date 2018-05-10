@@ -13,8 +13,11 @@ import cx from 'classnames';
 const WrappedSensors = wrapSensors(Sensors);
 const WrappedNavigation = wrapNavigation(Navigation);
 
+type Props = {
+  activeSensor: ?string,
+};
+
 type State = {
-  activeChart: string,
   activePeriod: string,
   temperatureChart: Array<number>,
   pressureChart: Array<number>,
@@ -38,7 +41,7 @@ type State = {
   },
 };
 
-class App extends Component<{}, State> {
+class App extends Component<Props, State> {
   /**
    * Constructor
    */
@@ -47,7 +50,6 @@ class App extends Component<{}, State> {
 
     // Default state
     this.state = {
-      activeChart: activeChart,
       activePeriod: '1D',
       temperatureChart: [],
       pressureChart: [],
@@ -108,8 +110,8 @@ class App extends Component<{}, State> {
    * @return {Node}
    */
   render(): Node {
+    const { activeSensor } = this.props;
     const {
-      activeChart,
       temperatureChart,
       pressureChart,
       humidityChart,
