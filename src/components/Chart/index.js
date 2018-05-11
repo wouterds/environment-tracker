@@ -18,6 +18,7 @@ type Props = {
   colors: ?Array<string>,
   data: ?Array<number>,
   unit: ?string,
+  formatter: ?Function,
 };
 
 class Chart extends Component<Props, State> {
@@ -139,16 +140,20 @@ class Chart extends Component<Props, State> {
    * @return {Node}
    */
   renderTooltip = (formattedChartDataMap: Object, data: Object): Node => {
-    const { unit } = this.props;
+    const { unit, formatter } = this.props;
     const { payload } = data;
 
     if (!payload || (payload && payload.length === 0)) {
       return null;
     }
 
+    if (!formatter) {
+      return null;
+    }
+
     return (
       <div className={styles.value}>
-        {(Math.round(formattedChartDataMap[payload.pop().value] * 100) / 100).toFixed(2)}
+        {formatter(formattedChartDataMap[payload.pop().value])}
         <span className={styles.unit}>{unit}</span>
       </div>
     );

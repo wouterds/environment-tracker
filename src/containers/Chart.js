@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { getActiveSensor } from 'store/selectors/activeSensor';
 import { getSensors } from 'store/selectors/sensors';
 import { getCharts } from 'store/selectors/charts';
+import { format as formatTemperature } from 'formatters/temperature';
+import { format as formatPressure } from 'formatters/pressure';
+import { format as formatHumidity } from 'formatters/humidity';
+import { format as formatLight } from 'formatters/light';
 
 const Chart = (WrappedComponent) => {
   class Chart extends Component {
@@ -43,6 +47,22 @@ const Chart = (WrappedComponent) => {
         break;
     }
 
+    let formatter = [];
+    switch (activeSensor) {
+      case 'temperature':
+        formatter = formatTemperature;
+        break;
+      case 'humidity':
+        formatter = formatHumidity;
+        break;
+      case 'pressure':
+        formatter = formatPressure;
+        break;
+      case 'light':
+        formatter = formatLight;
+        break;
+    }
+
     // TODO: See if we can provide this from the API
     let unit = sensors[activeSensor] ? sensors[activeSensor].unit : null;
 
@@ -51,6 +71,7 @@ const Chart = (WrappedComponent) => {
       data: charts ? charts[activeSensor] : [],
       colors,
       unit,
+      formatter,
     };
   };
 
