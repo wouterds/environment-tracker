@@ -96,7 +96,6 @@ const Measurement = sequelize.define('measurement', {
 const broadcastChartForSensor = async (sensor) => {
   let measurements = await sequelize.query(`
     SELECT
-      sensor,
       type,
       AVG(CAST(value AS DECIMAL)) AS value,
       TO_TIMESTAMP(FLOOR((EXTRACT(EPOCH FROM "createdAt") / 600 )) * 600) AT TIME ZONE 'UTC' as time_interval
