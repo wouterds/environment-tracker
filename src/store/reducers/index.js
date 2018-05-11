@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import sensors from 'store/reducers/sensors';
 import activeSensor from 'store/reducers/activeSensor';
+import sensors from 'store/reducers/sensors';
+import charts from 'store/reducers/charts';
 
 const reducers = combineReducers({
-  sensors,
   activeSensor,
+  sensors,
+  charts,
 });
 
 export { reducers };

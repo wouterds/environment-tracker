@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getSensors } from 'store/selectors/sensors';
 import { getActiveSensor } from 'store/selectors/activeSensor';
 import { setSensors } from 'store/actions/sensors';
+import { setCharts } from 'store/actions/charts';
 import { setActiveSensor } from 'store/actions/activeSensor';
 
 const App = (WrappedComponent) => {
@@ -61,6 +62,11 @@ const App = (WrappedComponent) => {
         case 'sensor-data':
           setSensors(data);
           break;
+
+        // Chart data
+        case 'sensor-chart-data':
+          setCharts(data);
+          break;
       }
     }
 
@@ -97,6 +103,9 @@ const App = (WrappedComponent) => {
     return {
       setSensors: (data) => {
         dispatch(setSensors(data));
+      },
+      setCharts: (data) => {
+        dispatch(setCharts(data));
       },
       setActiveSensor: (data) => {
         dispatch(setActiveSensor(data));
