@@ -34,16 +34,16 @@ const Chart = (WrappedComponent) => {
     let colors = [];
     switch (activeSensor) {
       case 'temperature':
-        colors = ['#d63031', '#fab1a0'];
+        colors = ['#fab1a0', '#f7dbd3'];
         break;
       case 'humidity':
-        colors = ['#0984e3', '#74b9ff'];
+        colors = ['#74b9ff', '#b5daff'];
         break;
       case 'pressure':
-        colors = ['#6c5ce7', '#a29bfe'];
+        colors = ['#a29bfe', '#c4bff9'];
         break;
       case 'light':
-        colors = ['#fdcb6e', '#ffeaa7'];
+        colors = ['#f6e19f', '#fbefca'];
         break;
     }
 
