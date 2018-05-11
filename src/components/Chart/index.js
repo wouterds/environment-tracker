@@ -23,6 +23,9 @@ type Props = {
 class Chart extends Component<Props, State> {
   ref: ?HTMLDivElement;
 
+  /**
+   * Constructor
+   */
   constructor() {
     super(...arguments);
 
@@ -31,6 +34,13 @@ class Chart extends Component<Props, State> {
     };
   }
 
+  /**
+   * Should component update
+   *
+   * @param {Object} nextProps
+   * @param {Object} nextState
+   * @return {boolean}
+   */
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     const { data } = this.props;
     const { data: newData } = nextProps;
@@ -44,19 +54,31 @@ class Chart extends Component<Props, State> {
     return true;
   }
 
+  /**
+   * Component did mount
+   */
   componentDidMount() {
     this.updateHeight();
     window.addEventListener('resize', this.updateHeight);
   }
 
+  /**
+   * Component will unmount
+   */
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateHeight);
   }
 
+  /**
+   * Component did update
+   */
   componentDidUpdate() {
     this.updateHeight();
   }
 
+  /**
+   * Update height
+   */
   updateHeight = () => {
     const height = this.ref ? this.ref.getBoundingClientRect().height : null;
 
@@ -67,6 +89,11 @@ class Chart extends Component<Props, State> {
     this.setState({ height });
   }
 
+  /**
+   * Render
+   *
+   * @type {Node}
+   */
   render(): Node {
     const { height } = this.state;
     const {
