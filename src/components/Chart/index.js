@@ -123,26 +123,33 @@ class Chart extends Component<Props, State> {
             <ResponsiveContainer height={height * 0.9}>
               <AreaChart data={formattedChartData} strokeWidth={1.5}>
                 <Area type='monotone' dataKey='v' stroke={colors ? colors[0] : null} fill={colors ? colors[1] : null} />
-                <Tooltip content={(data) => {
-                  data = data.payload;
-
-                  if (!data || (data && data.length === 0)) {
-                    return null;
-                  }
-
-                  data = data.pop();
-
-                  return (
-                    <div className={styles.value}>
-                      {(Math.round(formattedChartDataMap[data.value] * 100) / 100).toFixed(2)}
-                      <span className={styles.unit}>{unit}</span>
-                    </div>
-                  );
-                }} position={{ y: 0 }} />
+                <Tooltip animationDuration={100} content={(data) => this.renderTooltip(formattedChartDataMap, data)} position={{ y: 0 }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         }
+      </div>
+    );
+  }
+
+  /**
+   * Render tooltips
+   *
+   * @param {Object} data
+   * @return {Node}
+   */
+  renderTooltip = (formattedChartDataMap: Object, data: Object): Node => {
+    const { unit } = this.props;
+    const { payload } = data;
+
+    if (!payload || (payload && payload.length === 0)) {
+      return null;
+    }
+
+    return (
+      <div className={styles.value}>
+        {(Math.round(formattedChartDataMap[payload.pop().value] * 100) / 100).toFixed(2)}
+        <span className={styles.unit}>{unit}</span>
       </div>
     );
   }

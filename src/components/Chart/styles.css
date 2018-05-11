@@ -14,16 +14,19 @@
 
 .value {
   display: inline-block;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 5px 10px;
+  background-color: var(--color-white);
+  border: 1px solid #DAE1E9;
+  color: #7F96B4;
+  padding: 7px;
+  line-height: 1;
   border-radius: 3px;
+  position: relative;
 
   .unit {
     display: inline-block;
     font-size: 0.8em;
     vertical-align: top;
-    padding-top: 2px;
+    padding-top: 1px;
     padding-left: 2px;
   }
 }
