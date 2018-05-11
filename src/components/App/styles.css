@@ -63,16 +63,4 @@
   .content {
     padding: 5px;
   }
-
-  .legend {
-    .left {
-      .legendItem:not(.active) {
-        display: none;
-      }
-    }
-
-    .mobileSelect {
-      display: block;
-    }
-  }
 }

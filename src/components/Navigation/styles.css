@@ -57,3 +57,17 @@
     }
   }
 }
+
+@media(max-width: 800px) {
+  .container {
+    .left {
+      .item:not(.active) {
+        display: none;
+      }
+    }
+
+    .mobileSelect {
+      display: block;
+    }
+  }
+}
