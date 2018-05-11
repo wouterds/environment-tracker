@@ -25,10 +25,26 @@ const Chart = (WrappedComponent) => {
     const activeSensor = getActiveSensor(state);
     const charts = getCharts(state);
 
+    let colors = [];
+    switch (activeSensor) {
+      case 'temperature':
+        colors = ['#d63031', '#fab1a0'];
+        break;
+      case 'humidity':
+        colors = ['#0984e3', '#74b9ff'];
+        break;
+      case 'pressure':
+        colors = ['#6c5ce7', '#a29bfe'];
+        break;
+      case 'light':
+        colors = ['#fdcb6e', '#ffeaa7'];
+        break;
+    }
+
     return {
       label: _.capitalize(activeSensor),
       data: charts ? charts[activeSensor] : [],
-      colors: ['#F00', '#0F0'],
+      colors,
       unit: 'tmp',
     };
   };
