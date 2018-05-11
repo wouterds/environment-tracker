@@ -29,17 +29,17 @@
   display: flex;
 }
 
-.bigChartRow {
+.chartRow {
   flex: 1;
   padding: 10px;
 }
 
-.bigChart {
+.chart {
   display: flex;
   flex: 1;
 }
 
-.bigChartBox {
+.chartBox {
   display: flex;
   flex-direction: column;
 }
