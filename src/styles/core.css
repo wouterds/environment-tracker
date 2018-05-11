@@ -12,7 +12,6 @@ body {
   font-size: var(--font-base-size);
   line-height: var(--font-base-line-height);
   color: var(--color-dark-gray-blue);
-  overflow: hidden;
 }
 
 html,
@@ -20,6 +19,9 @@ body,
 .root {
   min-height: 100%;
   height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
 }
 
 b,
