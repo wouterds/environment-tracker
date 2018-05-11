@@ -1,4 +1,4 @@
-import { parse } from 'parsers/sensors';
+import { parse } from 'store/parsers/sensors';
 
 const SET_SENSORS = 'SET_SENSORS';
 
