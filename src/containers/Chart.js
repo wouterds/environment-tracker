@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getActiveSensor } from 'store/selectors/activeSensor';
+import { getSensors } from 'store/selectors/sensors';
 import { getCharts } from 'store/selectors/charts';
 
 const Chart = (WrappedComponent) => {
@@ -23,6 +24,7 @@ const Chart = (WrappedComponent) => {
   */
   const mapStateToProps = (state) => {
     const activeSensor = getActiveSensor(state);
+    const sensors = getSensors(state);
     const charts = getCharts(state);
 
     let colors = [];
@@ -41,11 +43,14 @@ const Chart = (WrappedComponent) => {
         break;
     }
 
+    // TODO: See if we can provide this from the API
+    let unit = sensors[activeSensor] ? sensors[activeSensor].unit : null;
+
     return {
       label: _.capitalize(activeSensor),
       data: charts ? charts[activeSensor] : [],
       colors,
-      unit: 'tmp',
+      unit,
     };
   };
 
