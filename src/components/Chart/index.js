@@ -123,8 +123,8 @@ class Chart extends Component<Props, State> {
           <div className={styles.chart}>
             <ResponsiveContainer height={height * 0.9}>
               <AreaChart data={formattedChartData} strokeWidth={1.5}>
-                <Area type='monotone' dataKey='v' stroke={colors ? colors[0] : null} fill={colors ? colors[1] : null} />
-                <Tooltip animationDuration={100} content={(data) => this.renderTooltip(formattedChartDataMap, data)} position={{ y: 0 }} />
+                <Area animationDuration={500} type='monotone' dataKey='v' stroke={colors ? colors[0] : null} fill={colors ? colors[1] : null} />
+                <Tooltip animationDuration={250} content={(data) => this.renderTooltip(formattedChartDataMap, data)} position={{ y: 0 }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
