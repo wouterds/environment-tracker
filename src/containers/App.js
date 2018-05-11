@@ -54,7 +54,7 @@ const App = (WrappedComponent) => {
      * @param {Object} rawData
      */
     newMessage = (event: Object) => {
-      const { setSensors } = this.props;
+      const { setSensors, setCharts } = this.props;
       const data = JSON.parse(event.data);
 
       switch (data.type) {
