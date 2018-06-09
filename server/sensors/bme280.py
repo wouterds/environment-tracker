@@ -117,26 +117,30 @@ def readBME280All(addr=DEVICE):
   return round(temperature/100.0, 2), round(pressure/100.0, 2), round(humidity, 2)
 
 while True:
-  temperature,pressure,humidity = readBME280All()
+  try:
+    temperature,pressure,humidity = readBME280All()
 
-  r.set('sensor:bme280', json.dumps({
-   'temperature': {
-     'value': temperature,
-     'unit': '˚C'
-    },
-    'pressure': {
-      'value': pressure,
-      'unit': 'hPa'
-    },
-    'humidity': {
-      'value': humidity,
-      'unit': '%'
-    }
-  }))
-  r.publish('sensor', 'bme280')
+    r.set('sensor:bme280', json.dumps({
+     'temperature': {
+       'value': temperature,
+       'unit': '˚C'
+      },
+      'pressure': {
+        'value': pressure,
+        'unit': 'hPa'
+      },
+      'humidity': {
+        'value': humidity,
+        'unit': '%'
+      }
+    }))
+    r.publish('sensor', 'bme280')
 
-  print 'Temperature:', temperature, '˚C'
-  print 'Pressure:', pressure, 'hPa'
-  print 'Humidity:', humidity, '%'
+    print 'Temperature:', temperature, '˚C'
+    print 'Pressure:', pressure, 'hPa'
+    print 'Humidity:', humidity, '%'
 
-  time.sleep(0.25)
+    time.sleep(0.25)
+
+  except Exception as e:
+    print 'Error:', str(e)

@@ -30,15 +30,20 @@ def readLight(addr=DEVICE):
   return convertToNumber(bus.read_i2c_block_data(addr,ONE_TIME_HIGH_RES_MODE_1))
 
 while True:
-  light = round(readLight(), 2)
+  try:
+    light = round(readLight(), 2)
 
-  r.set('sensor:bh1750', json.dumps({
-    'light': {
-      'value': light,
-      'unit': 'lx'
-     }
-  }))
-  r.publish('sensor', 'bh1750')
+    r.set('sensor:bh1750', json.dumps({
+      'light': {
+        'value': light,
+        'unit': 'lx'
+       }
+    }))
+    r.publish('sensor', 'bh1750')
 
-  print 'Light:', light, 'lx'
-  time.sleep(0.25)
+    print 'Light:', light, 'lx'
+
+    time.sleep(0.25)
+
+  except Exception as e:
+    print 'Error:', str(e)
