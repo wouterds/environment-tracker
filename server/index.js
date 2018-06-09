@@ -119,6 +119,10 @@ setInterval(() => {
 
     if (sensor === 'pir') {
       sensorsLastMinute[sensor].push(data);
+
+      if (sensorsLastMinute[sensor].length > 60) {
+        sensorsLastMinute[sensor].shift();
+      }
     } else {
       Object.entries(data).forEach(([type, data]) => {
         if (!sensorsLastMinute[sensor].hasOwnProperty(type)) {
