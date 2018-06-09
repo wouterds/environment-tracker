@@ -59,12 +59,12 @@ const App = (WrappedComponent) => {
 
       switch (data.type) {
         // Sensor data
-        case 'sensor-data':
+        case 'sensor':
           setSensors(data);
           break;
 
         // Chart data
-        case 'sensor-chart-data':
+        case 'chart':
           setCharts(data);
           break;
       }
