@@ -17,6 +17,7 @@ type Sensor = {
 type Props = {
   className?: ?string,
   activeSensor: ?string,
+  activePeriod: ?string,
   temperature: ?Sensor,
   humidity: ?Sensor,
   pressure: ?Sensor,
@@ -34,6 +35,7 @@ class Navigation extends Component<Props> {
   render(): Node {
     const {
       activeSensor,
+      activePeriod,
       temperature,
       pressure,
       humidity,
@@ -106,7 +108,7 @@ class Navigation extends Component<Props> {
           </ul>
         </div>
         <div className={styles.right}>
-          {/* <ul>
+          <ul>
             <li
               className={cx(styles.item, activePeriod === '1D' ? styles.active : null)}
               onClick={() => alert('🚧 🛠 🔜')}>
@@ -122,7 +124,7 @@ class Navigation extends Component<Props> {
               onClick={() => alert('🚧 🛠 🔜')}>
               1M
             </li>
-          </ul> */}
+          </ul>
         </div>
       </div>
     );
