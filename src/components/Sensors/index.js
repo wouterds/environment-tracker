@@ -6,6 +6,7 @@ import { format as formatTemperature } from 'formatters/temperature';
 import { format as formatPressure } from 'formatters/pressure';
 import { format as formatHumidity } from 'formatters/humidity';
 import { format as formatLight } from 'formatters/light';
+import { format as formatCo2 } from 'formatters/co2';
 import cx from 'classnames';
 import styles from './styles.css';
 
@@ -19,6 +20,7 @@ type Props = {
   temperature: ?Sensor,
   humidity: ?Sensor,
   pressure: ?Sensor,
+  co2: ?Sensor,
   light: ?Sensor,
 };
 
@@ -34,6 +36,7 @@ class Sensors extends Component<Props> {
       temperature,
       humidity,
       pressure,
+      co2,
       light,
     } = this.props;
 
@@ -61,6 +64,14 @@ class Sensors extends Component<Props> {
             label="Pressure"
             unit={pressure.unit}
             value={formatPressure(pressure.value)}
+          />
+        )}
+        {co2 && (
+          <SensorComponent
+            className={styles.sensorBox}
+            label="CO2"
+            unit={co2.unit}
+            value={formatCo2(co2.value)}
           />
         )}
         {light && (

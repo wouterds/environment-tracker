@@ -14,6 +14,12 @@ const parse = (raw) => {
         .map(item => parseFloat(item.value));
       break;
 
+    case 'ccs811':
+      data.co2 = raw.data
+        .filter(item => item.type === 'co2')
+        .map(item => parseFloat(item.value));
+      break;
+
     case 'bh1750':
       data.light = raw.data
         .filter(item => item.type === 'light')

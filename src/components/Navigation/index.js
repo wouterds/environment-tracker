@@ -4,6 +4,7 @@ import type { Node } from 'react';
 import { format as formatTemperature } from 'formatters/temperature';
 import { format as formatPressure } from 'formatters/pressure';
 import { format as formatHumidity } from 'formatters/humidity';
+import { format as formatCo2 } from 'formatters/co2';
 import { format as formatLight } from 'formatters/light';
 import cx from 'classnames';
 import styles from './styles.css';
@@ -19,6 +20,7 @@ type Props = {
   temperature: ?Sensor,
   humidity: ?Sensor,
   pressure: ?Sensor,
+  co2: ?Sensor,
   light: ?Sensor,
   setActiveSensor: Function,
 };
@@ -35,6 +37,7 @@ class Navigation extends Component<Props> {
       temperature,
       pressure,
       humidity,
+      co2,
       light,
       setActiveSensor,
     } = this.props;
@@ -50,6 +53,7 @@ class Navigation extends Component<Props> {
             {temperature && (<option value="temperature">Temperature</option>)}
             {humidity && (<option value="humidity">Humidity</option>)}
             {pressure && (<option value="pressure">Pressure</option>)}
+            {co2 && (<option value="co2">CO2</option>)}
             {light && (<option value="light">Light</option>)}
           </select>
 
@@ -79,6 +83,15 @@ class Navigation extends Component<Props> {
                 >
                 Pressure &middot; {formatPressure(pressure.value)}
                 <span className={styles.legendUnit}>{pressure.unit}</span>
+              </li>
+            )}
+            {co2 && (
+              <li
+                className={cx(styles.item, activeSensor === 'co2' ? styles.active : null)}
+                onClick={() => setActiveSensor('co2')}
+                >
+                CO2 &middot; {formatCo2(co2.value)}
+                <span className={styles.legendUnit}>{co2.unit}</span>
               </li>
             )}
             {light && (

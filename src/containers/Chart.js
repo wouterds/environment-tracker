@@ -6,6 +6,7 @@ import { getCharts } from 'store/selectors/charts';
 import { format as formatTemperature } from 'formatters/temperature';
 import { format as formatPressure } from 'formatters/pressure';
 import { format as formatHumidity } from 'formatters/humidity';
+import { format as formatCo2 } from 'formatters/co2';
 import { format as formatLight } from 'formatters/light';
 
 const Chart = (WrappedComponent) => {
@@ -42,6 +43,9 @@ const Chart = (WrappedComponent) => {
       case 'pressure':
         colors = ['#a29bfe', '#c4bff9'];
         break;
+      case 'co2':
+        colors = ['#6cccb9', '#abe8dc'];
+        break;
       case 'light':
         colors = ['#f6e19f', '#fbefca'];
         break;
@@ -57,6 +61,9 @@ const Chart = (WrappedComponent) => {
         break;
       case 'pressure':
         formatter = formatPressure;
+        break;
+      case 'co2':
+        formatter = formatCo2;
         break;
       case 'light':
         formatter = formatLight;

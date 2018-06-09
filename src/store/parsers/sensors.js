@@ -8,6 +8,10 @@ const parse = (raw) => {
       data.humidity = raw.data.humidity;
       break;
 
+    case 'ccs811':
+      data.co2 = raw.data.co2;
+      break;
+
     case 'bh1750':
       data.light = raw.data.light;
       break;
