@@ -3,14 +3,12 @@ version: '2'
 services:
   redis:
     image: redis:4.0
-    container_name: rpi-tracker-redis
     restart: unless-stopped
     ports:
       - '6379:6379'
 
   postgres:
     image: postgres:10.3
-    container_name: rpi-tracker-postgres
     restart: unless-stopped
     volumes:
       - ./docker/data/postgres:/var/lib/postgresql/data
@@ -23,7 +21,6 @@ services:
 
   node:
     image: node:9.11-slim
-    container_name: rpi-tracker-node
     restart: unless-stopped
     command: npm start
     working_dir: /code
@@ -35,7 +32,6 @@ services:
 
   nginx:
     image: nginx:1.13
-    container_name: rpi-tracker-nginx
     restart: unless-stopped
     environment:
       - VIRTUAL_HOST=tracker.wouterdeschuyter.be
