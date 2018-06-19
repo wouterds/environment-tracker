@@ -18,6 +18,13 @@ const App = (WrappedComponent) => {
     }
 
     /**
+     * Component will unmount
+     */
+    componentWillUnmount() {
+      this.disconnect();
+    }
+
+    /**
      * Component will receive props
      *
      * @param {Object} nextProps
