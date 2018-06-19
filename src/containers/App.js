@@ -26,25 +26,25 @@ const App = (WrappedComponent) => {
     }
 
     /**
-     * Component will receive props
+     * Component updated
      *
-     * @param {Object} nextProps
+     * @param {Object} prevProps
      */
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
       const { setActiveSensor, activeSensor, activePeriod } = this.props;
 
       // New period? Reconnect
-      if (activePeriod !== nextProps.activePeriod) {
+      if (activePeriod !== prevProps.activePeriod) {
         this.tellSocketAboutPeriod();
       }
 
       // No active sensor yet but we do have temperature sensor
-      if (nextProps.sensors.temperature && !nextProps.activeSensor) {
+      if (prevProps.sensors.temperature && !prevProps.activeSensor) {
         setActiveSensor('temperature');
       }
 
-      if (activeSensor !== nextProps.activeSensor) {
-        location.hash = `#${nextProps.activeSensor}`;
+      if (activeSensor !== prevProps.activeSensor) {
+        location.hash = `#${activeSensor}`;
       }
     }
 
