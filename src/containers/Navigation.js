@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSensors } from 'store/selectors/sensors'
+import { getSensors } from 'store/selectors/sensors';
 import { getActiveSensor } from 'store/selectors/activeSensor';
 import { setActiveSensor } from 'store/actions/activeSensor';
+import { getPeriods } from 'store/selectors/periods';
+import { getActivePeriod } from 'store/selectors/activePeriod';
+import { setActivePeriod } from 'store/actions/activePeriod';
 
 const Navigation = (WrappedComponent) => {
   class Navigation extends Component {
@@ -26,6 +29,8 @@ const Navigation = (WrappedComponent) => {
     return {
       ...getSensors(state),
       activeSensor: getActiveSensor(state),
+      ...getPeriods(state),
+      activePeriod: getActivePeriod(state),
     };
   };
 
@@ -39,6 +44,9 @@ const Navigation = (WrappedComponent) => {
     return {
       setActiveSensor: (sensor) => {
         dispatch(setActiveSensor(sensor));
+      },
+      setActivePeriod: (period) => {
+        dispatch(setActivePeriod(period));
       },
     };
   };

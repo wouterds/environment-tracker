@@ -38,8 +38,8 @@ const App = (WrappedComponent) => {
      */
     connect() {
       // Source
-      const source = `${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`;
-      //const source = 'wss://tracker.wouterdeschuyter.be/api';
+      // const source = `${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`;
+      const source = 'wss://tracker.wouterdeschuyter.be/api';
 
       // Open connection
       const websocket = new WebSocket(source);
