@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSensors } from 'store/selectors/sensors';
 import { getActiveSensor } from 'store/selectors/activeSensor';
+import { getActivePeriod } from 'store/selectors/activePeriod';
 import { setSensors } from 'store/actions/sensors';
 import { setCharts } from 'store/actions/charts';
 import { setActiveSensor } from 'store/actions/activeSensor';
@@ -30,7 +31,12 @@ const App = (WrappedComponent) => {
      * @param {Object} nextProps
      */
     componentWillReceiveProps(nextProps) {
-      const { setActiveSensor, activeSensor } = this.props;
+      const { setActiveSensor, activeSensor, activePeriod } = this.props;
+
+      // New period? Reconnect
+      if (activePeriod !== nextProps.activePeriod) {
+        this.tellSocketAboutPeriod();
+      }
 
       // No active sensor yet but we do have temperature sensor
       if (nextProps.sensors.temperature && !nextProps.activeSensor) {
@@ -55,6 +61,9 @@ const App = (WrappedComponent) => {
 
       // Subscribe to new messages
       this.socket.onmessage = this.newMessage;
+
+      // Ask data for period
+      this.tellSocketAboutPeriod();
     }
 
     /**
@@ -67,6 +76,19 @@ const App = (WrappedComponent) => {
 
       this.socket.close();
       this.socket = null;
+    }
+
+    /**
+     * Ask socket for data
+     */
+    tellSocketAboutPeriod() {
+      if (!this.socket || this.socket === null) {
+        throw new Error('no socket');
+      }
+
+      const { activePeriod } = this.props;
+
+      this.socket.send(JSON.stringify({ period: activePeriod }));
     }
 
     /**
@@ -111,6 +133,7 @@ const App = (WrappedComponent) => {
     return {
       sensors: getSensors(state),
       activeSensor: getActiveSensor(state),
+      activePeriod: getActivePeriod(state),
     };
   };
 
