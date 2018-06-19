@@ -114,7 +114,7 @@ class Navigation extends Component<Props> {
         <div className={styles.right}>
           <ul>
             {periods.map((period) => (
-              <li
+              <li key={`period-item-${period}`}
                 className={cx(styles.item, activePeriod === period ? styles.active : null)}
                 onClick={() => setActivePeriod(period)}>
                 {period}
