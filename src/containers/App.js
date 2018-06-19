@@ -8,7 +8,7 @@ import { setActiveSensor } from 'store/actions/activeSensor';
 
 const App = (WrappedComponent) => {
   class App extends Component {
-    socket: WebSocket;
+    socket: WebSocket = null;
 
     /**
      * Component did mount
@@ -54,7 +54,12 @@ const App = (WrappedComponent) => {
      * Disconnect from websocket
      */
     disconnect() {
+      if (this.socket === null) {
+        return;
+      }
+
       this.socket.close();
+      this.socket = null;
     }
 
     /**
