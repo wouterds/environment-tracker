@@ -8,6 +8,8 @@ import { setActiveSensor } from 'store/actions/activeSensor';
 
 const App = (WrappedComponent) => {
   class App extends Component {
+    socket: WebSocket;
+
     /**
      * Component did mount
      */
@@ -38,15 +40,22 @@ const App = (WrappedComponent) => {
      */
     connect() {
       // Source
-      // const source = `${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`;
-      const source = 'wss://tracker.wouterdeschuyter.be/api';
+      const source = `${location.protocol === 'https:' ? 'wss' : 'ws'}:/${location.host}/api`;
+      // const source = 'wss://tracker.wouterdeschuyter.be/api';
 
       // Open connection
-      const websocket = new WebSocket(source);
+      this.socket = new WebSocket(source);
 
       // Subscribe to new messages
-      websocket.onmessage = this.newMessage;
-    };
+      this.socket.onmessage = this.newMessage;
+    }
+
+    /**
+     * Disconnect from websocket
+     */
+    disconnect() {
+      this.socket.close();
+    }
 
     /**
      * New message from socket
