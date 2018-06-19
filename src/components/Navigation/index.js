@@ -16,14 +16,16 @@ type Sensor = {
 
 type Props = {
   className?: ?string,
-  activeSensor: ?string,
   activePeriod: ?string,
+  periods: Array<string>,
+  activeSensor: ?string,
   temperature: ?Sensor,
   humidity: ?Sensor,
   pressure: ?Sensor,
   co2: ?Sensor,
   light: ?Sensor,
   setActiveSensor: Function,
+  setActivePeriod: Function,
 };
 
 class Navigation extends Component<Props> {
@@ -34,14 +36,16 @@ class Navigation extends Component<Props> {
    */
   render(): Node {
     const {
-      activeSensor,
       activePeriod,
+      periods,
+      activeSensor,
       temperature,
       pressure,
       humidity,
       co2,
       light,
       setActiveSensor,
+      setActivePeriod,
     } = this.props;
 
     return (
@@ -109,21 +113,13 @@ class Navigation extends Component<Props> {
         </div>
         <div className={styles.right}>
           <ul>
-            <li
-              className={cx(styles.item, activePeriod === '1D' ? styles.active : null)}
-              onClick={() => alert('🚧 🛠 🔜')}>
-              1D
-            </li>
-            <li
-              className={cx(styles.item, activePeriod === '1W' ? styles.active : null)}
-              onClick={() => alert('🚧 🛠 🔜')}>
-              1W
-            </li>
-            <li
-              className={cx(styles.item, activePeriod === '1M' ? styles.active : null)}
-              onClick={() => alert('🚧 🛠 🔜')}>
-              1M
-            </li>
+            {periods.map((period) => (
+              <li
+                className={cx(styles.item, activePeriod === period ? styles.active : null)}
+                onClick={() => setActivePeriod(period)}>
+                {period}
+              </li>
+            ))}
           </ul>
         </div>
       </div>

@@ -29,7 +29,7 @@ const Navigation = (WrappedComponent) => {
     return {
       ...getSensors(state),
       activeSensor: getActiveSensor(state),
-      ...getPeriods(state),
+      periods: getPeriods(state),
       activePeriod: getActivePeriod(state),
     };
   };
