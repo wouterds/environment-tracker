@@ -62,8 +62,8 @@ const App = (WrappedComponent) => {
       // Subscribe to new messages
       this.socket.onmessage = this.newMessage;
 
-      // Ask data for period
-      this.tellSocketAboutPeriod();
+      // Listen when socket is opened
+      this.socket.onopen = this.onOpen;
     }
 
     /**
@@ -89,6 +89,14 @@ const App = (WrappedComponent) => {
       const { activePeriod } = this.props;
 
       this.socket.send(JSON.stringify({ period: activePeriod }));
+    }
+
+    /**
+     * When socket is opened
+     */
+    onOpen = () => {
+      // Ask data for period
+      this.tellSocketAboutPeriod();
     }
 
     /**
