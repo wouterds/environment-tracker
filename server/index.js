@@ -175,7 +175,7 @@ setInterval(() => {
 
     broadcastChartForSensor(sensor);
   });
-}, 1000 * 60);
+}, 1000 * 30);
 
 // Sync DB
 sequelize.sync();
