@@ -1,8 +1,8 @@
 const DEFAULT_PERIODS = [
-  '1H',
+  '6H',
   '1D',
   '1W',
-  '1M',
+  // '1M',
 ];
 
 const periods = (state = DEFAULT_PERIODS) => {
