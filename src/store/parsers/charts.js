@@ -14,7 +14,7 @@ const parse = (raw) => {
         .map(item => parseFloat(item.value));
       break;
 
-    case 'ccs811':
+    case 'sgp30':
       data.co2 = raw.data
         .filter(item => item.type === 'co2')
         .map(item => parseFloat(item.value));
