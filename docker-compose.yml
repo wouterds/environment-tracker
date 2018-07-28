@@ -2,13 +2,13 @@ version: '2'
 
 services:
   redis:
-    image: redis:4.0
+    image: arm32v6/redis:4.0-alpine
     restart: unless-stopped
     ports:
       - '6379:6379'
 
   postgres:
-    image: postgres:10.3
+    image: arm32v6/postgres:10.4-alpine
     restart: unless-stopped
     volumes:
       - ./docker/data/postgres:/var/lib/postgresql/data
@@ -20,7 +20,7 @@ services:
       - '5432:5432'
 
   node:
-    image: node:9.11-slim
+    image: arm32v6/node:9.6-alpine
     restart: unless-stopped
     command: npm start
     working_dir: /code
@@ -31,7 +31,7 @@ services:
       - postgres
 
   nginx:
-    image: nginx:1.13
+    image: arm32v6/nginx:1.15-alpine
     restart: unless-stopped
     environment:
       - VIRTUAL_HOST=tracker.wouterdeschuyter.be
