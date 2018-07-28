@@ -1,12 +1,6 @@
 version: '2'
 
 services:
-  redis:
-    image: arm32v6/redis:4.0-alpine
-    restart: unless-stopped
-    ports:
-      - '6379:6379'
-
   node:
     image: arm32v6/node:9.6-alpine
     restart: unless-stopped
@@ -14,11 +8,10 @@ services:
     working_dir: /code
     volumes:
       - ./:/code
-    depends_on:
-      - redis
     networks:
       - default
       - postgres
+      - redis
 
   nginx:
     image: arm32v6/nginx:1.15-alpine
@@ -36,6 +29,8 @@ services:
 
 networks:
   webproxy:
+    external: true
+  redis:
     external: true
   postgres:
     external: true
