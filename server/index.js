@@ -8,9 +8,9 @@ import uuid from 'uuid';
 const sequelize = new Sequelize({
   dialect: 'postgres',
   host: 'postgres',
-  database: 'demo',
-  username: 'demo',
-  password: 'demo',
+  database: 'bewouterdeschuytertracker',
+  username: 'bewouterdeschuytertracker',
+  password: 'bewouterdeschuytertracker',
 });
 
 // Init Redis clients
