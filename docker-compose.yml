@@ -42,8 +42,8 @@ services:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       - default
-      - nginx-proxy_default
+      - webproxy
 
 networks:
-  nginx-proxy_default:
+  webproxy:
     external: true
