@@ -7,18 +7,6 @@ services:
     ports:
       - '6379:6379'
 
-  postgres:
-    image: arm32v6/postgres:10.4-alpine
-    restart: unless-stopped
-    volumes:
-      - ./docker/data/postgres:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=demo
-      - POSTGRES_USER=demo
-      - POSTGRES_PASSWORD=demo
-    ports:
-      - '5432:5432'
-
   node:
     image: arm32v6/node:9.6-alpine
     restart: unless-stopped
@@ -28,6 +16,8 @@ services:
       - ./:/code
     depends_on:
       - redis
+    networks:
+      - default
       - postgres
 
   nginx:
@@ -46,4 +36,6 @@ services:
 
 networks:
   webproxy:
+    external: true
+  postgres:
     external: true
