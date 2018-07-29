@@ -10,7 +10,7 @@ services:
       - ./:/code
     networks:
       - default
-      - postgres
+      - mariadb
       - redis
 
   nginx:
@@ -32,5 +32,5 @@ networks:
     external: true
   redis:
     external: true
-  postgres:
+  mariadb:
     external: true

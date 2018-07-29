@@ -6,8 +6,8 @@ import uuid from 'uuid';
 
 // Init Sequelize client
 const sequelize = new Sequelize({
-  dialect: 'postgres',
-  host: 'postgres',
+  dialect: 'mysql',
+  host: 'mariadb',
   database: 'bewouterdeschuytertracker',
   username: 'bewouterdeschuytertracker',
   password: 'bewouterdeschuytertracker',
@@ -111,12 +111,18 @@ const Measurement = sequelize.define('measurement', {
   },
   sensor: Sequelize.STRING(8),
   type: Sequelize.STRING(16),
-  value: Sequelize.STRING(16),
+  value: Sequelize.DOUBLE,
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+    allowNull: false,
+  },
 }, {
+  timestamps: false,
   indexes: [
-    {
-      fields: ['createdAt'],
-    },
+    { fields: ['sensor', 'type'] },
+    { fields: ['value'] },
+    { fields: ['createdAt'] },
   ],
 });
 
@@ -150,12 +156,12 @@ const broadcastChartForSensor = async (sensor) => {
     const measurements = await sequelize.query(`
       SELECT
         type,
-        AVG(CAST(value AS DECIMAL)) AS value,
-        TO_TIMESTAMP(FLOOR((EXTRACT(EPOCH FROM "createdAt") / ${groupByMinutes} )) * ${groupByMinutes}) AT TIME ZONE 'UTC' as time_interval
+        IFNULL(AVG(value), 0) AS value,
+        FLOOR(UNIX_TIMESTAMP(createdAt)/(${groupByMinutes})) AS timekey
       FROM measurements
-      WHERE sensor = '${sensor}' AND "createdAt" >= NOW() - '${interval}'::INTERVAL
-      GROUP BY sensor, type, time_interval
-      ORDER BY time_interval ASC;
+      WHERE sensor = '${sensor}' AND createdAt >= DATE_SUB(NOW(), INTERVAL ${interval})
+      GROUP BY sensor, type, timekey
+      ORDER BY timekey ASC;
     `, { type: Sequelize.QueryTypes.SELECT });
 
     // Chart events
