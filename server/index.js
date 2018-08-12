@@ -9,11 +9,9 @@ import MeasurementRepository from './repositories/measurement';
 db.sync();
 
 // Init Redis clients
-const client = redis.createClient({ host: 'redis' });
-const sub = redis.createClient({ host: 'redis' });
-
-// Get async from Redis proxy
-const getAsync = promisify(client.get).bind(client);
+const redisClient = redis.createClient({ host: 'redis' });
+const redisSubscribtionClient = redis.createClient({ host: 'redis' });
+const redisGetAsync = promisify(redisClient.get).bind(redisClient);
 
 // WebSocker server
 const wss = new WebSocket.Server({ port: 3000 });
@@ -28,16 +26,16 @@ let connectedClients = {};
  */
 wss.broadcast = (period, data) => {
   Object.values(connectedClients).forEach((client) => {
-    if ((period === null || client.period === period) && client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(data));
+    if ((period === null || redisClient.period === period) && redisClient.readyState === WebSocket.OPEN) {
+      redisClient.send(JSON.stringify(data));
     }
   });
 };
 
 let sensors = {};
-sub.on('message', async (channel, message) => {
+redisSubscribtionClient.on('message', async (channel, message) => {
   let sensor = message;
-  let value = await getAsync(`sensor:${sensor}`);
+  let value = await redisGetAsync(`sensor:${sensor}`);
 
   // If there's a value, parse as json
   if (typeof value !== 'undefined') {
@@ -176,4 +174,4 @@ setInterval(() => {
 }, 1000 * 30);
 
 // Subscribe to events
-sub.subscribe('sensor');
+redisSubscribtionClient.subscribe('sensor');
