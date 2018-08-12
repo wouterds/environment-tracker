@@ -3,15 +3,10 @@ import { promisify } from 'util';
 import WebSocket from 'ws';
 import Sequelize from 'sequelize';
 import uuid from 'uuid';
+import db from './db';
+import Measurement from './models/measurement';
 
-// Init Sequelize client
-const sequelize = new Sequelize({
-  dialect: 'mysql',
-  host: 'mariadb',
-  database: 'bewouterdeschuytertracker',
-  username: 'bewouterdeschuytertracker',
-  password: 'bewouterdeschuytertracker',
-});
+db.sync();
 
 // Init Redis clients
 const client = redis.createClient({ host: 'redis' });
@@ -96,35 +91,15 @@ const clientSendMessage = (ws, data) => {
 
   // Send all sensor data
   Object.entries(sensors).forEach(([sensor, data]) => {
-    ws.send(JSON.stringify({ type: 'sensor', sensor, data }));
+    ws.send(JSON.stringify({
+      type: 'sensor',
+      sensor,
+      data,
+    }));
 
     broadcastChartForSensor(sensor);
   });
 };
-
-// Measurements model
-const Measurement = sequelize.define('measurement', {
-  id: {
-    primaryKey: true,
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-  },
-  sensor: Sequelize.STRING(8),
-  type: Sequelize.STRING(16),
-  value: Sequelize.DOUBLE,
-  createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.NOW,
-    allowNull: false,
-  },
-}, {
-  timestamps: false,
-  indexes: [
-    { fields: ['sensor', 'type'] },
-    { fields: ['value'] },
-    { fields: ['createdAt'] },
-  ],
-});
 
 const broadcastChartForSensor = async (sensor) => {
   const periods = ['6H', '1D', '1W', '1M'];
@@ -153,7 +128,7 @@ const broadcastChartForSensor = async (sensor) => {
         break;
     }
 
-    const measurements = await sequelize.query(`
+    const measurements = await db.query(`
       SELECT
         type,
         IFNULL(AVG(value), 0) AS value,
@@ -236,9 +211,6 @@ setInterval(() => {
     broadcastChartForSensor(sensor);
   });
 }, 1000 * 30);
-
-// Sync DB
-sequelize.sync();
 
 // Subscribe to events
 sub.subscribe('sensor');
