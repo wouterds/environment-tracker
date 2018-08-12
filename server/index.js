@@ -137,10 +137,16 @@ const broadcastChartForSensor = async (sensor) => {
       WHERE sensor = '${sensor}' AND createdAt >= DATE_SUB(NOW(), INTERVAL ${interval})
       GROUP BY sensor, type, timekey
       ORDER BY timekey ASC;
-    `, { type: Sequelize.QueryTypes.SELECT });
+    `, {
+      type: Sequelize.QueryTypes.SELECT,
+    });
 
     // Chart events
-    wss.broadcast(period, { type: 'chart', sensor, data: measurements });
+    wss.broadcast(period, {
+      type: 'chart',
+      sensor,
+      data: measurements,
+    });
   }
 };
 
