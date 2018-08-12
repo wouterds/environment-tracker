@@ -4,7 +4,7 @@ import WebSocket from 'ws';
 import Sequelize from 'sequelize';
 import uuid from 'uuid';
 import db from './db';
-import Measurement from './models/measurement';
+import MeasurementRepository from './repositories/measurement';
 
 db.sync();
 
@@ -104,42 +104,7 @@ const clientSendMessage = (ws, data) => {
 const broadcastChartForSensor = async (sensor) => {
   const periods = ['6H', '1D', '1W', '1M'];
   for (let index = 0; index < periods.length; index++) {
-    const period = periods[index];
-    const dataPoints = 60;
-    let interval = '1 DAY';
-    let groupByMinutes = ((1 * 60) / dataPoints) * 60;
-
-    switch (period) {
-      case '6H':
-        interval = '6 HOUR';
-        groupByMinutes = ((6 * 60) / dataPoints) * 60;
-        break;
-      case '1D':
-        interval = '1 DAY';
-        groupByMinutes = ((24 * 60) / dataPoints) * 60;
-        break;
-      case '1W':
-        interval = '1 WEEK';
-        groupByMinutes = ((7 * 24 * 60) / dataPoints) * 60;
-        break;
-      case '1M':
-        interval = '1 MONTH';
-        groupByMinutes = ((30 * 24 * 60) / dataPoints) * 60;
-        break;
-    }
-
-    const measurements = await db.query(`
-      SELECT
-        type,
-        IFNULL(AVG(value), 0) AS value,
-        FLOOR(UNIX_TIMESTAMP(createdAt)/(${groupByMinutes})) AS timekey
-      FROM measurements
-      WHERE sensor = '${sensor}' AND createdAt >= DATE_SUB(NOW(), INTERVAL ${interval})
-      GROUP BY sensor, type, timekey
-      ORDER BY timekey ASC;
-    `, {
-      type: Sequelize.QueryTypes.SELECT,
-    });
+    const measurements = MeasurementRepository.getAveragesForPeriod(periods[index], sensor);
 
     // Chart events
     wss.broadcast(period, {
@@ -195,22 +160,14 @@ setInterval(() => {
         }
       });
 
-      Measurement.create({
-        sensor,
-        type: 'activity',
-        value,
-      });
+      MeasurementRepository.create(sensor, 'activity', value);
     } else {
       Object.entries(sensorData).forEach(([type, data]) => {
         let value = data.values.reduce((total, current) => total + current);
         value = value / data.values.length;
         value = Math.round(value * 100) / 100;
 
-        Measurement.create({
-          sensor,
-          type,
-          value,
-        });
+        MeasurementRepository.create(sensor, type, value);
       });
     }
 
