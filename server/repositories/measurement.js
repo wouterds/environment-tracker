@@ -46,6 +46,6 @@ const getAveragesForPeriod = async (period, sensor, dataPoints = 60) => {
 };
 
 export default {
-  create,
+  add,
   getAveragesForPeriod,
 };
