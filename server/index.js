@@ -105,7 +105,7 @@ const broadcastChartForSensor = async (sensor) => {
     const measurements = MeasurementRepository.getAveragesForPeriod(periods[index], sensor);
 
     // Chart events
-    wss.broadcast(period, {
+    wss.broadcast(periods[index], {
       type: 'chart',
       sensor,
       data: measurements,

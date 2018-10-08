@@ -1,4 +1,6 @@
+import Sequelize from 'sequelize';
 import model from '../models/measurement';
+import db from '../db';
 
 const add = (sensor, type, value) => {
   model.create({
