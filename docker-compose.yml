@@ -12,6 +12,10 @@ services:
       - default
       - mariadb
       - redis
+    logging:
+      options:
+        max-size: 2m
+        max-file: '5'
 
   nginx:
     image: arm32v6/nginx:1.15-alpine
@@ -26,6 +30,10 @@ services:
     networks:
       - default
       - webproxy
+    logging:
+      options:
+        max-size: 2m
+        max-file: '5'
 
 networks:
   webproxy:
