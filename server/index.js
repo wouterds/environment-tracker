@@ -158,14 +158,14 @@ setInterval(() => {
         }
       });
 
-      MeasurementRepository.create(sensor, 'activity', value);
+      MeasurementRepository.add(sensor, 'activity', value);
     } else {
       Object.entries(sensorData).forEach(([type, data]) => {
         let value = data.values.reduce((total, current) => total + current);
         value = value / data.values.length;
         value = Math.round(value * 100) / 100;
 
-        MeasurementRepository.create(sensor, type, value);
+        MeasurementRepository.add(sensor, type, value);
       });
     }
 
