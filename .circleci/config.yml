@@ -10,13 +10,15 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package-lock.json" }}
-          - v1-dependencies-
-      - run: npm i
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
-      - run: npm run lint
+      - run:
+        name: Dependencies
+        command: make dependencies
+      - run:
+        name: Linting
+        command: make lint
+      - run:
+        name: Build
+        command: make build
+      - run:
+        name: Push docker image
+        command: make push && make push-latest
