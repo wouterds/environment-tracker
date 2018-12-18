@@ -11,17 +11,17 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Dependencies
-        command: make dependencies
+          name: Dependencies
+          command: make dependencies
       - run:
-        name: Linting
-        command: make lint
+          name: Linting
+          command: make lint
       - run:
-        name: Build
-        command: make build
+          name: Build
+          command: make build
       - run:
-        name: Push docker image
-        command: |
-          docker login docker.wouterdeschuyter.be -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-          make push
-          make push-latest
+          name: Push docker image
+          command: |
+            docker login docker.wouterdeschuyter.be -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            make push
+            make push-latest
