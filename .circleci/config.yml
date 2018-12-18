@@ -21,4 +21,7 @@ jobs:
         command: make build
       - run:
         name: Push docker image
-        command: make push && make push-latest
+        command: |
+          docker login docker.wouterdeschuyter.be -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+          make push
+          make push-latest
