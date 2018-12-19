@@ -23,7 +23,7 @@ export default db.define<Definition, Partial<Definition>>(
   {
     indexes: [
       {
-        fields: ['type'],
+        fields: ['name', 'type'],
         unique: true,
       },
     ],
