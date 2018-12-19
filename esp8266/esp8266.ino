@@ -92,30 +92,6 @@ void setup(void)
 
 void loop()
 {
-  // Read illuminance
-  float illuminance = bh1750.readLightLevel();
-
-  // Read relative humidity
-  float humidity = bme280.readHumidity();
-
-  // Read temperature
-  float temperature = bme280.readTemperature();
-
-  // Read pressure
-  float pressure = bme280.readPressure() / 100.0F;
-
-  // Enable humidity compensation for more accurate results
-  sgp30.setHumidity(getAbsoluteHumidity(temperature, humidity));
-
-  // eCO2 placeholder
-  float eco2;
-
-  // Mesure air quality
-  if (sgp30.IAQmeasure())
-  {
-    eco2 = sgp30.eCO2;
-  }
-
   WiFiClient client = server.available();
   if (client)
   {
@@ -130,6 +106,30 @@ void loop()
 
         if (c == '\n' && blank_line)
         {
+          // Read illuminance
+          float illuminance = bh1750.readLightLevel();
+
+          // Read relative humidity
+          float humidity = bme280.readHumidity();
+
+          // Read temperature
+          float temperature = bme280.readTemperature();
+
+          // Read pressure
+          float pressure = bme280.readPressure() / 100.0F;
+
+          // Enable humidity compensation for more accurate results
+          sgp30.setHumidity(getAbsoluteHumidity(temperature, humidity));
+
+          // eCO2 placeholder
+          float eco2;
+
+          // Mesure air quality
+          if (sgp30.IAQmeasure())
+          {
+            eco2 = sgp30.eCO2;
+          }
+
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: application/json");
           client.println("Connection: close");
