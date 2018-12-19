@@ -4,6 +4,7 @@
   "private": true,
   "author": "Wouter De Schuyter <wouter.de.schuyter@gmail.com>",
   "scripts": {
+    "server": "./node_modules/.bin/ts-node ./src/server",
     "lint": "./node_modules/.bin/tslint --format stylish 'src/**/*.ts'",
     "lint:fix": "./node_modules/.bin/tslint --format stylish --fix 'src/**/*.ts'"
   },

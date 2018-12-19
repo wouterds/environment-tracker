@@ -18,4 +18,4 @@ app.get(
 app.listen(3000);
 
 /* tslint:disable */
-console.log('Application running 🚀!');
+console.log('Application running 🚀');
