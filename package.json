@@ -4,6 +4,7 @@
   "private": true,
   "author": "Wouter De Schuyter <wouter.de.schuyter@gmail.com>",
   "scripts": {
+    "start": "npm run sync:db && npm run server:watch",
     "server": "./node_modules/.bin/ts-node ./src/server",
     "server:watch": "./node_modules/.bin/nodemon",
     "sync:db": "./node_modules/.bin/ts-node ./src/scripts/sync-models-database.ts",
