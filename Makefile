@@ -23,18 +23,15 @@ dependencies: node_modules
 lint: dependencies
 	docker run --rm -v $(PWD):/code -w /code node:9-alpine npm run lint
 
-.build-app: dependencies
-	touch .build-app
-
 .build-nginx: $(DOCKERFILE_NGINX)
 	docker build -f $(DOCKERFILE_NGINX) -t $(TAG_NGINX) .
 	touch .build-nginx
 
-.build-node: $(DOCKERFILE_NODE)
+.build-node: dependencies $(DOCKERFILE_NODE)
 	docker build -f $(DOCKERFILE_NODE) -t $(TAG_NODE) .
 	touch .build-nginx
 
-build: .build-app .build-nginx .build-node
+build: .build-nginx .build-node
 
 tag: build
 	docker tag $(TAG_NGINX) $(TAG_NGINX):$(VERSION)
