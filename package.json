@@ -5,6 +5,7 @@
   "author": "Wouter De Schuyter <wouter.de.schuyter@gmail.com>",
   "scripts": {
     "server": "./node_modules/.bin/ts-node ./src/server",
+    "server:watch": "./node_modules/.bin/nodemon",
     "sync:db": "./node_modules/.bin/ts-node ./src/scripts/sync-models-database.ts",
     "lint": "./node_modules/.bin/tslint --format stylish 'src/**/*.ts'",
     "lint:fix": "./node_modules/.bin/tslint --format stylish --fix 'src/**/*.ts'"
