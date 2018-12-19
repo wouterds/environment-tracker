@@ -1,3 +1,6 @@
 [submodule "esp8266/libs/adafruit-bme280"]
 	path = esp8266/libs/adafruit-bme280
 	url = https://github.com/adafruit/Adafruit_BME280_Library.git
+[submodule "esp8266/libs/adafruit-sensor"]
+	path = esp8266/libs/adafruit-sensor
+	url = https://github.com/adafruit/Adafruit_Sensor.git
