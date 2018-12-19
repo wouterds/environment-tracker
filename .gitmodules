@@ -7,3 +7,6 @@
 [submodule "esp8266/libs/adafruit-sgp30"]
 	path = esp8266/libs/adafruit-sgp30
 	url = https://github.com/adafruit/Adafruit_SGP30.git
+[submodule "esp8266/libs/bh1750"]
+	path = esp8266/libs/bh1750
+	url = https://github.com/claws/BH1750.git
