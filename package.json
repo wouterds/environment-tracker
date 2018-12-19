@@ -8,10 +8,12 @@
     "lint:fix": "./node_modules/.bin/tslint --format stylish --fix 'src/**/*.ts'"
   },
   "dependencies": {
+    "dotenv": "^6.2.0",
     "mysql2": "^1.6.4",
     "sequelize": "^4.42.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.0",
     "@types/node": "^10.12.15",
     "@types/sequelize": "^4.27.33",
     "prettier": "^1.15.3",
