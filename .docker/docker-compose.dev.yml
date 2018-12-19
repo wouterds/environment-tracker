@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+  node:
+    image: node:alpine
+    depends_on:
+      - mysql
+    working_dir: /code
+    command: npm start
+    volumes:
+      - ../:/code
+    ports:
+      - 3000:3000
