@@ -7,9 +7,12 @@
     "lint": "./node_modules/.bin/tslint --format stylish 'src/**/*.ts'",
     "lint:fix": "./node_modules/.bin/tslint --format stylish --fix 'src/**/*.ts'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "sequelize": "^4.42.0"
+  },
   "devDependencies": {
     "@types/node": "^10.12.15",
+    "@types/sequelize": "^4.27.33",
     "prettier": "^1.15.3",
     "ts-node": "^7.0.1",
     "tslint": "^5.12.0",
