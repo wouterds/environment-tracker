@@ -17,6 +17,9 @@ export default db.define<Definition, Partial<Definition>>(
       {
         fields: ['sensorId'],
       },
+      {
+        fields: ['createdAt'],
+      },
     ],
   },
 );
