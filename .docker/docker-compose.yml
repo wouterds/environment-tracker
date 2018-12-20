@@ -16,6 +16,10 @@ services:
         max-size: 2m
         max-file: '5'
 
+  node:
+    image: docker.wouterdeschuyter.be/env-tracker-node
+    restart: unless-stopped
+
 networks:
   webproxy:
     external: true
