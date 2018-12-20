@@ -19,11 +19,31 @@ services:
   node:
     image: docker.wouterdeschuyter.be/env-tracker-node
     restart: unless-stopped
+    env_file:
+      - docker.env
+    networks:
+      - default
+      - mariadb
+    logging:
+      options:
+        max-size: 2m
+        max-file: '5'
 
   node-cron:
     image: docker.wouterdeschuyter.be/env-tracker-node-cron
     restart: unless-stopped
+    env_file:
+      - docker.env
+    networks:
+      - default
+      - mariadb
+    logging:
+      options:
+        max-size: 2m
+        max-file: '5'
 
 networks:
   webproxy:
+    external: true
+  mariadb:
     external: true
