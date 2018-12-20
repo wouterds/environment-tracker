@@ -18,3 +18,13 @@ services:
       - ../:/code
     ports:
       - 3000:3000
+
+  node-cron:
+    build:
+      context: ../
+      dockerfile: ./.docker/node/Dockerfile
+    depends_on:
+      - mysql
+    working_dir: /code
+    volumes:
+      - ../:/code
