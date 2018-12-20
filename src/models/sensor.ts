@@ -2,17 +2,17 @@ import * as sequelize from 'sequelize';
 import db from '../services/database';
 
 export enum Sensor {
-  BME280,
-  SGP30,
-  BH1750,
+  BME280 = 'BME280',
+  SGP30 = 'SGP30',
+  BH1750 = 'BH1750',
 }
 
 export enum Type {
-  ILLUMINANCE,
-  HUMIDITY,
-  PRESSURE,
-  ECO2,
-  TEMPERATURE,
+  ILLUMINANCE = 'ILLUMINANCE',
+  HUMIDITY = 'HUMIDITY',
+  PRESSURE = 'PRESSURE',
+  ECO2 = 'ECO2',
+  TEMPERATURE = 'TEMPERATURE',
 }
 
 export interface Definition {
