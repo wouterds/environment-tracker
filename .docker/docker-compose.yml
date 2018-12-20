@@ -20,6 +20,10 @@ services:
     image: docker.wouterdeschuyter.be/env-tracker-node
     restart: unless-stopped
 
+  node-cron:
+    image: docker.wouterdeschuyter.be/env-tracker-node-cron
+    restart: unless-stopped
+
 networks:
   webproxy:
     external: true
