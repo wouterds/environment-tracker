@@ -29,7 +29,7 @@ lint: dependencies
 
 .build-node: dependencies $(DOCKERFILE_NODE)
 	docker build -f $(DOCKERFILE_NODE) -t $(TAG_NODE) .
-	touch .build-nginx
+	touch .build-node
 
 build: .build-nginx .build-node
 
