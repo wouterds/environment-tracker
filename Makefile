@@ -8,8 +8,10 @@ PROJECT = $(shell cat package.json | grep "\"name\"" | sed -e 's/^.*: "\(.*\)".*
 
 TAG_NGINX = $(DOCKER_REPO)/$(PROJECT)-nginx
 TAG_NODE = $(DOCKER_REPO)/$(PROJECT)-node
+TAG_NODE_CRON = $(DOCKER_REPO)/$(PROJECT)-node-cron
 DOCKERFILE_NGINX = ./.docker/nginx/Dockerfile
 DOCKERFILE_NODE = ./.docker/node/Dockerfile
+DOCKERFILE_NODE_CRON = ./.docker/node-cron/Dockerfile
 
 clean:
 	-rm -rf ./node_modules
@@ -31,16 +33,23 @@ lint: dependencies
 	docker build -f $(DOCKERFILE_NODE) -t $(TAG_NODE) .
 	touch .build-node
 
-build: .build-nginx .build-node
+.build-node-cron: dependencies $(DOCKERFILE_NODE_CRON)
+	docker build -f $(DOCKERFILE_NODE_CRON) -t $(TAG_NODE_CRON) .
+	touch .build-node-cron
+
+build: .build-nginx .build-node .build-node-cron
 
 tag: build
 	docker tag $(TAG_NGINX) $(TAG_NGINX):$(VERSION)
 	docker tag $(TAG_NODE) $(TAG_NODE):$(VERSION)
+	docker tag $(TAG_NODE_CRON) $(TAG_NODE_CRON):$(VERSION)
 
 push: tag
 	docker push $(TAG_NGINX):$(VERSION)
 	docker push $(TAG_NODE):$(VERSION)
+	docker push $(TAG_NODE_CRON):$(VERSION)
 
 push-latest: push
 	docker push $(TAG_NGINX):latest
 	docker push $(TAG_NODE):latest
+	docker push $(TAG_NODE_CRON):latest

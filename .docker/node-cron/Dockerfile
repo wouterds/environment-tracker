@@ -6,7 +6,7 @@ WORKDIR /code
 
 # Copy source
 COPY ./ /code
-COPY ./.docker/node/crons ./crons
+COPY ./.docker/node-cron/crons ./crons
 
 # Enable crontab
 RUN crontab ./crons
