@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-export default (_request: Request, response: Response): Response => {
-  response.status(200);
-  response.send('Work in progress!');
+export default (_req: Request, res: Response): Response => {
+  res.status(200);
+  res.send('Work in progress!');
 
-  return response;
+  return res;
 };

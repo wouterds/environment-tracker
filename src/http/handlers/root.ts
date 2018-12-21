@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-export default (request: Request, response: Response): Response => {
-  response.status(200);
-  response.send(`Hello, ${request.ip}`);
+export default (req: Request, res: Response): Response => {
+  res.status(200);
+  res.send(`Hello, ${req.ip}`);
 
-  return response;
+  return res;
 };
