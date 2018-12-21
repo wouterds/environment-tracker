@@ -9,7 +9,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
 
   node:
-    image: node:alpine
+    image: node:9-alpine
     depends_on:
       - mysql
     working_dir: /code
