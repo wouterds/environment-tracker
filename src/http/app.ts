@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import * as express from 'express';
+import Handlers from './handlers';
 
 // Load .env
 config();
@@ -8,11 +9,8 @@ config();
 const app = express();
 
 // Routes
-app.get(
-  '/',
-  (_request: express.Request, response: express.Response): express.Response =>
-    response.sendStatus(200),
-);
+app.get('/', Handlers.Root);
+app.get('/sensors', Handlers.Sensors.List);
 
 // Start http app
 app.listen(3000);
