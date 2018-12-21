@@ -4,7 +4,7 @@ import * as express from 'express';
 // Load .env
 config();
 
-// Create http server
+// Create http app
 const app = express();
 
 // Routes
@@ -14,8 +14,8 @@ app.get(
     response.sendStatus(200),
 );
 
-// Start http server
+// Start http app
 app.listen(3000);
 
 /* tslint:disable */
-console.log('Application running 🚀');
+console.log('Application is running 🚀');
