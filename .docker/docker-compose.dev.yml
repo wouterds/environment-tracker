@@ -20,11 +20,15 @@ services:
       - 3000:3000
 
   node-cron:
-    build:
-      context: ../
-      dockerfile: ./.docker/node/Dockerfile
+    image: node:9-alpine
     depends_on:
       - mysql
     working_dir: /code
     volumes:
-      - ../:/code
+      - ../node_modules:/code/node_modules
+      - ../src:/code/src
+      - ../.env:/code/.env
+      - ../package.json:/code/package.json
+      - ../tsconfig.json:/code/tsconfig.json
+      - ./node-cron/crons:/code/crons
+    command: sh -c "crontab ./crons && crond -f"
