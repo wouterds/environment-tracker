@@ -2,19 +2,15 @@ import { config } from 'dotenv';
 import * as express from 'express';
 import Handlers from './handlers';
 
-// Load .env
 config();
 
-// Create http app
 const app = express();
 
-// Routes
 app.get('/', (req, res) => Handlers.Root(app, req, res));
 app.get('/sensors', Handlers.Sensors.List);
 app.get('/sensors/:id', Handlers.Sensors.Get);
 app.get('/samples', Handlers.Samples.List);
 
-// Start http app
 app.listen(3000);
 
 /* tslint:disable */
