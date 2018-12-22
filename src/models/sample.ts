@@ -5,6 +5,7 @@ export interface Definition {
   id: string;
   sensorId: string;
   value: number;
+  createdAt: Date;
 }
 
 export default db.define<Definition, Partial<Definition>>(

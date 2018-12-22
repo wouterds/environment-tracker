@@ -21,6 +21,7 @@ export interface Definition {
   sensor: Sensor;
   type: Type;
   unit: string;
+  createdAt: Date;
 }
 
 export default db.define<Definition, Partial<Definition>>(
