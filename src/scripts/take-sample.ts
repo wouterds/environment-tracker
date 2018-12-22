@@ -29,6 +29,9 @@ interface ApiResponse {
       }
 
       samples.push(response.data);
+
+      // Sleep for 500ms so we don't ddos ourselves ourselves to death
+      await new Promise(resolve => setTimeout(resolve, 500));
     } catch (e) {
       continue;
     }
