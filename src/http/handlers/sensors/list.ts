@@ -6,6 +6,5 @@ export default async (_req: Request, res: Response): Promise<Response> => {
 
   res.status(200);
   res.json(sensors);
-
   return res;
 };
