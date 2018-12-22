@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as SensorRepository from '../../../repositories/sensor';
+import * as SensorTransformer from '../../transformers/sensors/get';
 
 export default async (req: Request, res: Response): Promise<Response> => {
   const sensor = await SensorRepository.getById(req.params.id);
@@ -8,5 +9,5 @@ export default async (req: Request, res: Response): Promise<Response> => {
     return res.sendStatus(404);
   }
 
-  return res.status(200).json(sensor);
+  return res.status(200).json(SensorTransformer.transform(sensor));
 };
