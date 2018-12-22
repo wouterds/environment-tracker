@@ -12,6 +12,7 @@ const app = express();
 app.get('/', Handlers.Root);
 app.get('/sensors', Handlers.Sensors.List);
 app.get('/sensors/:id', Handlers.Sensors.Get);
+app.get('/samples', Handlers.Samples.List);
 
 // Start http app
 app.listen(3000);

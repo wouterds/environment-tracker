@@ -9,3 +9,10 @@ export const add = async (
     value,
   });
 };
+
+export const getAll = async (sensorId: string): Promise<Definition[]> => {
+  return SampleModel.findAll({
+    where: { sensorId },
+    order: [['createdAt', 'DESC']],
+  });
+};
