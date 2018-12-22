@@ -5,11 +5,8 @@ export default async (req: Request, res: Response): Promise<Response> => {
   const sensor = await SensorRepository.getById(req.params.id);
 
   if (!sensor) {
-    res.status(404);
-    return res;
+    return res.sendStatus(404);
   }
 
-  res.status(200);
-  res.json(sensor);
-  return res;
+  return res.status(200).json(sensor);
 };
