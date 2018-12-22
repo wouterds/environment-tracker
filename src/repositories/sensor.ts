@@ -6,6 +6,10 @@ export const getAll = async (): Promise<Definition[]> => {
   });
 };
 
+export const getById = async (id: string): Promise<Definition | null> => {
+  return SensorModel.findOne({ where: { id } });
+};
+
 export const getByType = async (type: Type): Promise<Definition | null> => {
   return SensorModel.findOne({ where: { type } });
 };

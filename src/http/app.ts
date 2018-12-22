@@ -11,6 +11,7 @@ const app = express();
 // Routes
 app.get('/', Handlers.Root);
 app.get('/sensors', Handlers.Sensors.List);
+app.get('/sensors/:id', Handlers.Sensors.Get);
 
 // Start http app
 app.listen(3000);
