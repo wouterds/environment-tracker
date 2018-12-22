@@ -1,9 +1,9 @@
-import Root from './root';
+import Index from './index/index';
 import Samples from './samples';
 import Sensors from './sensors';
 
 export default {
-  Root,
+  Index,
   Sensors,
   Samples,
 };

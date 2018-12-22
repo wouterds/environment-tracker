@@ -6,7 +6,7 @@ config();
 
 const app = express();
 
-app.get('/', (req, res) => Handlers.Root(app, req, res));
+app.get('/', (req, res) => Handlers.Index(app, req, res));
 app.get('/sensors', Handlers.Sensors.List);
 app.get('/sensors/:id', Handlers.Sensors.Get);
 app.get('/samples', Handlers.Samples.List);
