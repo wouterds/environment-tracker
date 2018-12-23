@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { maxBy, minBy } from 'lodash';
 import * as React from 'react';
 import {
   CartesianGrid,
@@ -41,119 +42,189 @@ class App extends React.Component<{}, State> {
   public render() {
     const { illuminance, temperature, humidity, eco2, pressure } = this.state;
 
-    const chartData: Array<{
-      illuminance: number;
-      temperature: number;
-      humidity: number;
-      pressure: number;
-      eco2: number;
-    }> = [];
+    interface ChartRow {
+      illuminance: number | null;
+      temperature: number | null;
+      humidity: number | null;
+      pressure: number | null;
+      eco2: number | null;
+    }
+
+    const chartRows: ChartRow[] = [];
 
     let i = 0;
     for (const sample of illuminance) {
-      const data: any = chartData[i] || {};
+      const chartRow: ChartRow = chartRows[i] || {};
 
-      data.illuminance = sample.value;
+      chartRow.illuminance = sample.value;
 
-      chartData[i++] = data;
+      chartRows[i++] = chartRow;
     }
 
     i = 0;
     for (const sample of temperature) {
-      const data: any = chartData[i] || {};
+      const chartRow: ChartRow = chartRows[i] || {};
 
-      data.temperature = sample.value;
+      chartRow.temperature = sample.value;
 
-      chartData[i++] = data;
+      chartRows[i++] = chartRow;
     }
 
     i = 0;
     for (const sample of humidity) {
-      const data: any = chartData[i] || {};
+      const chartRow: ChartRow = chartRows[i] || {};
 
-      data.humidity = sample.value;
+      chartRow.humidity = sample.value;
 
-      chartData[i++] = data;
+      chartRows[i++] = chartRow;
     }
 
     i = 0;
     for (const sample of pressure) {
-      const data: any = chartData[i] || {};
+      const chartRow: ChartRow = chartRows[i] || {};
 
-      data.pressure = sample.value;
+      chartRow.pressure = sample.value;
 
-      chartData[i++] = data;
+      chartRows[i++] = chartRow;
     }
 
     i = 0;
     for (const sample of eco2) {
-      const data: any = chartData[i] || {};
+      const chartRow: ChartRow = chartRows[i] || {};
 
-      data.eco2 = sample.value;
+      chartRow.eco2 = sample.value;
 
-      chartData[i++] = data;
+      chartRows[i++] = chartRow;
     }
+
+    const illuminanceMin = minBy(chartRows, 'illuminance');
+    const illuminanceMax = maxBy(chartRows, 'illuminance');
+    const temperatureMin = minBy(chartRows, 'temperature');
+    const temperatureMax = maxBy(chartRows, 'temperature');
+    const humidityMin = minBy(chartRows, 'humidity');
+    const humidityMax = maxBy(chartRows, 'humidity');
+    const pressureMin = minBy(chartRows, 'pressure');
+    const pressureMax = maxBy(chartRows, 'pressure');
+    const eco2Min = minBy(chartRows, 'eco2');
+    const eco2Max = maxBy(chartRows, 'eco2');
 
     return (
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={1280}
           height={720}
-          data={chartData.reverse()}
+          data={chartRows.reverse()}
           margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
         >
+          <CartesianGrid stroke="#d9d9d9" strokeDasharray="5 5" />
           <Line
             type="monotone"
             dataKey="temperature"
             yAxisId="temperature"
             stroke="#e74c3c"
+            strokeWidth={2}
             dot={false}
             activeDot={false}
+            connectNulls={true}
           />
           <Line
             type="monotone"
             dataKey="illuminance"
             yAxisId="illuminance"
             stroke="#f1c40f"
+            strokeWidth={2}
             dot={false}
             activeDot={false}
+            connectNulls={true}
           />
           <Line
             type="monotone"
             dataKey="humidity"
             yAxisId="humidity"
             stroke="#3498db"
+            strokeWidth={2}
             dot={false}
             activeDot={false}
+            connectNulls={true}
           />
           <Line
             type="monotone"
             dataKey="pressure"
             yAxisId="pressure"
             stroke="#1abc9c"
+            strokeWidth={2}
             dot={false}
             activeDot={false}
+            connectNulls={true}
           />
           <Line
             type="monotone"
             dataKey="eco2"
             yAxisId="eco2"
             stroke="#34495e"
+            strokeWidth={2}
             dot={false}
             activeDot={false}
+            connectNulls={true}
           />
-          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis hide={true} />
-          <YAxis yAxisId="temperature" hide={true} />
+          <YAxis
+            yAxisId="temperature"
+            hide={true}
+            domain={[
+              temperatureMin && temperatureMin.temperature
+                ? temperatureMin.temperature * 0.8
+                : 0,
+              temperatureMax && temperatureMax.temperature
+                ? temperatureMax.temperature * 1.2
+                : 0,
+            ]}
+          />
           <YAxis
             yAxisId="illuminance"
             hide={true}
             scale="log"
-            domain={['auto', 'auto']}
+            domain={[
+              illuminanceMin && illuminanceMin.illuminance
+                ? illuminanceMin.illuminance * 0.8
+                : 0,
+              illuminanceMax && illuminanceMax.illuminance
+                ? illuminanceMax.illuminance * 1.2
+                : 0,
+            ]}
           />
-          <YAxis yAxisId="humidity" hide={true} />
-          <YAxis yAxisId="pressure" hide={true} />
-          <YAxis yAxisId="eco2" hide={true} />
+          <YAxis
+            yAxisId="humidity"
+            hide={true}
+            domain={[
+              humidityMin && humidityMin.humidity
+                ? humidityMin.humidity * 0.8
+                : 0,
+              humidityMax && humidityMax.humidity
+                ? humidityMax.humidity * 1.2
+                : 0,
+            ]}
+          />
+          <YAxis
+            yAxisId="pressure"
+            hide={true}
+            domain={[
+              pressureMin && pressureMin.pressure
+                ? pressureMin.pressure * 0.8
+                : 0,
+              pressureMax && pressureMax.pressure
+                ? pressureMax.pressure * 1.2
+                : 0,
+            ]}
+          />
+          <YAxis
+            yAxisId="eco2"
+            hide={true}
+            domain={[
+              eco2Min && eco2Min.eco2 ? eco2Min.eco2 * 0.8 : 0,
+              eco2Max && eco2Max.eco2 ? eco2Max.eco2 * 1.2 : 0,
+            ]}
+          />
           <Tooltip />
         </LineChart>
       </ResponsiveContainer>
