@@ -1,3 +1,4 @@
+import * as cors from 'cors';
 import { config } from 'dotenv';
 import * as express from 'express';
 import Handlers from './handlers';
@@ -6,6 +7,10 @@ config();
 
 const app = express();
 
+// Middleware
+app.use(cors());
+
+// Routes
 app.get('/', (req, res) => Handlers.Index(app, req, res));
 app.get('/sensors', Handlers.Sensors.List);
 app.get('/sensors/:id', Handlers.Sensors.Get);
