@@ -15,7 +15,9 @@ DOCKERFILE_NODE_CRON = ./.docker/node-cron/Dockerfile
 
 clean:
 	-rm -rf ./node_modules
+	-rm -rf ./package-lock.json
 	-rm -rf ./.build-*
+	-rm -rf ./dist
 
 node_modules: package.json
 	docker run --rm -v $(PWD):/code -w /code node:9-alpine npm install
@@ -25,9 +27,9 @@ dependencies: node_modules
 lint: dependencies
 	docker run --rm -v $(PWD):/code -w /code node:9-alpine npm run lint
 
-.build-nginx: $(DOCKERFILE_NGINX)
-	docker build -f $(DOCKERFILE_NGINX) -t $(TAG_NGINX) .
-	touch .build-nginx
+.build-app: dependencies
+	docker run --rm -v $(PWD):/code -w /code node:9-alpine npm run client:build
+	touch .build-app
 
 .build-node: dependencies $(DOCKERFILE_NODE)
 	docker build -f $(DOCKERFILE_NODE) -t $(TAG_NODE) .
@@ -37,7 +39,11 @@ lint: dependencies
 	docker build -f $(DOCKERFILE_NODE_CRON) -t $(TAG_NODE_CRON) .
 	touch .build-node-cron
 
-build: .build-nginx .build-node .build-node-cron
+.build-nginx: .build-app $(DOCKERFILE_NGINX)
+	docker build -f $(DOCKERFILE_NGINX) -t $(TAG_NGINX) .
+	touch .build-nginx
+
+build: .build-node .build-node-cron .build-nginx
 
 tag: build
 	docker tag $(TAG_NGINX) $(TAG_NGINX):$(VERSION)
