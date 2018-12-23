@@ -1,8 +1,10 @@
 version: '2'
 
 services:
-  mysql:
-    image: mysql:5.7
+  mariadb:
+    image: mariadb:10.3
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
     ports:
       - 3306:3306
     environment:
@@ -11,7 +13,7 @@ services:
   node:
     image: node:9-alpine
     depends_on:
-      - mysql
+      - mariadb
     working_dir: /code
     command: npm start
     volumes:
@@ -22,7 +24,7 @@ services:
   node-cron:
     image: node:9-alpine
     depends_on:
-      - mysql
+      - mariadb
     working_dir: /code
     volumes:
       - ../node_modules:/code/node_modules
