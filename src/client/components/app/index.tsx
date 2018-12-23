@@ -167,7 +167,9 @@ class App extends React.Component<{}, State> {
 
     for (const sensor of sensorsResponse.data) {
       const samplesResponse: AxiosResponse = await axios.get(
-        `https://tracker.wouterdeschuyter.be/api/samples?sensorId=${sensor.id}`,
+        `https://tracker.wouterdeschuyter.be/api/samples?sensorId=${
+          sensor.id
+        }?groupingInterval=10`,
       );
 
       switch (sensor.type) {
