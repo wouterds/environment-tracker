@@ -8,7 +8,12 @@ interface ResponseObject {
   date: Date;
 }
 
-export const transform = (samples: Definition[]): ResponseObject[] => {
+export const transform = (
+  samples: Definition[],
+  groupingIntervalSeconds: number,
+): ResponseObject[] => {
+  const groupingIntervalInMinutes = Math.ceil(groupingIntervalSeconds / 60);
+
   const lastItem = head(samples); // dangerous: assuming first item is last in time
   const firstItem = last(samples); // dangerous: assuming last item is firt in time
 
@@ -23,10 +28,10 @@ export const transform = (samples: Definition[]): ResponseObject[] => {
     samplesMinuteMap[startOfMinute(sample.createdAt).getTime()] = sample;
   });
 
-  // Loop through every minute between our 2 points and fill in gaps
+  // Loop through every interval of minutes between our 2 points and fill in gaps
   const response: ResponseObject[] = [];
   const endDate = startOfMinute(lastItem.createdAt);
-  for (let i = 0; i < minutes; i++) {
+  for (let i = 0; i < minutes; i += groupingIntervalInMinutes) {
     const date = subMinutes(endDate, i);
     const sample = samplesMinuteMap[date.getTime()];
 
