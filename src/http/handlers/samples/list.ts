@@ -7,14 +7,14 @@ export default async (req: Request, res: Response): Promise<Response> => {
     return res.sendStatus(400);
   }
 
-  const groupingInterval = req.query.groupingInterval
-    ? parseInt(req.query.groupingInterval, 10)
+  const groupByMinutes = req.query.groupByMinutes
+    ? parseInt(req.query.groupByMinutes, 10)
     : undefined;
 
-  const samples = groupingInterval
+  const samples = groupByMinutes
     ? await SampleRepository.getAllAveragedOut(
         req.query.sensorId,
-        groupingInterval,
+        groupByMinutes,
       )
     : await SampleRepository.getAll(req.query.sensorId);
 
@@ -24,5 +24,5 @@ export default async (req: Request, res: Response): Promise<Response> => {
 
   return res
     .status(200)
-    .json(SampleTransformer.transform(samples, groupingInterval));
+    .json(SampleTransformer.transform(samples, groupByMinutes));
 };
