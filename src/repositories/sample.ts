@@ -18,24 +18,35 @@ export const getAll = async (sensorId: string): Promise<Definition[]> => {
   });
 };
 
-export const getAllGroupedByTimeInterval = async (
+export const getAllAveragedOut = async (
   sensorId: string,
-  interval: number,
+  minutes: number,
 ): Promise<Definition[]> => {
-  return db.query(
+  const rows = await db.query(
     `
-    SELECT *, AVG(value) AS value
+    SELECT
+      *,
+      AVG(value) AS value,
+      FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(createdAt) / (60 * :minutes)) * 60 * :minutes, '%Y-%m-%d %H:%i:%s') AS createdAt
     FROM ${SampleModel.getTableName()}
     WHERE sensorId = :sensorId
-    GROUP BY (UNIX_TIMESTAMP(createdAt) DIV :interval)
+    GROUP BY createdAt
     ORDER BY createdAt DESC
   `,
     {
       replacements: {
         sensorId,
-        interval,
+        minutes,
       },
       type: db.QueryTypes.SELECT,
     },
   );
+
+  return rows.map((object: Definition) => ({
+    ...object,
+    // can't have an id for an averaged out value
+    id: null,
+    // casted as string because we do some funky stuff with it
+    createdAt: new Date(object.createdAt),
+  }));
 };

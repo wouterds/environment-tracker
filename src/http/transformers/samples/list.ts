@@ -8,12 +8,16 @@ interface ResponseObject {
   date: Date;
 }
 
+const roundTillTenthMinute = (date: Date): Date => {
+  const coeff = 1000 * 60 * 10;
+
+  return new Date(Math.round(date.getTime() / coeff) * coeff);
+};
+
 export const transform = (
   samples: Definition[],
-  groupingIntervalSeconds: number,
+  groupingIntervalMinutes?: number,
 ): ResponseObject[] => {
-  const groupingIntervalInMinutes = Math.ceil(groupingIntervalSeconds / 60);
-
   const lastItem = head(samples); // dangerous: assuming first item is last in time
   const firstItem = last(samples); // dangerous: assuming last item is firt in time
 
@@ -21,17 +25,19 @@ export const transform = (
     return [];
   }
 
+  // The end date is the start date, round it to a nice number
+  const endDate = roundTillTenthMinute(lastItem.createdAt);
+
   // Map samples to minutes
-  const minutes = differenceInMinutes(lastItem.createdAt, firstItem.createdAt);
+  const minutes = differenceInMinutes(endDate, firstItem.createdAt);
   const samplesMinuteMap: { [index: number]: Definition } = {};
   samples.forEach((sample: Definition) => {
     samplesMinuteMap[startOfMinute(sample.createdAt).getTime()] = sample;
   });
 
-  // Loop through every interval of minutes between our 2 points and fill in gaps
+  // Loop through every {interval} of minutes between our 2 points and fill in gaps
   const response: ResponseObject[] = [];
-  const endDate = startOfMinute(lastItem.createdAt);
-  for (let i = 0; i < minutes; i += groupingIntervalInMinutes) {
+  for (let i = 0; i < minutes; i += groupingIntervalMinutes || 1) {
     const date = subMinutes(endDate, i);
     const sample = samplesMinuteMap[date.getTime()];
 
