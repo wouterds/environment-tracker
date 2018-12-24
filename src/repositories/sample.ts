@@ -18,10 +18,19 @@ export const getAll = async (sensorId: string): Promise<Definition[]> => {
   });
 };
 
+interface Between {
+  from: Date;
+  to: Date;
+}
+
 export const getAllAveragedOut = async (
   sensorId: string,
   minutes: number,
+  between?: Between,
 ): Promise<Definition[]> => {
+  /* tslint:disable */
+  console.log({ between });
+
   const rows = await db.query(
     `
     SELECT
@@ -30,6 +39,13 @@ export const getAllAveragedOut = async (
       FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(createdAt) / (60 * :minutes)) * 60 * :minutes, '%Y-%m-%d %H:%i:%s') AS createdAt
     FROM ${SampleModel.getTableName()}
     WHERE sensorId = :sensorId
+    ${
+      between
+        ? `AND createdAt BETWEEN FROM_UNIXTIME(${Math.floor(
+            between.from.getTime() / 1000,
+          )}) AND FROM_UNIXTIME(${Math.floor(between.to.getTime() / 1000)})`
+        : ''
+    }
     GROUP BY createdAt
     ORDER BY createdAt DESC
   `,
