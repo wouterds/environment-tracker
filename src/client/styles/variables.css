@@ -1,0 +1,12 @@
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-gray: #576576;
+  --color-light-gray: #bebfc2;
+  --color-brown: #6B5651;
+
+  --font-family-default:  'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+}

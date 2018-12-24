@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-// import { Type } from '../../../models/sensor';
+import '../../styles/core.css';
 
 interface Sample {
   id: string;

@@ -1,0 +1,36 @@
+html {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: inside;
+  list-style-type: none;
+}
+
+input,
+textarea,
+button,
+select {
+  -webkit-appearance: none;
+  border-radius: 0;
+  outline: 0;
+
+  &[type=checkbox] {
+    -webkit-appearance: checkbox;
+  }
+}
+
+html {
+  font-size: 62.5%;
+}

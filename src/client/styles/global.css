@@ -1,0 +1,34 @@
+@import 'variables';
+
+html,
+body,
+[id='root'] {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-size: 1.8em;
+  line-height: 1.8;
+  font-family: var(--font-family-default);
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-weight: var(--font-weight-bold);
+}
+
+em {
+  font-weight: var(--font-weight-medium);
+}
+
+p {
+  margin-bottom: 15px;
+}
