@@ -10,7 +10,9 @@ export default (env, { mode }) => {
     resolve: {
       extensions: ['.js', '.ts', '.tsx']
     },
-    entry: './client/app.tsx',
+    entry: {
+      app: './client/app.tsx',
+    },
     output: {
       path: resolve('./dist'),
       filename: '[name].[hash:7].js',
