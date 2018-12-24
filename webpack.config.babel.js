@@ -1,8 +1,11 @@
 import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default (env, { mode }) => {
-  return {
+  const isProduction = mode === 'production';
+
+  const config = {
     context: resolve('./src'),
     resolve: {
       extensions: ['.js', '.ts', '.tsx']
@@ -33,4 +36,15 @@ export default (env, { mode }) => {
       }),
     ],
   };
+
+  // Production specific
+  if (isProduction) {
+    config.plugins.push(new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: resolve('./dist/report.html'),
+      openAnalyzer: false,
+    }));
+  }
+
+  return config;
 };
