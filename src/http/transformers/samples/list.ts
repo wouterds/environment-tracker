@@ -43,7 +43,7 @@ export const transform = (
 
     response.push({
       id: (sample && sample.id) || null,
-      value: (sample && sample.value) || null,
+      value: (sample && Math.floor(sample.value * 100) / 100) || null,
       date,
     });
   }
