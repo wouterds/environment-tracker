@@ -240,7 +240,7 @@ class App extends React.Component<{}, State> {
       const samplesResponse: AxiosResponse = await axios.get(
         `https://tracker.wouterdeschuyter.be/api/samples?sensorId=${
           sensor.id
-        }?groupingInterval=10`,
+        }&groupByMinutes=30`,
       );
 
       switch (sensor.type) {
