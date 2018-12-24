@@ -119,7 +119,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             type="monotone"
             dataKey="temperature"
             yAxisId="temperature"
-            stroke="#e74c3c"
+            stroke="#ff7675"
             strokeWidth={2}
             dot={false}
             activeDot={false}
@@ -129,7 +129,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             type="monotone"
             dataKey="illuminance"
             yAxisId="illuminance"
-            stroke="#f1c40f"
+            stroke="#fdcb6e"
             strokeWidth={2}
             dot={false}
             activeDot={false}
@@ -139,7 +139,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             type="monotone"
             dataKey="humidity"
             yAxisId="humidity"
-            stroke="#3498db"
+            stroke="#0984e3"
             strokeWidth={2}
             dot={false}
             activeDot={false}
@@ -149,7 +149,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             type="monotone"
             dataKey="pressure"
             yAxisId="pressure"
-            stroke="#1abc9c"
+            stroke="#a29bfe"
             strokeWidth={2}
             dot={false}
             activeDot={false}
@@ -159,7 +159,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             type="monotone"
             dataKey="eco2"
             yAxisId="eco2"
-            stroke="#34495e"
+            stroke="#55efc4"
             strokeWidth={2}
             dot={false}
             activeDot={false}

@@ -11,8 +11,9 @@ body {
   font-size: 1.8em;
   line-height: 1.8;
   font-family: var(--font-family-default);
-  background: var(--color-white);
+  background: linear-gradient(260deg, #211D2D, transparent), linear-gradient(180deg, #353347, #211D2D);
   color: var(--color-black);
+  overflow: hidden;
 }
 
 h1,
