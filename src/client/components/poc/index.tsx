@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from 'axios';
 import { maxBy, minBy } from 'lodash';
 import * as React from 'react';
 import {
-  CartesianGrid,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -116,7 +115,6 @@ class ProofOfConcept extends React.Component<{}, State> {
           data={chartRows.reverse()}
           margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
         >
-          <CartesianGrid stroke="#d9d9d9" strokeDasharray="5 5" />
           <Line
             type="monotone"
             dataKey="temperature"
