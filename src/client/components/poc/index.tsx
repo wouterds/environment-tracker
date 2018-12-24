@@ -26,7 +26,7 @@ interface State {
   eco2: Sample[];
 }
 
-class App extends React.Component<{}, State> {
+class ProofOfConcept extends React.Component<{}, State> {
   public state: State = {
     illuminance: [],
     temperature: [],
@@ -264,4 +264,4 @@ class App extends React.Component<{}, State> {
   };
 }
 
-export default App;
+export default ProofOfConcept;
