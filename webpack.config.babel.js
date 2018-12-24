@@ -13,7 +13,7 @@ export default (env, { mode }) => {
     entry: './client/app.tsx',
     output: {
       path: resolve('./dist'),
-      filename: '[name].[hash:6].js',
+      filename: '[name].[hash:7].js',
       publicPath: '/',
     },
     module: {
