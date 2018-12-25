@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { subHours } from 'date-fns';
 import { maxBy, minBy } from 'lodash';
 import * as React from 'react';
 import {
@@ -238,7 +239,9 @@ class ProofOfConcept extends React.Component<{}, State> {
       const samplesResponse: AxiosResponse = await axios.get(
         `https://tracker.wouterdeschuyter.be/api/samples?sensorId=${
           sensor.id
-        }&groupByMinutes=30`,
+        }&groupByMinutes=30&between=${Math.floor(
+          subHours(new Date(), 24).getTime() / 1000,
+        )},${Math.floor(new Date().getTime() / 1000)}`,
       );
 
       switch (sensor.type) {
