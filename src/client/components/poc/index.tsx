@@ -222,7 +222,7 @@ class ProofOfConcept extends React.Component<{}, State> {
               eco2Max && eco2Max.eco2 ? eco2Max.eco2 * 1.2 : 0,
             ]}
           />
-          <Tooltip />
+          <Tooltip cursor={{ stroke: '#FFF', strokeWidth: 1.5 }} />
         </LineChart>
       </ResponsiveContainer>
     );
