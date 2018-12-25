@@ -10,6 +10,7 @@ import {
   YAxis,
 } from 'recharts';
 import styles from './styles.css';
+import ToolTip from './tooltip';
 
 interface Sample {
   id: string;
@@ -18,7 +19,7 @@ interface Sample {
 }
 
 interface Props {
-  label: string;
+  name: string;
   unit: string;
   identifier: string;
   syncId?: string;
@@ -29,7 +30,7 @@ interface Props {
 
 class Chart extends React.Component<Props> {
   public render() {
-    const { data, identifier, color, scale, syncId, label, unit } = this.props;
+    const { data, identifier, color, scale, syncId, name, unit } = this.props;
 
     return (
       <div className={styles.container}>
@@ -55,7 +56,7 @@ class Chart extends React.Component<Props> {
             />
             <XAxis
               dataKey="date"
-              name={label}
+              name={name}
               padding={{ left: 0, right: 0 }}
               stroke="rgba(255, 255, 255, 0.25)"
               tickFormatter={time => format(time, 'HH:mm a')}
@@ -69,6 +70,9 @@ class Chart extends React.Component<Props> {
             />
             <Tooltip
               cursor={{ stroke: 'rgba(255, 255, 255, 0.25)', strokeWidth: 1 }}
+              content={(props: any) => (
+                <ToolTip {...props} unit={unit} name={name} />
+              )}
             />
           </LineChart>
         </ResponsiveContainer>

@@ -47,7 +47,7 @@ class ProofOfConcept extends React.Component<{}, State> {
               <Chart
                 syncId="sync-charts"
                 identifier={temperature.sensor.type}
-                label="Temperature"
+                name="Temperature"
                 color="#ff7675"
                 data={[...temperature.samples].reverse()}
                 unit={temperature.sensor.unit}
@@ -59,7 +59,7 @@ class ProofOfConcept extends React.Component<{}, State> {
               <Chart
                 syncId="sync-charts"
                 identifier={humidity.sensor.type}
-                label="Humidity"
+                name="Relative Humidity"
                 color="#0984e3"
                 data={[...humidity.samples].reverse()}
                 unit={humidity.sensor.unit}
@@ -71,7 +71,7 @@ class ProofOfConcept extends React.Component<{}, State> {
               <Chart
                 syncId="sync-charts"
                 identifier={eco2.sensor.type}
-                label="eCO2"
+                name="eCO2"
                 color="#55efc4"
                 data={[...eco2.samples].reverse()}
                 unit={eco2.sensor.unit}
@@ -86,7 +86,7 @@ class ProofOfConcept extends React.Component<{}, State> {
               <Chart
                 syncId="sync-charts"
                 identifier={illuminance.sensor.type}
-                label="Illuminance"
+                name="Illuminance"
                 color="#fdcb6e"
                 scale="log"
                 data={[...illuminance.samples].reverse()}
@@ -99,7 +99,7 @@ class ProofOfConcept extends React.Component<{}, State> {
               <Chart
                 syncId="sync-charts"
                 identifier={pressure.sensor.type}
-                label="Pressure"
+                name="Pressure"
                 color="#a29bfe"
                 data={[...pressure.samples].reverse()}
                 unit={pressure.sensor.unit}
