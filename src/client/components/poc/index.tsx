@@ -121,7 +121,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             dataKey="temperature"
             yAxisId="temperature"
             stroke="#ff7675"
-            strokeWidth={2}
+            strokeWidth={1.5}
             dot={false}
             activeDot={false}
             connectNulls={true}
@@ -131,7 +131,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             dataKey="illuminance"
             yAxisId="illuminance"
             stroke="#fdcb6e"
-            strokeWidth={2}
+            strokeWidth={1.5}
             dot={false}
             activeDot={false}
             connectNulls={true}
@@ -141,7 +141,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             dataKey="humidity"
             yAxisId="humidity"
             stroke="#0984e3"
-            strokeWidth={2}
+            strokeWidth={1.5}
             dot={false}
             activeDot={false}
             connectNulls={true}
@@ -151,7 +151,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             dataKey="pressure"
             yAxisId="pressure"
             stroke="#a29bfe"
-            strokeWidth={2}
+            strokeWidth={1.5}
             dot={false}
             activeDot={false}
             connectNulls={true}
@@ -161,7 +161,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             dataKey="eco2"
             yAxisId="eco2"
             stroke="#55efc4"
-            strokeWidth={2}
+            strokeWidth={1.5}
             dot={false}
             activeDot={false}
             connectNulls={true}
