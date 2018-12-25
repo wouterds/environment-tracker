@@ -10,7 +10,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import '../../styles/core.css';
 
 interface Sample {
   id: string;
