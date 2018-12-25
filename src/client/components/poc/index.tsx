@@ -1,15 +1,14 @@
 import axios, { AxiosResponse } from 'axios';
 import { subHours } from 'date-fns';
-import { maxBy, minBy } from 'lodash';
 import * as React from 'react';
-import {
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import Chart from '../chart';
+import styles from './styles.css';
+
+interface Sensor {
+  id: string;
+  type: string;
+  unit: string;
+}
 
 interface Sample {
   id: string;
@@ -17,22 +16,21 @@ interface Sample {
   date: string;
 }
 
+interface Data {
+  sensor: Sensor;
+  samples: Sample[];
+}
+
 interface State {
-  illuminance: Sample[];
-  temperature: Sample[];
-  humidity: Sample[];
-  pressure: Sample[];
-  eco2: Sample[];
+  illuminance?: Data;
+  temperature?: Data;
+  humidity?: Data;
+  pressure?: Data;
+  eco2?: Data;
 }
 
 class ProofOfConcept extends React.Component<{}, State> {
-  public state: State = {
-    illuminance: [],
-    temperature: [],
-    humidity: [],
-    pressure: [],
-    eco2: [],
-  };
+  public state: State = {};
 
   public componentDidMount() {
     this.fetch();
@@ -41,189 +39,75 @@ class ProofOfConcept extends React.Component<{}, State> {
   public render() {
     const { illuminance, temperature, humidity, eco2, pressure } = this.state;
 
-    interface ChartRow {
-      illuminance: number | null;
-      temperature: number | null;
-      humidity: number | null;
-      pressure: number | null;
-      eco2: number | null;
-    }
-
-    const chartRows: ChartRow[] = [];
-
-    let i = 0;
-    for (const sample of illuminance) {
-      const chartRow: ChartRow = chartRows[i] || {};
-
-      chartRow.illuminance = sample.value;
-
-      chartRows[i++] = chartRow;
-    }
-
-    i = 0;
-    for (const sample of temperature) {
-      const chartRow: ChartRow = chartRows[i] || {};
-
-      chartRow.temperature = sample.value;
-
-      chartRows[i++] = chartRow;
-    }
-
-    i = 0;
-    for (const sample of humidity) {
-      const chartRow: ChartRow = chartRows[i] || {};
-
-      chartRow.humidity = sample.value;
-
-      chartRows[i++] = chartRow;
-    }
-
-    i = 0;
-    for (const sample of pressure) {
-      const chartRow: ChartRow = chartRows[i] || {};
-
-      chartRow.pressure = sample.value;
-
-      chartRows[i++] = chartRow;
-    }
-
-    i = 0;
-    for (const sample of eco2) {
-      const chartRow: ChartRow = chartRows[i] || {};
-
-      chartRow.eco2 = sample.value;
-
-      chartRows[i++] = chartRow;
-    }
-
-    const illuminanceMin = minBy(chartRows, 'illuminance');
-    const illuminanceMax = maxBy(chartRows, 'illuminance');
-    const temperatureMin = minBy(chartRows, 'temperature');
-    const temperatureMax = maxBy(chartRows, 'temperature');
-    const humidityMin = minBy(chartRows, 'humidity');
-    const humidityMax = maxBy(chartRows, 'humidity');
-    const pressureMin = minBy(chartRows, 'pressure');
-    const pressureMax = maxBy(chartRows, 'pressure');
-    const eco2Min = minBy(chartRows, 'eco2');
-    const eco2Max = maxBy(chartRows, 'eco2');
-
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={chartRows.reverse()}
-          margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
-        >
-          <Line
-            type="monotone"
-            dataKey="temperature"
-            yAxisId="temperature"
-            stroke="#ff7675"
-            strokeWidth={1.5}
-            dot={false}
-            activeDot={false}
-            connectNulls={true}
-          />
-          <Line
-            type="monotone"
-            dataKey="illuminance"
-            yAxisId="illuminance"
-            stroke="#fdcb6e"
-            strokeWidth={1.5}
-            dot={false}
-            activeDot={false}
-            connectNulls={true}
-          />
-          <Line
-            type="monotone"
-            dataKey="humidity"
-            yAxisId="humidity"
-            stroke="#0984e3"
-            strokeWidth={1.5}
-            dot={false}
-            activeDot={false}
-            connectNulls={true}
-          />
-          <Line
-            type="monotone"
-            dataKey="pressure"
-            yAxisId="pressure"
-            stroke="#a29bfe"
-            strokeWidth={1.5}
-            dot={false}
-            activeDot={false}
-            connectNulls={true}
-          />
-          <Line
-            type="monotone"
-            dataKey="eco2"
-            yAxisId="eco2"
-            stroke="#55efc4"
-            strokeWidth={1.5}
-            dot={false}
-            activeDot={false}
-            connectNulls={true}
-          />
-          <XAxis hide={true} />
-          <YAxis
-            yAxisId="temperature"
-            hide={true}
-            domain={[
-              temperatureMin && temperatureMin.temperature
-                ? temperatureMin.temperature * 0.8
-                : 0,
-              temperatureMax && temperatureMax.temperature
-                ? temperatureMax.temperature * 1.2
-                : 0,
-            ]}
-          />
-          <YAxis
-            yAxisId="illuminance"
-            hide={true}
-            scale="log"
-            domain={[
-              illuminanceMin && illuminanceMin.illuminance
-                ? illuminanceMin.illuminance * 0.8
-                : 0,
-              illuminanceMax && illuminanceMax.illuminance
-                ? illuminanceMax.illuminance * 1.2
-                : 0,
-            ]}
-          />
-          <YAxis
-            yAxisId="humidity"
-            hide={true}
-            domain={[
-              humidityMin && humidityMin.humidity
-                ? humidityMin.humidity * 0.8
-                : 0,
-              humidityMax && humidityMax.humidity
-                ? humidityMax.humidity * 1.2
-                : 0,
-            ]}
-          />
-          <YAxis
-            yAxisId="pressure"
-            hide={true}
-            domain={[
-              pressureMin && pressureMin.pressure
-                ? pressureMin.pressure * 0.8
-                : 0,
-              pressureMax && pressureMax.pressure
-                ? pressureMax.pressure * 1.2
-                : 0,
-            ]}
-          />
-          <YAxis
-            yAxisId="eco2"
-            hide={true}
-            domain={[
-              eco2Min && eco2Min.eco2 ? eco2Min.eco2 * 0.8 : 0,
-              eco2Max && eco2Max.eco2 ? eco2Max.eco2 * 1.2 : 0,
-            ]}
-          />
-          <Tooltip cursor={{ stroke: '#FFF', strokeWidth: 1.5 }} />
-        </LineChart>
-      </ResponsiveContainer>
+      <div className={styles.container}>
+        <div className={styles.column}>
+          <div className={styles.cell}>
+            {temperature && (
+              <Chart
+                syncId="sync-charts"
+                identifier={temperature.sensor.type}
+                label="Temperature"
+                color="#ff7675"
+                data={[...temperature.samples].reverse()}
+                unit={temperature.sensor.unit}
+              />
+            )}
+          </div>
+          <div className={styles.cell}>
+            {humidity && (
+              <Chart
+                syncId="sync-charts"
+                identifier={humidity.sensor.type}
+                label="Humidity"
+                color="#0984e3"
+                data={[...humidity.samples].reverse()}
+                unit={humidity.sensor.unit}
+              />
+            )}
+          </div>
+          <div className={styles.cell}>
+            {eco2 && (
+              <Chart
+                syncId="sync-charts"
+                identifier={eco2.sensor.type}
+                label="eCO2"
+                color="#55efc4"
+                data={[...eco2.samples].reverse()}
+                unit={eco2.sensor.unit}
+              />
+            )}
+          </div>
+        </div>
+        <div className={styles.column}>
+          <div className={styles.cell} />
+          <div className={styles.cell}>
+            {illuminance && (
+              <Chart
+                syncId="sync-charts"
+                identifier={illuminance.sensor.type}
+                label="Illuminance"
+                color="#fdcb6e"
+                scale="log"
+                data={[...illuminance.samples].reverse()}
+                unit={illuminance.sensor.unit}
+              />
+            )}
+          </div>
+          <div className={styles.cell}>
+            {pressure && (
+              <Chart
+                syncId="sync-charts"
+                identifier={pressure.sensor.type}
+                label="Pressure"
+                color="#a29bfe"
+                data={[...pressure.samples].reverse()}
+                unit={pressure.sensor.unit}
+              />
+            )}
+          </div>
+        </div>
+      </div>
     );
   }
 
@@ -243,19 +127,44 @@ class ProofOfConcept extends React.Component<{}, State> {
 
       switch (sensor.type) {
         case 'ILLUMINANCE':
-          this.setState({ illuminance: samplesResponse.data });
+          this.setState({
+            illuminance: {
+              sensor,
+              samples: samplesResponse.data,
+            },
+          });
           break;
         case 'HUMIDITY':
-          this.setState({ humidity: samplesResponse.data });
+          this.setState({
+            humidity: {
+              sensor,
+              samples: samplesResponse.data,
+            },
+          });
           break;
         case 'PRESSURE':
-          this.setState({ pressure: samplesResponse.data });
+          this.setState({
+            pressure: {
+              sensor,
+              samples: samplesResponse.data,
+            },
+          });
           break;
         case 'TEMPERATURE':
-          this.setState({ temperature: samplesResponse.data });
+          this.setState({
+            temperature: {
+              sensor,
+              samples: samplesResponse.data,
+            },
+          });
           break;
         case 'ECO2':
-          this.setState({ eco2: samplesResponse.data });
+          this.setState({
+            eco2: {
+              sensor,
+              samples: samplesResponse.data,
+            },
+          });
           break;
       }
     }
