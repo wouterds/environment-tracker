@@ -239,7 +239,7 @@ class ProofOfConcept extends React.Component<{}, State> {
       const samplesResponse: AxiosResponse = await axios.get(
         `https://tracker.wouterdeschuyter.be/api/samples?sensorId=${
           sensor.id
-        }&groupByMinutes=30&between=${Math.floor(
+        }&groupByMinutes=20&between=${Math.floor(
           subHours(new Date(), 24).getTime() / 1000,
         )},${Math.floor(new Date().getTime() / 1000)}`,
       );
