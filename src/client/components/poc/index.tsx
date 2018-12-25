@@ -60,7 +60,7 @@ class ProofOfConcept extends React.Component<{}, State> {
                 syncId="sync-charts"
                 identifier={humidity.sensor.type}
                 name="Relative Humidity"
-                color="#0984e3"
+                color="#74b9ff"
                 data={[...humidity.samples].reverse()}
                 unit={humidity.sensor.unit}
               />
