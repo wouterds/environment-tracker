@@ -48,7 +48,8 @@ class ProofOfConcept extends React.Component<{}, State> {
                 syncId="sync-charts"
                 identifier={temperature.sensor.type}
                 name="Temperature"
-                color="#ff7675"
+                strokeColor="rgb(255, 153, 153)"
+                fillColor="rgba(255, 153, 153, 0.1)"
                 data={[...temperature.samples].reverse()}
                 unit={temperature.sensor.unit}
               />
@@ -60,7 +61,8 @@ class ProofOfConcept extends React.Component<{}, State> {
                 syncId="sync-charts"
                 identifier={humidity.sensor.type}
                 name="Relative Humidity"
-                color="#74b9ff"
+                strokeColor="rgb(116, 185, 255)"
+                fillColor="rgba(116, 185, 255, 0.1)"
                 data={[...humidity.samples].reverse()}
                 unit={humidity.sensor.unit}
               />
@@ -72,7 +74,8 @@ class ProofOfConcept extends React.Component<{}, State> {
                 syncId="sync-charts"
                 identifier={eco2.sensor.type}
                 name="eCO2"
-                color="#55efc4"
+                strokeColor="rgb(129, 236, 236)"
+                fillColor="rgba(129, 236, 236, 0.1)"
                 data={[...eco2.samples].reverse()}
                 unit={eco2.sensor.unit}
               />
@@ -87,7 +90,8 @@ class ProofOfConcept extends React.Component<{}, State> {
                 syncId="sync-charts"
                 identifier={illuminance.sensor.type}
                 name="Illuminance"
-                color="#fdcb6e"
+                strokeColor="rgb(255, 234, 167)"
+                fillColor="rgba(255, 234, 167, 0.1)"
                 scale="log"
                 data={[...illuminance.samples].reverse()}
                 unit={illuminance.sensor.unit}
@@ -100,7 +104,8 @@ class ProofOfConcept extends React.Component<{}, State> {
                 syncId="sync-charts"
                 identifier={pressure.sensor.type}
                 name="Pressure"
-                color="#a29bfe"
+                strokeColor="rgb(181,  175,  255)"
+                fillColor="rgba(181, 175, 255, 0.1)"
                 data={[...pressure.samples].reverse()}
                 unit={pressure.sensor.unit}
               />

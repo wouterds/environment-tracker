@@ -1,9 +1,9 @@
 import { format } from 'date-fns';
 import * as React from 'react';
 import {
+  Area,
+  AreaChart,
   CartesianGrid,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -23,19 +23,29 @@ interface Props {
   unit: string;
   identifier: string;
   syncId?: string;
-  color: string;
+  strokeColor: string;
+  fillColor: string;
   scale?: 'auto' | 'linear' | 'log';
   data: Sample[];
 }
 
 class Chart extends React.Component<Props> {
   public render() {
-    const { data, identifier, color, scale, syncId, name, unit } = this.props;
+    const {
+      data,
+      identifier,
+      strokeColor,
+      fillColor,
+      scale,
+      syncId,
+      name,
+      unit,
+    } = this.props;
 
     return (
       <div className={styles.container}>
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart
+          <AreaChart
             data={data}
             margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
             syncId={syncId}
@@ -44,11 +54,12 @@ class Chart extends React.Component<Props> {
               strokeDasharray="3 3"
               stroke="rgba(255, 255, 255, 0.1)"
             />
-            <Line
+            <Area
               type="monotone"
               dataKey="value"
               yAxisId={identifier}
-              stroke={color}
+              stroke={strokeColor}
+              fill={fillColor}
               strokeWidth={1.5}
               dot={false}
               activeDot={false}
@@ -74,7 +85,7 @@ class Chart extends React.Component<Props> {
                 <ToolTip {...props} unit={unit} name={name} />
               )}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     );
