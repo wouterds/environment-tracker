@@ -111,10 +111,8 @@ class ProofOfConcept extends React.Component<{}, State> {
     return (
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
-          width={1280}
-          height={720}
           data={chartRows.reverse()}
-          margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+          margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
         >
           <Line
             type="monotone"
