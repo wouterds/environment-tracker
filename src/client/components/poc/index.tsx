@@ -67,6 +67,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             </div>
             {temperature && (
               <Chart
+                loading={loading}
                 syncId="sync-charts"
                 identifier={temperature.sensor.type}
                 name="Temperature"
@@ -83,6 +84,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             </div>
             {humidity && (
               <Chart
+                loading={loading}
                 syncId="sync-charts"
                 identifier={humidity.sensor.type}
                 name="Relative Humidity"
@@ -99,6 +101,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             </div>
             {eco2 && (
               <Chart
+                loading={loading}
                 syncId="sync-charts"
                 identifier={eco2.sensor.type}
                 name="eCO2"
@@ -160,6 +163,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             </div>
             {illuminance && (
               <Chart
+                loading={loading}
                 syncId="sync-charts"
                 identifier={illuminance.sensor.type}
                 name="Illuminance"
@@ -177,6 +181,7 @@ class ProofOfConcept extends React.Component<{}, State> {
             </div>
             {pressure && (
               <Chart
+                loading={loading}
                 syncId="sync-charts"
                 identifier={pressure.sensor.type}
                 name="Pressure"

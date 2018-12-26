@@ -19,6 +19,7 @@ interface Sample {
 }
 
 interface Props {
+  loading: boolean;
   name: string;
   unit: string;
   identifier: string;
@@ -40,6 +41,7 @@ class Chart extends React.Component<Props> {
       syncId,
       name,
       unit,
+      loading,
     } = this.props;
 
     return (
@@ -79,12 +81,14 @@ class Chart extends React.Component<Props> {
               unit={unit}
               stroke="rgba(255, 255, 255, 0.25)"
             />
-            <Tooltip
-              cursor={{ stroke: 'rgba(255, 255, 255, 0.25)', strokeWidth: 1 }}
-              content={(props: any) => (
-                <ToolTip {...props} unit={unit} name={name} />
-              )}
-            />
+            {!loading && (
+              <Tooltip
+                cursor={{ stroke: 'rgba(255, 255, 255, 0.25)', strokeWidth: 1 }}
+                content={(props: any) => (
+                  <ToolTip {...props} unit={unit} name={name} />
+                )}
+              />
+            )}
           </AreaChart>
         </ResponsiveContainer>
       </div>
