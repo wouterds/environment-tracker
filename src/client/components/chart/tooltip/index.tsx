@@ -25,7 +25,7 @@ const ToolTip = (props: Props) => {
     return (
       <div className={styles.container}>
         <p className={styles.value}>
-          {name} {payload[0].value} {unit}
+          {name} {payload[0] && payload[0].value} {unit}
         </p>
         <p className={styles.label}>{format(label, 'MMMM Do, YYYY HH:mm a')}</p>
       </div>
