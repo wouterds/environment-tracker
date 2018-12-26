@@ -156,43 +156,43 @@ class ProofOfConcept extends React.Component<{}, State> {
                   <label className={styles.label}>Time range</label>
                   <ul className={styles.timeRangeSelector}>
                     <li
-                      className={time === 24 && styles.active}
+                      className={time === 24 ? styles.active : null}
                       onClick={() => this.setState({ time: 24 })}
                     >
                       24H
                     </li>
                     <li
-                      className={time === 36 && styles.active}
+                      className={time === 36 ? styles.active : null}
                       onClick={() => this.setState({ time: 36 })}
                     >
                       36H
                     </li>
                     <li
-                      className={time === 48 && styles.active}
+                      className={time === 48 ? styles.active : null}
                       onClick={() => this.setState({ time: 48 })}
                     >
                       48H
                     </li>
                     <li
-                      className={time === 60 && styles.active}
+                      className={time === 60 ? styles.active : null}
                       onClick={() => this.setState({ time: 60 })}
                     >
                       60H
                     </li>
                     <li
-                      className={time === 72 && styles.active}
+                      className={time === 72 ? styles.active : null}
                       onClick={() => this.setState({ time: 72 })}
                     >
                       72H
                     </li>
                     <li
-                      className={time === 84 && styles.active}
+                      className={time === 84 ? styles.active : null}
                       onClick={() => this.setState({ time: 84 })}
                     >
                       84H
                     </li>
                     <li
-                      className={time === 168 && styles.active}
+                      className={time === 168 ? styles.active : null}
                       onClick={() => this.setState({ time: 168 })}
                     >
                       168H
@@ -208,122 +208,124 @@ class ProofOfConcept extends React.Component<{}, State> {
               </div>
               <div className={styles.infoRow}>
                 <table className={styles.table}>
-                  <tr>
-                    <th />
-                    <th>
-                      <span className={styles.label}>
-                        Temperature{' '}
-                        {temperature && `(${temperature.sensor.unit})`}
-                      </span>
-                    </th>
-                    <th>
-                      <span className={styles.label}>
-                        Relative Humidity{' '}
-                        {humidity && `(${humidity.sensor.unit})`}
-                      </span>
-                    </th>
-                    <th>
-                      <span className={styles.label}>
-                        eCO2 {eco2 && `(${eco2.sensor.unit})`}
-                      </span>
-                    </th>
-                    <th>
-                      <span className={styles.label}>
-                        Illuminance{' '}
-                        {illuminance && `(${illuminance.sensor.unit})`}
-                      </span>
-                    </th>
-                    <th>
-                      <span className={styles.label}>
-                        Pressure {pressure && `(${pressure.sensor.unit})`}
-                      </span>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>
-                      <span className={styles.label}>Min</span>
-                    </th>
-                    <td>
-                      <HighlightedNumber value={temperatureMinValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={humidityMinValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={eco2MinValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={illuminanceMinValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={pressureMinValue} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <span className={styles.label}>Max</span>
-                    </th>
-                    <td>
-                      <HighlightedNumber value={temperatureMaxValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={humidityMaxValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={eco2MaxValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={illuminanceMaxValue} />
-                    </td>
-                    <td>
-                      <HighlightedNumber value={pressureMaxValue} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <span className={styles.label}>Diff</span>
-                    </th>
-                    <td>
-                      <HighlightedNumber
-                        value={
-                          (temperatureMaxValue ? temperatureMaxValue : 0) -
-                          (temperatureMinValue ? temperatureMinValue : 0)
-                        }
-                      />
-                    </td>
-                    <td>
-                      <HighlightedNumber
-                        value={
-                          (humidityMaxValue ? humidityMaxValue : 0) -
-                          (humidityMinValue ? humidityMinValue : 0)
-                        }
-                      />
-                    </td>
-                    <td>
-                      <HighlightedNumber
-                        value={
-                          (eco2MaxValue ? eco2MaxValue : 0) -
-                          (eco2MinValue ? eco2MinValue : 0)
-                        }
-                      />
-                    </td>
-                    <td>
-                      <HighlightedNumber
-                        value={
-                          (illuminanceMaxValue ? illuminanceMaxValue : 0) -
-                          (illuminanceMinValue ? illuminanceMinValue : 0)
-                        }
-                      />
-                    </td>
-                    <td>
-                      <HighlightedNumber
-                        value={
-                          (pressureMaxValue ? pressureMaxValue : 0) -
-                          (pressureMinValue ? pressureMinValue : 0)
-                        }
-                      />
-                    </td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th />
+                      <th>
+                        <span className={styles.label}>
+                          Temperature{' '}
+                          {temperature && `(${temperature.sensor.unit})`}
+                        </span>
+                      </th>
+                      <th>
+                        <span className={styles.label}>
+                          Relative Humidity{' '}
+                          {humidity && `(${humidity.sensor.unit})`}
+                        </span>
+                      </th>
+                      <th>
+                        <span className={styles.label}>
+                          eCO2 {eco2 && `(${eco2.sensor.unit})`}
+                        </span>
+                      </th>
+                      <th>
+                        <span className={styles.label}>
+                          Illuminance{' '}
+                          {illuminance && `(${illuminance.sensor.unit})`}
+                        </span>
+                      </th>
+                      <th>
+                        <span className={styles.label}>
+                          Pressure {pressure && `(${pressure.sensor.unit})`}
+                        </span>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>
+                        <span className={styles.label}>Min</span>
+                      </th>
+                      <td>
+                        <HighlightedNumber value={temperatureMinValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={humidityMinValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={eco2MinValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={illuminanceMinValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={pressureMinValue} />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <span className={styles.label}>Max</span>
+                      </th>
+                      <td>
+                        <HighlightedNumber value={temperatureMaxValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={humidityMaxValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={eco2MaxValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={illuminanceMaxValue} />
+                      </td>
+                      <td>
+                        <HighlightedNumber value={pressureMaxValue} />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <span className={styles.label}>Diff</span>
+                      </th>
+                      <td>
+                        <HighlightedNumber
+                          value={
+                            (temperatureMaxValue ? temperatureMaxValue : 0) -
+                            (temperatureMinValue ? temperatureMinValue : 0)
+                          }
+                        />
+                      </td>
+                      <td>
+                        <HighlightedNumber
+                          value={
+                            (humidityMaxValue ? humidityMaxValue : 0) -
+                            (humidityMinValue ? humidityMinValue : 0)
+                          }
+                        />
+                      </td>
+                      <td>
+                        <HighlightedNumber
+                          value={
+                            (eco2MaxValue ? eco2MaxValue : 0) -
+                            (eco2MinValue ? eco2MinValue : 0)
+                          }
+                        />
+                      </td>
+                      <td>
+                        <HighlightedNumber
+                          value={
+                            (illuminanceMaxValue ? illuminanceMaxValue : 0) -
+                            (illuminanceMinValue ? illuminanceMinValue : 0)
+                          }
+                        />
+                      </td>
+                      <td>
+                        <HighlightedNumber
+                          value={
+                            (pressureMaxValue ? pressureMaxValue : 0) -
+                            (pressureMinValue ? pressureMinValue : 0)
+                          }
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
