@@ -49,7 +49,7 @@ class HighlightedNumber extends React.Component<Props, State> {
             : null
         }
       >
-        {value ? Math.round(value * 100) / 100 : value}
+        {value ? (Math.round(value * 100) / 100).toFixed(2) : value}
       </span>
     );
   }

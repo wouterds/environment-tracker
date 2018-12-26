@@ -50,7 +50,7 @@
 }
 
 .chartLabel {
-  font-size: 0.55em;
+  font-size: 0.65em;
   font-weight: var(--font-weight-bold);
   color: rgba(#FFF, 0.5);
   display: block;
@@ -82,12 +82,12 @@
 
   td {
     color: #FFF;
-    font-size: 0.55em;
+    font-size: 0.65em;
   }
 }
 
 .label {
-  font-size: 0.55em;
+  font-size: 0.65em;
   font-weight: var(--font-weight-bold);
   color: rgba(#FFF, 0.5);
   display: block;
@@ -122,6 +122,6 @@
 
 .activity {
   display: block;
-  font-size: 0.55em;
+  font-size: 0.65em;
   color: #FFF;
 }
