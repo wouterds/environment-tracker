@@ -25,15 +25,6 @@
   }
 }
 
-.label {
-  font-size: 0.55em;
-  font-weight: var(--font-weight-bold);
-  color: rgba(#FFF, 0.5);
-  display: block;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-}
-
 .chartLabel {
   font-size: 0.55em;
   font-weight: var(--font-weight-bold);
@@ -42,6 +33,27 @@
   text-transform: uppercase;
   margin-bottom: 15px;
   text-align: center;
+}
+
+.infoRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.infoColumnFill {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-left: 25px;
+}
+
+.label {
+  font-size: 0.55em;
+  font-weight: var(--font-weight-bold);
+  color: rgba(#FFF, 0.5);
+  display: block;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
 .timeRangeSelector {

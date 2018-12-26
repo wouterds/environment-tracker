@@ -116,57 +116,62 @@ class ProofOfConcept extends React.Component<{}, State> {
         <div className={styles.column}>
           <div className={styles.cell}>
             <div className={styles.content}>
-              <label className={styles.label}>Time range</label>
-              <ul className={styles.timeRangeSelector}>
-                <li
-                  className={time === 24 && styles.active}
-                  onClick={() => this.setState({ time: 24 })}
-                >
-                  24H
-                </li>
-                <li
-                  className={time === 36 && styles.active}
-                  onClick={() => this.setState({ time: 36 })}
-                >
-                  36H
-                </li>
-                <li
-                  className={time === 48 && styles.active}
-                  onClick={() => this.setState({ time: 48 })}
-                >
-                  48H
-                </li>
-                <li
-                  className={time === 60 && styles.active}
-                  onClick={() => this.setState({ time: 60 })}
-                >
-                  60H
-                </li>
-                <li
-                  className={time === 72 && styles.active}
-                  onClick={() => this.setState({ time: 72 })}
-                >
-                  72H
-                </li>
-                <li
-                  className={time === 84 && styles.active}
-                  onClick={() => this.setState({ time: 84 })}
-                >
-                  84H
-                </li>
-                <li
-                  className={time === 168 && styles.active}
-                  onClick={() => this.setState({ time: 168 })}
-                >
-                  168H
-                </li>
-              </ul>
-              <br />
-              <br />
-              <label className={styles.label}>Activity status</label>
-              <span className={styles.activity}>
-                {loading ? 'Loading..' : 'Idle'}
-              </span>
+              <div className={styles.infoRow}>
+                <div className={styles.infoColumn}>
+                  <label className={styles.label}>Time range</label>
+                  <ul className={styles.timeRangeSelector}>
+                    <li
+                      className={time === 24 && styles.active}
+                      onClick={() => this.setState({ time: 24 })}
+                    >
+                      24H
+                    </li>
+                    <li
+                      className={time === 36 && styles.active}
+                      onClick={() => this.setState({ time: 36 })}
+                    >
+                      36H
+                    </li>
+                    <li
+                      className={time === 48 && styles.active}
+                      onClick={() => this.setState({ time: 48 })}
+                    >
+                      48H
+                    </li>
+                    <li
+                      className={time === 60 && styles.active}
+                      onClick={() => this.setState({ time: 60 })}
+                    >
+                      60H
+                    </li>
+                    <li
+                      className={time === 72 && styles.active}
+                      onClick={() => this.setState({ time: 72 })}
+                    >
+                      72H
+                    </li>
+                    <li
+                      className={time === 84 && styles.active}
+                      onClick={() => this.setState({ time: 84 })}
+                    >
+                      84H
+                    </li>
+                    <li
+                      className={time === 168 && styles.active}
+                      onClick={() => this.setState({ time: 168 })}
+                    >
+                      168H
+                    </li>
+                  </ul>
+                </div>
+                <div className={styles.infoColumnFill}>
+                  <label className={styles.label}>Activity status</label>
+                  <span className={styles.activity}>
+                    {loading ? 'Loading..' : 'Idle'}
+                  </span>
+                </div>
+              </div>
+              <div className={styles.infoRow} />
             </div>
           </div>
           <div className={styles.cell}>
