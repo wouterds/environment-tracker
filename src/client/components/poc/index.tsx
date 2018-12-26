@@ -59,6 +59,9 @@ class ProofOfConcept extends React.Component<{}, State> {
       <div className={styles.container}>
         <div className={styles.column}>
           <div className={styles.cell}>
+            <div className={styles.content}>
+              <label className={styles.chartLabel}>Temperature</label>
+            </div>
             {temperature && (
               <Chart
                 syncId="sync-charts"
@@ -72,6 +75,9 @@ class ProofOfConcept extends React.Component<{}, State> {
             )}
           </div>
           <div className={styles.cell}>
+            <div className={styles.content}>
+              <label className={styles.chartLabel}>Relative humidity</label>
+            </div>
             {humidity && (
               <Chart
                 syncId="sync-charts"
@@ -85,6 +91,9 @@ class ProofOfConcept extends React.Component<{}, State> {
             )}
           </div>
           <div className={styles.cell}>
+            <div className={styles.content}>
+              <label className={styles.chartLabel}>eCO2</label>
+            </div>
             {eco2 && (
               <Chart
                 syncId="sync-charts"
@@ -137,6 +146,9 @@ class ProofOfConcept extends React.Component<{}, State> {
             </div>
           </div>
           <div className={styles.cell}>
+            <div className={styles.content}>
+              <label className={styles.chartLabel}>Illuminance</label>
+            </div>
             {illuminance && (
               <Chart
                 syncId="sync-charts"
@@ -151,6 +163,9 @@ class ProofOfConcept extends React.Component<{}, State> {
             )}
           </div>
           <div className={styles.cell}>
+            <div className={styles.content}>
+              <label className={styles.chartLabel}>Pressure</label>
+            </div>
             {pressure && (
               <Chart
                 syncId="sync-charts"
