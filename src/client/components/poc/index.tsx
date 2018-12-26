@@ -3,6 +3,7 @@ import { subHours } from 'date-fns';
 import { maxBy, minBy } from 'lodash';
 import * as React from 'react';
 import Chart from '../chart';
+import HighlightedNumber from '../highlightednumber';
 import styles from './styles.css';
 
 interface Sensor {
@@ -242,60 +243,85 @@ class ProofOfConcept extends React.Component<{}, State> {
                     <th>
                       <span className={styles.label}>Min</span>
                     </th>
-                    <td>{temperatureMinValue}</td>
-                    <td>{humidityMinValue}</td>
-                    <td>{eco2MinValue}</td>
-                    <td>{illuminanceMinValue}</td>
-                    <td>{pressureMinValue}</td>
+                    <td>
+                      <HighlightedNumber value={temperatureMinValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={humidityMinValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={eco2MinValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={illuminanceMinValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={pressureMinValue} />
+                    </td>
                   </tr>
                   <tr>
                     <th>
                       <span className={styles.label}>Max</span>
                     </th>
-                    <td>{temperatureMaxValue}</td>
-                    <td>{humidityMaxValue}</td>
-                    <td>{eco2MaxValue}</td>
-                    <td>{illuminanceMaxValue}</td>
-                    <td>{pressureMaxValue}</td>
+                    <td>
+                      <HighlightedNumber value={temperatureMaxValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={humidityMaxValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={eco2MaxValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={illuminanceMaxValue} />
+                    </td>
+                    <td>
+                      <HighlightedNumber value={pressureMaxValue} />
+                    </td>
                   </tr>
                   <tr>
                     <th>
                       <span className={styles.label}>Diff</span>
                     </th>
                     <td>
-                      {Math.round(
-                        ((temperatureMaxValue ? temperatureMaxValue : 0) -
-                          (temperatureMinValue ? temperatureMinValue : 0)) *
-                          100,
-                      ) / 100}
+                      <HighlightedNumber
+                        value={
+                          (temperatureMaxValue ? temperatureMaxValue : 0) -
+                          (temperatureMinValue ? temperatureMinValue : 0)
+                        }
+                      />
                     </td>
                     <td>
-                      {Math.round(
-                        ((humidityMaxValue ? humidityMaxValue : 0) -
-                          (humidityMinValue ? humidityMinValue : 0)) *
-                          100,
-                      ) / 100}
+                      <HighlightedNumber
+                        value={
+                          (humidityMaxValue ? humidityMaxValue : 0) -
+                          (humidityMinValue ? humidityMinValue : 0)
+                        }
+                      />
                     </td>
                     <td>
-                      {Math.round(
-                        ((eco2MaxValue ? eco2MaxValue : 0) -
-                          (eco2MinValue ? eco2MinValue : 0)) *
-                          100,
-                      ) / 100}
+                      <HighlightedNumber
+                        value={
+                          (eco2MaxValue ? eco2MaxValue : 0) -
+                          (eco2MinValue ? eco2MinValue : 0)
+                        }
+                      />
                     </td>
                     <td>
-                      {Math.round(
-                        ((illuminanceMaxValue ? illuminanceMaxValue : 0) -
-                          (illuminanceMinValue ? illuminanceMinValue : 0)) *
-                          100,
-                      ) / 100}
+                      <HighlightedNumber
+                        value={
+                          (illuminanceMaxValue ? illuminanceMaxValue : 0) -
+                          (illuminanceMinValue ? illuminanceMinValue : 0)
+                        }
+                      />
                     </td>
                     <td>
-                      {Math.round(
-                        ((pressureMaxValue ? pressureMaxValue : 0) -
-                          (pressureMinValue ? pressureMinValue : 0)) *
-                          100,
-                      ) / 100}
+                      <HighlightedNumber
+                        value={
+                          (pressureMaxValue ? pressureMaxValue : 0) -
+                          (pressureMinValue ? pressureMinValue : 0)
+                        }
+                      />
                     </td>
                   </tr>
                 </table>
