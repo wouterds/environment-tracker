@@ -1,3 +1,5 @@
+@import '../../styles/variables.css';
+
 .container {
   display: flex;
   flex: 1;
@@ -15,7 +17,44 @@
 .cell {
   flex-direction: column;
   display: flex;
-  flex: 1;
   height: calc(1/3 * 100)%;
   padding: 15px 25px 10px 0;
+
+  .content {
+    padding-left: 55px;
+  }
+}
+
+.label {
+  font-size: 0.55em;
+  font-weight: var(--font-weight-bold);
+  color: #FFF;
+  display: block;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.timeRangeSelector {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  font-size: 0.7em;
+  font-weight: var(--font-weight-bold);
+  display: inline-block;
+  width: auto;
+
+  li {
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: rgba(#FFF, 0.75);
+
+    &.active {
+      background: rgba(#FFF, 0.05);
+      color: #FFF;
+    }
+
+    & + li {
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
 }

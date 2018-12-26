@@ -22,6 +22,7 @@ interface Data {
 }
 
 interface State {
+  time: number;
   illuminance?: Data;
   temperature?: Data;
   humidity?: Data;
@@ -30,14 +31,29 @@ interface State {
 }
 
 class ProofOfConcept extends React.Component<{}, State> {
-  public state: State = {};
+  public state: State = {
+    time: 24,
+  };
 
   public componentDidMount() {
     this.fetch();
   }
 
+  public componentDidUpdate(_prevProps: {}, prevState: State) {
+    if (prevState.time !== this.state.time) {
+      this.fetch();
+    }
+  }
+
   public render() {
-    const { illuminance, temperature, humidity, eco2, pressure } = this.state;
+    const {
+      illuminance,
+      temperature,
+      humidity,
+      eco2,
+      pressure,
+      time,
+    } = this.state;
 
     return (
       <div className={styles.container}>
@@ -83,7 +99,43 @@ class ProofOfConcept extends React.Component<{}, State> {
           </div>
         </div>
         <div className={styles.column}>
-          <div className={styles.cell} />
+          <div className={styles.cell}>
+            <div className={styles.content}>
+              <label className={styles.label}>Time range</label>
+              <ul className={styles.timeRangeSelector}>
+                <li
+                  className={time === 24 && styles.active}
+                  onClick={() => this.setState({ time: 24 })}
+                >
+                  24H
+                </li>
+                <li
+                  className={time === 36 && styles.active}
+                  onClick={() => this.setState({ time: 36 })}
+                >
+                  36H
+                </li>
+                <li
+                  className={time === 48 && styles.active}
+                  onClick={() => this.setState({ time: 48 })}
+                >
+                  48H
+                </li>
+                <li
+                  className={time === 60 && styles.active}
+                  onClick={() => this.setState({ time: 60 })}
+                >
+                  60H
+                </li>
+                <li
+                  className={time === 72 && styles.active}
+                  onClick={() => this.setState({ time: 72 })}
+                >
+                  72H
+                </li>
+              </ul>
+            </div>
+          </div>
           <div className={styles.cell}>
             {illuminance && (
               <Chart
@@ -117,6 +169,8 @@ class ProofOfConcept extends React.Component<{}, State> {
   }
 
   private fetch = async () => {
+    const { time } = this.state;
+
     const sensorsResponse: AxiosResponse = await axios.get(
       'https://tracker.wouterdeschuyter.be/api/sensors',
     );
@@ -126,7 +180,7 @@ class ProofOfConcept extends React.Component<{}, State> {
         `https://tracker.wouterdeschuyter.be/api/samples?sensorId=${
           sensor.id
         }&groupByMinutes=10&between=${Math.floor(
-          subHours(new Date(), 24).getTime() / 1000,
+          subHours(new Date(), time).getTime() / 1000,
         )},${Math.floor(new Date().getTime() / 1000)}`,
       );
 
