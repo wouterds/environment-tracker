@@ -22,6 +22,7 @@ interface Data {
 }
 
 interface State {
+  loading: boolean;
   time: number;
   illuminance?: Data;
   temperature?: Data;
@@ -33,6 +34,7 @@ interface State {
 class ProofOfConcept extends React.Component<{}, State> {
   public state: State = {
     time: 24,
+    loading: false,
   };
 
   public componentDidMount() {
@@ -53,6 +55,7 @@ class ProofOfConcept extends React.Component<{}, State> {
       eco2,
       pressure,
       time,
+      loading,
     } = this.state;
 
     return (
@@ -143,6 +146,12 @@ class ProofOfConcept extends React.Component<{}, State> {
                   72H
                 </li>
               </ul>
+              <br />
+              <br />
+              <label className={styles.label}>Activity status</label>
+              <span className={styles.activity}>
+                {loading ? 'Loading..' : 'Idle'}
+              </span>
             </div>
           </div>
           <div className={styles.cell}>
@@ -185,6 +194,8 @@ class ProofOfConcept extends React.Component<{}, State> {
 
   private fetch = async () => {
     const { time } = this.state;
+
+    this.setState({ loading: true });
 
     const sensorsResponse: AxiosResponse = await axios.get(
       'https://tracker.wouterdeschuyter.be/api/sensors',
@@ -242,6 +253,8 @@ class ProofOfConcept extends React.Component<{}, State> {
           break;
       }
     }
+
+    this.setState({ loading: false });
   };
 }
 

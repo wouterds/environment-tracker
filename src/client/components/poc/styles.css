@@ -68,3 +68,9 @@
     }
   }
 }
+
+.activity {
+  display: block;
+  font-size: 0.55em;
+  color: #FFF;
+}
