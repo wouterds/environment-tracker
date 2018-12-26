@@ -156,6 +156,18 @@ class ProofOfConcept extends React.Component<{}, State> {
                   <label className={styles.label}>Time range</label>
                   <ul className={styles.timeRangeSelector}>
                     <li
+                      className={time === 6 ? styles.active : null}
+                      onClick={() => this.setState({ time: 6 })}
+                    >
+                      6H
+                    </li>
+                    <li
+                      className={time === 12 ? styles.active : null}
+                      onClick={() => this.setState({ time: 12 })}
+                    >
+                      12H
+                    </li>
+                    <li
                       className={time === 24 ? styles.active : null}
                       onClick={() => this.setState({ time: 24 })}
                     >
