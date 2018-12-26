@@ -197,7 +197,7 @@ class ProofOfConcept extends React.Component<{}, State> {
                 syncId="sync-charts"
                 identifier={pressure.sensor.type}
                 name="Pressure"
-                strokeColor="rgb(181,  175,  255)"
+                strokeColor="rgb(181, 175, 255)"
                 fillColor="rgba(181, 175, 255, 0.1)"
                 data={[...pressure.samples].reverse()}
                 unit={pressure.sensor.unit}
