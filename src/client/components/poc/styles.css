@@ -5,6 +5,30 @@
   flex: 1;
   flex-direction: row;
   overflow: hidden;
+
+  @media(max-width: 1250px) {
+    &:before {
+      z-index: 1;
+      background: rgba(#000, 0.9);
+      content: 'Not supported on small screens yet, please visit on desktop!';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      color: #fff;
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      padding: 25px;
+      padding-bottom: 250px;
+    }
+  }
 }
 
 .column {
