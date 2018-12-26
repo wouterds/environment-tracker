@@ -148,6 +148,18 @@ class ProofOfConcept extends React.Component<{}, State> {
                 >
                   72H
                 </li>
+                <li
+                  className={time === 84 && styles.active}
+                  onClick={() => this.setState({ time: 84 })}
+                >
+                  84H
+                </li>
+                <li
+                  className={time === 168 && styles.active}
+                  onClick={() => this.setState({ time: 168 })}
+                >
+                  168H
+                </li>
               </ul>
               <br />
               <br />
