@@ -75,7 +75,7 @@
   margin-top: 15px;
 
   th, td {
-    padding: 5px;
+    padding: 6px;
     text-align: left;
     vertical-align: top;
   }
@@ -83,6 +83,7 @@
   td {
     color: #FFF;
     font-size: 0.65em;
+    font-weight: var(--font-weight-bold);
   }
 }
 
@@ -105,9 +106,10 @@
 
   li {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 2px 8px;
     cursor: pointer;
     color: rgba(#FFF, 0.75);
+    font-size: 0.9em;
 
     &.active {
       background: rgba(#FFF, 0.05);
@@ -124,4 +126,6 @@
   display: block;
   font-size: 0.65em;
   color: #FFF;
+  font-weight: var(--font-weight-bold);
+  padding-top: 7px;
 }

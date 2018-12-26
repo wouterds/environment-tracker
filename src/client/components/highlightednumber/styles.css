@@ -23,9 +23,9 @@
 }
 
 .increase {
-  animation: highlightIncrease 1s;
+  animation: highlightIncrease 1.5s;
 }
 
 .decrease {
-  animation: highlightDecrease 1s;
+  animation: highlightDecrease 1.5s;
 }
