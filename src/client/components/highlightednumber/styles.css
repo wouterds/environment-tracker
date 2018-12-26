@@ -1,7 +1,31 @@
+@keyframes highlightIncrease {
+  0% {
+    color: #55efc4;
+  }
+  25% {
+    color: #55efc4;
+  }
+  100% {
+    color: inherit;
+  }
+}
+
+@keyframes highlightDecrease {
+  0% {
+    color: #ff7675;
+  }
+  25% {
+    color: #ff7675;
+  }
+  100% {
+    color: inherit;
+  }
+}
+
 .increase {
-  color: #0F0;
+  animation: highlightIncrease 1s;
 }
 
 .decrease {
-  color: #F00;
+  animation: highlightDecrease 1s;
 }

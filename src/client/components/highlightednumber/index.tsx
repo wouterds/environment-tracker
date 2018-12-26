@@ -6,41 +6,49 @@ interface Props {
 }
 
 interface State {
-  valueIncreased: boolean;
+  direction: 'increase' | 'decrease' | null;
 }
 
 class HighlightedNumber extends React.Component<Props, State> {
   public state: State = {
-    valueIncreased: false,
+    direction: null,
   };
 
   public componentWillReceiveProps(nextProps: Props) {
-    const { valueIncreased } = this.state;
-
     if (this.props.value === null && nextProps.value !== null) {
-      this.setState({ valueIncreased: true });
+      this.setState({ direction: 'increase' });
       return;
     } else if (this.props.value !== null && nextProps.value === null) {
-      this.setState({ valueIncreased: true });
+      this.setState({ direction: 'decrease' });
       return;
     }
 
     if (this.props.value !== null && nextProps.value !== null) {
       this.setState({
-        valueIncreased:
+        direction:
           nextProps.value === this.props.value
-            ? valueIncreased
-            : nextProps.value > this.props.value,
+            ? null
+            : nextProps.value > this.props.value
+            ? 'increase'
+            : 'decrease',
       });
     }
   }
 
   public render() {
-    const { valueIncreased } = this.state;
+    const { direction } = this.state;
     const { value } = this.props;
 
     return (
-      <span className={valueIncreased ? styles.increase : styles.decrease}>
+      <span
+        className={
+          direction === 'increase'
+            ? styles.increase
+            : direction === 'decrease'
+            ? styles.decrease
+            : null
+        }
+      >
         {value ? Math.round(value * 100) / 100 : value}
       </span>
     );
