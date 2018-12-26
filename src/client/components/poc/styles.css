@@ -47,6 +47,21 @@
   padding-left: 25px;
 }
 
+.table {
+  margin-top: 15px;
+
+  th, td {
+    padding: 5px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  td {
+    color: #FFF;
+    font-size: 0.55em;
+  }
+}
+
 .label {
   font-size: 0.55em;
   font-weight: var(--font-weight-bold);

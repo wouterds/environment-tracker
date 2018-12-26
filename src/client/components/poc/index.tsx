@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { subHours } from 'date-fns';
+import { maxBy, minBy } from 'lodash';
 import * as React from 'react';
 import Chart from '../chart';
 import styles from './styles.css';
@@ -57,6 +58,39 @@ class ProofOfConcept extends React.Component<{}, State> {
       time,
       loading,
     } = this.state;
+
+    const temperatureMin = temperature
+      ? minBy(temperature.samples, 'value')
+      : null;
+    const temperatureMinValue = temperatureMin ? temperatureMin.value : null;
+    const temperatureMax = temperature
+      ? maxBy(temperature.samples, 'value')
+      : null;
+    const temperatureMaxValue = temperatureMax ? temperatureMax.value : null;
+
+    const humidityMin = humidity ? minBy(humidity.samples, 'value') : null;
+    const humidityMinValue = humidityMin ? humidityMin.value : null;
+    const humidityMax = humidity ? maxBy(humidity.samples, 'value') : null;
+    const humidityMaxValue = humidityMax ? humidityMax.value : null;
+
+    const eco2Min = eco2 ? minBy(eco2.samples, 'value') : null;
+    const eco2MinValue = eco2Min ? eco2Min.value : null;
+    const eco2Max = eco2 ? maxBy(eco2.samples, 'value') : null;
+    const eco2MaxValue = eco2Max ? eco2Max.value : null;
+
+    const illuminanceMin = illuminance
+      ? minBy(illuminance.samples, 'value')
+      : null;
+    const illuminanceMinValue = illuminanceMin ? illuminanceMin.value : null;
+    const illuminanceMax = illuminance
+      ? maxBy(illuminance.samples, 'value')
+      : null;
+    const illuminanceMaxValue = illuminanceMax ? illuminanceMax.value : null;
+
+    const pressureMin = pressure ? minBy(pressure.samples, 'value') : null;
+    const pressureMinValue = pressureMin ? pressureMin.value : null;
+    const pressureMax = pressure ? maxBy(pressure.samples, 'value') : null;
+    const pressureMaxValue = pressureMax ? pressureMax.value : null;
 
     return (
       <div className={styles.container}>
@@ -171,7 +205,101 @@ class ProofOfConcept extends React.Component<{}, State> {
                   </span>
                 </div>
               </div>
-              <div className={styles.infoRow} />
+              <div className={styles.infoRow}>
+                <table className={styles.table}>
+                  <tr>
+                    <th />
+                    <th>
+                      <span className={styles.label}>
+                        Temperature{' '}
+                        {temperature && `(${temperature.sensor.unit})`}
+                      </span>
+                    </th>
+                    <th>
+                      <span className={styles.label}>
+                        Relative Humidity{' '}
+                        {humidity && `(${humidity.sensor.unit})`}
+                      </span>
+                    </th>
+                    <th>
+                      <span className={styles.label}>
+                        eCO2 {eco2 && `(${eco2.sensor.unit})`}
+                      </span>
+                    </th>
+                    <th>
+                      <span className={styles.label}>
+                        Illuminance{' '}
+                        {illuminance && `(${illuminance.sensor.unit})`}
+                      </span>
+                    </th>
+                    <th>
+                      <span className={styles.label}>
+                        Pressure {pressure && `(${pressure.sensor.unit})`}
+                      </span>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>
+                      <span className={styles.label}>Min</span>
+                    </th>
+                    <td>{temperatureMinValue}</td>
+                    <td>{humidityMinValue}</td>
+                    <td>{eco2MinValue}</td>
+                    <td>{illuminanceMinValue}</td>
+                    <td>{pressureMinValue}</td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <span className={styles.label}>Max</span>
+                    </th>
+                    <td>{temperatureMaxValue}</td>
+                    <td>{humidityMaxValue}</td>
+                    <td>{eco2MaxValue}</td>
+                    <td>{illuminanceMaxValue}</td>
+                    <td>{pressureMaxValue}</td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <span className={styles.label}>Diff</span>
+                    </th>
+                    <td>
+                      {Math.round(
+                        ((temperatureMaxValue ? temperatureMaxValue : 0) -
+                          (temperatureMinValue ? temperatureMinValue : 0)) *
+                          100,
+                      ) / 100}
+                    </td>
+                    <td>
+                      {Math.round(
+                        ((humidityMaxValue ? humidityMaxValue : 0) -
+                          (humidityMinValue ? humidityMinValue : 0)) *
+                          100,
+                      ) / 100}
+                    </td>
+                    <td>
+                      {Math.round(
+                        ((eco2MaxValue ? eco2MaxValue : 0) -
+                          (eco2MinValue ? eco2MinValue : 0)) *
+                          100,
+                      ) / 100}
+                    </td>
+                    <td>
+                      {Math.round(
+                        ((illuminanceMaxValue ? illuminanceMaxValue : 0) -
+                          (illuminanceMinValue ? illuminanceMinValue : 0)) *
+                          100,
+                      ) / 100}
+                    </td>
+                    <td>
+                      {Math.round(
+                        ((pressureMaxValue ? pressureMaxValue : 0) -
+                          (pressureMinValue ? pressureMinValue : 0)) *
+                          100,
+                      ) / 100}
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
           <div className={styles.cell}>
