@@ -11,7 +11,7 @@ import {
   YAxis,
 } from 'recharts';
 import styles from './styles.css';
-import ToolTip from './tooltip';
+import ToolTip from './ToolTip';
 
 interface Sample {
   id: string;

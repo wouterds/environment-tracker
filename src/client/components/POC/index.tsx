@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import { subHours } from 'date-fns';
 import { maxBy, minBy } from 'lodash';
 import * as React from 'react';
-import Chart from '../chart';
-import HighlightedNumber from '../highlightednumber';
+import Chart from '../Chart';
+import HighlightedNumber from '../HighlightedNumber';
 import styles from './styles.css';
 
 interface Sensor {
