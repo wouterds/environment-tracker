@@ -26,6 +26,7 @@
     "react-dom": "^16.7.0",
     "recharts": "^1.4.2",
     "redux": "^4.0.1",
+    "redux-saga": "^0.16.2",
     "sequelize": "^4.42.0"
   },
   "devDependencies": {
