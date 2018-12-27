@@ -69,7 +69,7 @@ class Chart extends React.Component<Props> {
               fill={fillColor}
               strokeWidth={1.5}
               dot={false}
-              activeDot={false}
+              activeDot={{ fill: '#FFF', r: 2 }}
               connectNulls={true}
             />
             <XAxis
