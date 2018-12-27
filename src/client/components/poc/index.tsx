@@ -391,7 +391,6 @@ class ProofOfConcept extends React.Component<{}, State> {
       'https://tracker.wouterdeschuyter.be/api/sensors',
     );
 
-    let sensorCount = sensorsResponse.data.length;
     for (const sensor of sensorsResponse.data) {
       const samplesResponse: AxiosResponse = await axios.get(
         `https://tracker.wouterdeschuyter.be/api/samples?sensorId=${
@@ -401,8 +400,6 @@ class ProofOfConcept extends React.Component<{}, State> {
         )},${Math.floor(new Date().getTime() / 1000)}`,
       );
 
-      const finished = sensorCount-- > 1;
-
       switch (sensor.type) {
         case 'ILLUMINANCE':
           this.setState({
@@ -410,7 +407,6 @@ class ProofOfConcept extends React.Component<{}, State> {
               sensor,
               samples: samplesResponse.data,
             },
-            loading: finished,
           });
           break;
         case 'HUMIDITY':
@@ -419,7 +415,6 @@ class ProofOfConcept extends React.Component<{}, State> {
               sensor,
               samples: samplesResponse.data,
             },
-            loading: finished,
           });
           break;
         case 'PRESSURE':
@@ -428,7 +423,6 @@ class ProofOfConcept extends React.Component<{}, State> {
               sensor,
               samples: samplesResponse.data,
             },
-            loading: finished,
           });
           break;
         case 'TEMPERATURE':
@@ -437,7 +431,6 @@ class ProofOfConcept extends React.Component<{}, State> {
               sensor,
               samples: samplesResponse.data,
             },
-            loading: finished,
           });
           break;
         case 'ECO2':
@@ -446,11 +439,14 @@ class ProofOfConcept extends React.Component<{}, State> {
               sensor,
               samples: samplesResponse.data,
             },
-            loading: finished,
           });
           break;
       }
     }
+
+    await new Promise(r => setTimeout(r, 1500));
+
+    this.setState({ loading: false });
   };
 }
 

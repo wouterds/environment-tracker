@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { isEqual } from 'lodash';
 import * as React from 'react';
 import {
   Area,
@@ -31,6 +32,10 @@ interface Props {
 }
 
 class Chart extends React.Component<Props> {
+  public shouldComponentUpdate(nextProps: Props) {
+    return !isEqual(nextProps, this.props);
+  }
+
   public render() {
     const {
       data,
