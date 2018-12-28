@@ -7,8 +7,6 @@ import { Sample } from '../../store/samples/types';
 import { fetch as fetchSensors } from '../../store/sensors/actions';
 import { getSensors } from '../../store/sensors/selectors';
 import { Sensor, Type } from '../../store/sensors/types';
-import { TIMEFRAMES } from '../../store/timeframe/config';
-import { getTimeframe } from '../../store/timeframe/selectors';
 
 interface Props {
   fetchSensors: () => void;
@@ -32,28 +30,41 @@ const wrapApp = (WrappedComponent: any) => {
       const eco2Sensor = find(sensors, { type: Type.ECO2 });
 
       const props = {
-        ...this.props,
-        timeframes: TIMEFRAMES,
-        samples: {
-          [Type.ILLUMINANCE]:
-            (illuminanceSensor
-              ? find(samples, { sensorId: illuminanceSensor.id })
-              : []) || [],
-          [Type.HUMIDITY]:
-            (humiditySensor
-              ? find(samples, { sensorId: humiditySensor.id })
-              : []) || [],
-          [Type.TEMPERATURE]:
-            (temperatureSensor
-              ? find(samples, { sensorId: temperatureSensor.id })
-              : []) || [],
-          [Type.PRESSURE]:
-            (pressureSensor
-              ? find(samples, { sensorId: pressureSensor.id })
-              : []) || [],
-          [Type.ECO2]:
-            (eco2Sensor ? find(samples, { sensorId: eco2Sensor.id }) : []) ||
-            [],
+        data: {
+          [Type.ILLUMINANCE]: {
+            sensor: illuminanceSensor,
+            samples:
+              (illuminanceSensor
+                ? find(samples, { sensorId: illuminanceSensor.id })
+                : []) || [],
+          },
+          [Type.HUMIDITY]: {
+            sensor: humiditySensor,
+            samples:
+              (humiditySensor
+                ? find(samples, { sensorId: humiditySensor.id })
+                : []) || [],
+          },
+          [Type.TEMPERATURE]: {
+            sensor: temperatureSensor,
+            samples:
+              (temperatureSensor
+                ? find(samples, { sensorId: temperatureSensor.id })
+                : []) || [],
+          },
+          [Type.PRESSURE]: {
+            sensor: pressureSensor,
+            samples:
+              (pressureSensor
+                ? find(samples, { sensorId: pressureSensor.id })
+                : []) || [],
+          },
+          [Type.ECO2]: {
+            sensor: eco2Sensor,
+            samples:
+              (eco2Sensor ? find(samples, { sensorId: eco2Sensor.id }) : []) ||
+              [],
+          },
         },
       };
 
@@ -69,7 +80,6 @@ const wrapApp = (WrappedComponent: any) => {
     return createStructuredSelector({
       sensors: getSensors,
       samples: getSamples,
-      timeframe: getTimeframe,
     })(state);
   };
 

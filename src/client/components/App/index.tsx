@@ -5,16 +5,18 @@ import Sidebar from '../Sidebar';
 import withContainer from './container';
 import styles from './styles.css';
 
+interface Data {
+  sensor: Sensor;
+  samples: Sample[];
+}
+
 interface Props {
-  timeframe: number;
-  timeframes: number[];
-  sensors: Sensor[];
-  samples: {
-    [Type.ILLUMINANCE]: Sample[];
-    [Type.HUMIDITY]: Sample[];
-    [Type.TEMPERATURE]: Sample[];
-    [Type.PRESSURE]: Sample[];
-    [Type.ECO2]: Sample[];
+  data: {
+    [Type.ILLUMINANCE]: Data;
+    [Type.HUMIDITY]: Data;
+    [Type.TEMPERATURE]: Data;
+    [Type.PRESSURE]: Data;
+    [Type.ECO2]: Data;
   };
 }
 
