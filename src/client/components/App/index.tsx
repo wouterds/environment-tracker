@@ -24,6 +24,21 @@ const App = (props: Props) => {
   return (
     <div className={styles.container}>
       <Sidebar />
+
+      <div className={styles.content}>
+        <div className={styles.row}>
+          <div className={styles.column}>Col</div>
+          <div className={styles.column}>Col</div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.column}>Col</div>
+          <div className={styles.column}>Col</div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.column}>Col</div>
+          <div className={styles.column}>Col</div>
+        </div>
+      </div>
     </div>
   );
 };
