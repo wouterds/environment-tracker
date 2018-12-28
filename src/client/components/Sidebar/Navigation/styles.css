@@ -1,0 +1,13 @@
+.container {
+  li {
+    color: #FFF;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .active {
+    background: #FFF;
+    color: #000;
+    cursor: default;
+  }
+}
