@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { call, fork, put, takeEvery } from 'redux-saga/effects';
 import { API_ENDPOINT } from '../../config';
+import { fetch as fetchSamples } from '../samples/actions';
 import { FETCH, fetchError, fetchSuccess } from './actions';
 
 function* fetchFlow() {
@@ -15,6 +16,8 @@ function* fetchFlow() {
     }
 
     yield put(fetchSuccess(response.data));
+
+    yield call(fetchSamples);
   } catch (error) {
     yield put(fetchError());
   }
