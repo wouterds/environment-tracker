@@ -1,9 +1,9 @@
-import { call, fork, takeEvery } from 'redux-saga/effects';
+import { fork, put, takeEvery } from 'redux-saga/effects';
 import { fetch as fetchSamples } from '../samples/actions';
 import { SET } from './actions';
 
 function* setFlow() {
-  yield call(fetchSamples);
+  yield put(fetchSamples());
 }
 
 function* setFlowWatcher() {
