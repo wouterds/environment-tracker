@@ -14,11 +14,9 @@ export default (state: State = EMPTY_STATE, action: Action) => {
 
   switch (type) {
     case SET:
-      const { timeframe } = payload;
-
       return {
         ...state,
-        timeframe,
+        timeframe: payload,
       };
     default:
       return state;
