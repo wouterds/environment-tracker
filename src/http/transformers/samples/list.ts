@@ -4,6 +4,7 @@ import { Definition } from '../../../models/sample';
 
 interface ResponseObject {
   id: string | null;
+  sensorId: string;
   value: number | null;
   date: Date;
 }
@@ -43,6 +44,7 @@ export const transform = (
 
     response.push({
       id: (sample && sample.id) || null,
+      sensorId: sample.sensorId,
       value: (sample && Math.floor(sample.value * 100) / 100) || null,
       date,
     });
