@@ -26,7 +26,7 @@ function* fetchFlow() {
         continue;
       }
 
-      samples = [...samples, response.data];
+      samples = [...samples, ...response.data];
 
       yield put(fetchSuccess(samples));
     } catch (error) {
