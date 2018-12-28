@@ -29,6 +29,7 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",
     "redux-saga": "^0.16.2",
+    "reselect": "^4.0.0",
     "sequelize": "^4.42.0"
   },
   "devDependencies": {
