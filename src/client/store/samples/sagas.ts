@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { call, fork, put, select, takeEvery } from 'redux-saga/effects';
-import { API_ENDPOINT } from '../../config';
+import { API_ENDPOINT, GROUP_BY_MINUTES } from '../../config';
 import { getSensors } from '../sensors/selectors';
 import { Sensor } from '../sensors/types';
 import { FETCH, fetchSuccess } from './actions';
@@ -18,6 +18,7 @@ function* fetchFlow() {
         {
           params: {
             sensorId: sensor.id,
+            groupByMinutes: GROUP_BY_MINUTES,
           },
         },
       );
