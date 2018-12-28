@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Sample } from '../../store/samples/types';
 import { Sensor, Type } from '../../store/sensors/types';
+import Sidebar from '../Sidebar';
 import withContainer from './container';
+import styles from './styles.css';
 
 interface Props {
   timeframe: number;
@@ -20,7 +22,11 @@ class App extends React.Component<Props> {
   public render() {
     console.log({ props: this.props });
 
-    return <div />;
+    return (
+      <div className={styles.container}>
+        <Sidebar />
+      </div>
+    );
   }
 }
 
