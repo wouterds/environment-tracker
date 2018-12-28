@@ -18,16 +18,14 @@ interface Props {
   };
 }
 
-class App extends React.Component<Props> {
-  public render() {
-    console.log({ props: this.props });
+const App = (props: Props) => {
+  console.log(props);
 
-    return (
-      <div className={styles.container}>
-        <Sidebar />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.container}>
+      <Sidebar />
+    </div>
+  );
+};
 
 export default withContainer(App);
