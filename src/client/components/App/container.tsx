@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import { filter, find } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -35,35 +35,36 @@ const wrapApp = (WrappedComponent: any) => {
             sensor: illuminanceSensor,
             samples:
               (illuminanceSensor
-                ? find(samples, { sensorId: illuminanceSensor.id })
+                ? filter(samples, { sensorId: illuminanceSensor.id })
                 : []) || [],
           },
           [Type.HUMIDITY]: {
             sensor: humiditySensor,
             samples:
               (humiditySensor
-                ? find(samples, { sensorId: humiditySensor.id })
+                ? filter(samples, { sensorId: humiditySensor.id })
                 : []) || [],
           },
           [Type.TEMPERATURE]: {
             sensor: temperatureSensor,
             samples:
               (temperatureSensor
-                ? find(samples, { sensorId: temperatureSensor.id })
+                ? filter(samples, { sensorId: temperatureSensor.id })
                 : []) || [],
           },
           [Type.PRESSURE]: {
             sensor: pressureSensor,
             samples:
               (pressureSensor
-                ? find(samples, { sensorId: pressureSensor.id })
+                ? filter(samples, { sensorId: pressureSensor.id })
                 : []) || [],
           },
           [Type.ECO2]: {
             sensor: eco2Sensor,
             samples:
-              (eco2Sensor ? find(samples, { sensorId: eco2Sensor.id }) : []) ||
-              [],
+              (eco2Sensor
+                ? filter(samples, { sensorId: eco2Sensor.id })
+                : []) || [],
           },
         },
       };
