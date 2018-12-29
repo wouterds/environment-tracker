@@ -73,7 +73,7 @@ const ChartCell = (props: Props) => {
       {data.sensor && (
         <Chart
           syncId="sync-charts"
-          loading={isLoading}
+          isLoading={isLoading}
           identifier={type}
           name={title(type)}
           strokeColor={`rgb(${color(type)})`}

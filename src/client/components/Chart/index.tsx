@@ -20,7 +20,7 @@ export enum Scale {
 }
 
 interface Props {
-  loading: boolean;
+  isLoading: boolean;
   name: string;
   unit: string;
   identifier: string;
@@ -46,7 +46,7 @@ class Chart extends React.Component<Props> {
       syncId,
       name,
       unit,
-      loading,
+      isLoading,
     } = this.props;
 
     return (
@@ -85,7 +85,7 @@ class Chart extends React.Component<Props> {
               activeDot={{ fill: '#FFF', r: 1 }}
               connectNulls={true}
             />
-            {!loading && (
+            {!isLoading && (
               <Tooltip
                 cursor={{ stroke: 'rgba(255, 255, 255, 0.25)', strokeWidth: 1 }}
                 content={(props: any) => (
