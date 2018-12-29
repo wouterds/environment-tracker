@@ -10,14 +10,9 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { Sample } from '../../store/samples/types';
 import styles from './styles.css';
 import ToolTip from './ToolTip';
-
-interface Sample {
-  id: string;
-  value: number | null;
-  date: string;
-}
 
 interface Props {
   loading: boolean;
