@@ -35,15 +35,16 @@ const App = (props: Props) => {
 
       <div className={styles.content}>
         <div className={styles.row}>
-          <Cell data={eco2} />
+          <Cell title="Todo">Todo</Cell>
+          <Cell.Chart data={eco2} />
         </div>
         <div className={styles.row}>
-          <Cell data={temperature} />
-          <Cell data={illuminance} />
+          <Cell.Chart data={temperature} />
+          <Cell.Chart data={illuminance} />
         </div>
         <div className={styles.row}>
-          <Cell data={humidity} />
-          <Cell data={pressure} />
+          <Cell.Chart data={humidity} />
+          <Cell.Chart data={pressure} />
         </div>
       </div>
     </div>
