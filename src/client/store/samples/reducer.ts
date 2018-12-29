@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { Action } from '../types';
-import { FETCH, FETCH_ERROR, FETCH_SUCCESS } from './actions';
+import { FETCH, FETCH_ERROR, FETCH_SUCCESS, FINISHED } from './actions';
 import { Sample } from './types';
 
 export interface State {
@@ -43,10 +43,14 @@ export default (state: State = EMPTY_STATE, action: Action) => {
         hasError: false,
         samples,
       };
-    case FETCH_ERROR:
+    case FINISHED:
       return {
         ...state,
         isLoading: false,
+      };
+    case FETCH_ERROR:
+      return {
+        ...state,
         hasError: true,
       };
     default:

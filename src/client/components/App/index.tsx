@@ -12,6 +12,7 @@ interface Data {
 }
 
 interface Props {
+  isLoading: boolean;
   data: {
     [Type.ILLUMINANCE]: Data;
     [Type.HUMIDITY]: Data;
@@ -22,7 +23,7 @@ interface Props {
 }
 
 const App = (props: Props) => {
-  const { data } = props;
+  const { data, isLoading } = props;
   const { [Type.ILLUMINANCE]: illuminance } = data;
   const { [Type.HUMIDITY]: humidity } = data;
   const { [Type.TEMPERATURE]: temperature } = data;
@@ -36,15 +37,15 @@ const App = (props: Props) => {
       <div className={styles.content}>
         <div className={styles.row}>
           <Cell title="Todo">Todo</Cell>
-          <Cell.Chart data={eco2} />
+          <Cell.Chart data={eco2} isLoading={isLoading} />
         </div>
         <div className={styles.row}>
-          <Cell.Chart data={temperature} />
-          <Cell.Chart data={illuminance} />
+          <Cell.Chart data={temperature} isLoading={isLoading} />
+          <Cell.Chart data={illuminance} isLoading={isLoading} />
         </div>
         <div className={styles.row}>
-          <Cell.Chart data={humidity} />
-          <Cell.Chart data={pressure} />
+          <Cell.Chart data={humidity} isLoading={isLoading} />
+          <Cell.Chart data={pressure} isLoading={isLoading} />
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ interface Data {
 }
 
 interface Props {
+  isLoading: boolean;
   data: Data;
 }
 
@@ -58,7 +59,7 @@ const scale = (type: Type): Scale => {
 };
 
 const ChartCell = (props: Props) => {
-  const { data } = props;
+  const { data, isLoading } = props;
   const { sensor, samples } = data;
 
   if (!sensor) {
@@ -71,8 +72,8 @@ const ChartCell = (props: Props) => {
     <Cell title={title(type)} contentStyles={styles.content}>
       {data.sensor && (
         <Chart
-          loading={false}
           syncId="sync-charts"
+          loading={isLoading}
           identifier={type}
           name={title(type)}
           strokeColor={`rgb(${color(type)})`}

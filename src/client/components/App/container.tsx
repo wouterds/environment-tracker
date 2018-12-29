@@ -2,7 +2,7 @@ import { filter, find } from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { getSamples } from '../../store/samples/selectors';
+import { getIsLoading, getSamples } from '../../store/samples/selectors';
 import { Sample } from '../../store/samples/types';
 import { fetch as fetchSensors } from '../../store/sensors/actions';
 import { getSensors } from '../../store/sensors/selectors';
@@ -12,6 +12,7 @@ interface Props {
   fetchSensors: () => void;
   sensors: Sensor[];
   samples: Sample[];
+  isLoading: boolean;
 }
 
 const wrapApp = (WrappedComponent: any) => {
@@ -21,7 +22,7 @@ const wrapApp = (WrappedComponent: any) => {
     }
 
     public render() {
-      const { sensors, samples } = this.props;
+      const { sensors, samples, isLoading } = this.props;
 
       const illuminanceSensor = find(sensors, { type: Type.ILLUMINANCE });
       const humiditySensor = find(sensors, { type: Type.HUMIDITY });
@@ -30,6 +31,7 @@ const wrapApp = (WrappedComponent: any) => {
       const eco2Sensor = find(sensors, { type: Type.ECO2 });
 
       const props = {
+        isLoading,
         data: {
           [Type.ILLUMINANCE]: {
             sensor: illuminanceSensor,
@@ -81,6 +83,7 @@ const wrapApp = (WrappedComponent: any) => {
     return createStructuredSelector({
       sensors: getSensors,
       samples: getSamples,
+      isLoading: getIsLoading,
     })(state);
   };
 

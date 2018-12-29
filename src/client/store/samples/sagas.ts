@@ -5,8 +5,7 @@ import { API_ENDPOINT, GROUP_BY_MINUTES } from '../../config';
 import { getSensors } from '../sensors/selectors';
 import { Sensor } from '../sensors/types';
 import { getTimeframe } from '../timeframe/selectors';
-import { FETCH, fetchError, fetchSuccess } from './actions';
-import { Sample } from './types';
+import { FETCH, fetchError, fetchSuccess, finished } from './actions';
 
 function* fetchFlow() {
   const timeframe: number = yield select(getTimeframe);
@@ -38,6 +37,8 @@ function* fetchFlow() {
       continue;
     }
   }
+
+  yield put(finished());
 }
 
 function* fetchFlowWatcher() {
