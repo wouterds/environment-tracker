@@ -1,3 +1,4 @@
+import { filter } from 'lodash';
 import { Action } from '../types';
 import { FETCH, FETCH_ERROR, FETCH_SUCCESS } from './actions';
 import { Sample } from './types';
@@ -25,11 +26,20 @@ export default (state: State = EMPTY_STATE, action: Action) => {
         hasError: false,
       };
     case FETCH_SUCCESS:
-      const { samples } = payload;
+      const { samples: newSamples } = payload;
+      let { samples } = state;
+
+      const sensorId = newSamples ? newSamples[0].sensorId : null;
+
+      samples = filter(
+        samples,
+        (sample: Sample) => sample.sensorId !== sensorId,
+      );
+
+      samples = [...samples, ...newSamples];
 
       return {
         ...state,
-        isLoading: false,
         hasError: false,
         samples,
       };

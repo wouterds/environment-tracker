@@ -5,14 +5,13 @@ import { API_ENDPOINT, GROUP_BY_MINUTES } from '../../config';
 import { getSensors } from '../sensors/selectors';
 import { Sensor } from '../sensors/types';
 import { getTimeframe } from '../timeframe/selectors';
-import { FETCH, fetchSuccess } from './actions';
+import { FETCH, fetchError, fetchSuccess } from './actions';
 import { Sample } from './types';
 
 function* fetchFlow() {
   const timeframe: number = yield select(getTimeframe);
   const sensors: Sensor[] = yield select(getSensors);
 
-  let samples: Sample[] = [];
   for (const sensor of sensors) {
     try {
       const response: AxiosResponse = yield call(
@@ -33,11 +32,9 @@ function* fetchFlow() {
         continue;
       }
 
-      samples = [...samples, ...response.data];
-
-      yield put(fetchSuccess(samples));
+      yield put(fetchSuccess(response.data));
     } catch (error) {
-      // yield put(fetchError());
+      yield put(fetchError());
       continue;
     }
   }
