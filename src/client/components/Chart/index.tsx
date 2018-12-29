@@ -14,6 +14,11 @@ import { Sample } from '../../store/samples/types';
 import styles from './styles.css';
 import ToolTip from './ToolTip';
 
+export enum Scale {
+  AUTO = 'auto',
+  LOG = 'log',
+}
+
 interface Props {
   loading: boolean;
   name: string;
@@ -22,7 +27,7 @@ interface Props {
   syncId?: string;
   strokeColor: string;
   fillColor: string;
-  scale?: 'auto' | 'linear' | 'log';
+  scale?: Scale;
   data: Sample[];
 }
 

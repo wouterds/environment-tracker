@@ -1,0 +1,93 @@
+import * as React from 'react';
+import { Sample } from '../../../store/samples/types';
+import { Sensor, Type } from '../../../store/sensors/types';
+import Chart, { Scale } from '../../Chart';
+import styles from './styles.css';
+
+interface Data {
+  sensor: Sensor;
+  samples: Sample[];
+}
+
+interface Props {
+  data: Data;
+}
+
+const title = (type: Type): string => {
+  switch (type) {
+    case Type.ECO2:
+      return 'eCO2';
+    case Type.ILLUMINANCE:
+      return 'Illuminance';
+    case Type.PRESSURE:
+      return 'Pressure';
+    case Type.TEMPERATURE:
+      return 'Temperature';
+    case Type.HUMIDITY:
+      return 'Humidity';
+  }
+
+  return 'Unknown';
+};
+
+const color = (type: Type): string => {
+  switch (type) {
+    case Type.ECO2:
+      return '129, 236, 236';
+    case Type.ILLUMINANCE:
+      return '255, 234, 167';
+    case Type.PRESSURE:
+      return '181, 175, 255';
+    case Type.TEMPERATURE:
+      return '255, 153, 153';
+    case Type.HUMIDITY:
+      return '116, 185, 255';
+  }
+
+  return '255, 255, 255';
+};
+
+const scale = (type: Type): Scale => {
+  switch (type) {
+    case Type.ILLUMINANCE:
+      return Scale.LOG;
+  }
+
+  return Scale.AUTO;
+};
+
+const Cell = (props: Props) => {
+  const { data } = props;
+  const { sensor, samples } = data;
+
+  if (!sensor) {
+    return null;
+  }
+
+  const { type, unit } = sensor;
+
+  return (
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <label className={styles.label}>{title(type)}</label>
+      </header>
+      <div className={styles.content}>
+        {data.sensor && (
+          <Chart
+            loading={false}
+            syncId="sync-charts"
+            identifier={type}
+            name={title(type)}
+            strokeColor={`rgb(${color(type)})`}
+            fillColor={`rgba(${color(type)}, 0.1)`}
+            scale={scale(type)}
+            data={[...samples].reverse()}
+            unit={unit}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Cell;

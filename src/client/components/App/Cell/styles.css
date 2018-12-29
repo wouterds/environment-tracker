@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+
+  .header {
+    padding: 5px;
+    padding-left: 60px;
+
+    .label {
+      color: rgba(#FFF, 0.75);
+      font-size: 0.6em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      word-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    padding: 0 15px 0 0;
+  }
+}
