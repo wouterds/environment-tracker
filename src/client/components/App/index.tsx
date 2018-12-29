@@ -22,34 +22,46 @@ interface Props {
   };
 }
 
-const App = (props: Props) => {
-  const { data, isLoading } = props;
-  const { [Type.ILLUMINANCE]: illuminance } = data;
-  const { [Type.HUMIDITY]: humidity } = data;
-  const { [Type.TEMPERATURE]: temperature } = data;
-  const { [Type.PRESSURE]: pressure } = data;
-  const { [Type.ECO2]: eco2 } = data;
+class App extends React.Component<Props> {
+  public shouldComponentUpdate(nextProps: Props) {
+    // Finished loading => delay this re-render (so our charts finish their animation)
+    if (this.props.isLoading === true && nextProps.isLoading === false) {
+      setTimeout(() => this.forceUpdate(), 1500);
+      return false;
+    }
 
-  return (
-    <div className={styles.container}>
-      <Sidebar />
+    return true;
+  }
 
-      <div className={styles.content}>
-        <div className={styles.row}>
-          <Cell title="Todo">Todo</Cell>
-          <Cell.Chart data={eco2} isLoading={isLoading} />
-        </div>
-        <div className={styles.row}>
-          <Cell.Chart data={temperature} isLoading={isLoading} />
-          <Cell.Chart data={illuminance} isLoading={isLoading} />
-        </div>
-        <div className={styles.row}>
-          <Cell.Chart data={humidity} isLoading={isLoading} />
-          <Cell.Chart data={pressure} isLoading={isLoading} />
+  public render() {
+    const { data, isLoading } = this.props;
+    const { [Type.ILLUMINANCE]: illuminance } = data;
+    const { [Type.HUMIDITY]: humidity } = data;
+    const { [Type.TEMPERATURE]: temperature } = data;
+    const { [Type.PRESSURE]: pressure } = data;
+    const { [Type.ECO2]: eco2 } = data;
+
+    return (
+      <div className={styles.container}>
+        <Sidebar />
+
+        <div className={styles.content}>
+          <div className={styles.row}>
+            <Cell title="Todo">Todo</Cell>
+            <Cell.Chart data={eco2} isLoading={isLoading} />
+          </div>
+          <div className={styles.row}>
+            <Cell.Chart data={temperature} isLoading={isLoading} />
+            <Cell.Chart data={illuminance} isLoading={isLoading} />
+          </div>
+          <div className={styles.row}>
+            <Cell.Chart data={humidity} isLoading={isLoading} />
+            <Cell.Chart data={pressure} isLoading={isLoading} />
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default withContainer(App);
