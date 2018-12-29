@@ -43,7 +43,7 @@ class App extends React.Component<Props> {
 
     return (
       <div className={styles.container}>
-        <Sidebar />
+        <Sidebar isLoading={isLoading} />
 
         <div className={styles.content}>
           <div className={styles.row}>

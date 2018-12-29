@@ -1,8 +1,20 @@
 .container {
   background: rgba(10, 10, 25, 0.7);
   display: flex;
+  padding: 10px 11px 10px 10px;
+  flex-direction: column;
+}
+
+.navigation {
+  flex: 1;
+  display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 10px;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
