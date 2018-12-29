@@ -1,13 +1,23 @@
 .container {
-  li {
-    color: #FFF;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
+  border: 1px solid rgba(150, 150, 255, 0.2);
+  border-radius: 3px;
+  font-size: 0.6em;
+  font-weight: 600;
 
-  .active {
-    background: #FFF;
-    color: #000;
-    cursor: default;
+  li {
+    color: rgba(200, 200, 255, 0.25);
+    padding: 6px 4px;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      color: rgba(200, 200, 255, 0.4);
+    }
+
+    &.active {
+      background: rgba(150, 150, 255, 0.2);
+      color: rgba(200, 200, 255, 0.75);
+      cursor: default;
+    }
   }
 }

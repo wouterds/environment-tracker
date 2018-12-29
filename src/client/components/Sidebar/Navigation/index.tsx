@@ -19,7 +19,7 @@ const Navigation = (props: Props) => {
           className={(item === timeframe && styles.active) || null}
           onClick={() => setTimeframe(item)}
         >
-          {item}
+          {item}H
         </li>
       ))}
     </ul>

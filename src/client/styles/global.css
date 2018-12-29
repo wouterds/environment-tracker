@@ -11,7 +11,7 @@ body {
   font-size: 1.8em;
   line-height: 1.8;
   font-family: var(--font-family-default);
-  background: linear-gradient(260deg, #211D2D, transparent), linear-gradient(180deg, #353347, #211D2D);
+  background: linear-gradient(260deg, #1e1c2d, transparent), linear-gradient(180deg, #34364c, #1e1c2d);
   color: var(--color-black);
 }
 
