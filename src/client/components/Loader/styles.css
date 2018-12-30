@@ -1,25 +1,33 @@
-.container,
-.container:after {
-  border-radius: 50%;
-  width: 1.25em;
-  height: 1.25em;
-}
-
 .container {
-  position: relative;
-  text-indent: -9999em;
-  border: 0.2em solid rgba(255, 255, 255, 0.25);
-  border-left: 0.2em solid rgba(255, 255, 255, 0.75);
-  transform: translateZ(0);
-  animation: load8 0.75s infinite linear;
+  animation: rotate 2s linear infinite;
+  width: 30px;
+  height: 30px;
   opacity: 0.25;
+
+  & .circle {
+    stroke: rgba(200, 200, 255, 0.75);
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
 }
 
-@keyframes load8 {
-  0% {
-    transform: rotate(0deg);
-  }
+@keyframes rotate {
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
   }
 }
