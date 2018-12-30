@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 import Chart from './Chart';
 import styles from './styles.css';
+import Summary from './Summary';
 
 interface Props {
   title: string;
@@ -25,5 +26,6 @@ const Cell = (props: Props) => {
 };
 
 Cell.Chart = Chart;
+Cell.Summary = Summary;
 
 export default Cell;

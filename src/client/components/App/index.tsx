@@ -47,7 +47,7 @@ class App extends React.Component<Props> {
 
         <div className={styles.content}>
           <div className={styles.row}>
-            <Cell title="Summary" />
+            <Cell.Summary data={data} />
             <Cell.Chart data={eco2} isLoading={isLoading} />
           </div>
           <div className={styles.row}>

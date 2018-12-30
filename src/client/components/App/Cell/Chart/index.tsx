@@ -26,7 +26,7 @@ const title = (type: Type): string => {
     case Type.TEMPERATURE:
       return 'Temperature';
     case Type.HUMIDITY:
-      return 'Humidity';
+      return 'Relative Humidity';
   }
 
   return 'Unknown';
