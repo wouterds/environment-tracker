@@ -61,13 +61,6 @@ class Chart extends React.Component<Props> {
               strokeDasharray="3 3"
               stroke="rgba(200, 200, 255, 0.2)"
             />
-            <XAxis
-              dataKey="date"
-              name={name}
-              padding={{ left: 0, right: 0 }}
-              stroke="#4c506b"
-              tickFormatter={time => format(time, 'HH:mm a')}
-            />
             <YAxis
               yAxisId={identifier}
               scale={scale || 'auto'}
@@ -84,6 +77,13 @@ class Chart extends React.Component<Props> {
               dot={false}
               activeDot={{ fill: '#FFF', r: 1 }}
               connectNulls={true}
+            />
+            <XAxis
+              dataKey="date"
+              name={name}
+              padding={{ left: 0, right: 0 }}
+              stroke="#4c506b"
+              tickFormatter={time => format(time, 'HH:mm a')}
             />
             {!isLoading && (
               <Tooltip
