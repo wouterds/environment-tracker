@@ -34,5 +34,7 @@ export default async (req: Request, res: Response): Promise<Response> => {
 
   return res
     .status(200)
-    .json(SampleTransformer.transform(samples, groupByMinutes));
+    .json(
+      SampleTransformer.transform(req.query.sensorId, samples, groupByMinutes),
+    );
 };

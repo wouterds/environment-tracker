@@ -16,6 +16,7 @@ const roundTillTenthMinute = (date: Date): Date => {
 };
 
 export const transform = (
+  sensorId: string,
   samples: Definition[],
   groupingIntervalMinutes?: number,
 ): ResponseObject[] => {
@@ -44,7 +45,7 @@ export const transform = (
 
     response.push({
       id: (sample && sample.id) || null,
-      sensorId: sample.sensorId,
+      sensorId,
       value: (sample && Math.floor(sample.value * 100) / 100) || null,
       date,
     });
