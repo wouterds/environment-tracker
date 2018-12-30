@@ -21,6 +21,7 @@
   .content {
     display: block;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     padding-left: 5px;
   }
 
