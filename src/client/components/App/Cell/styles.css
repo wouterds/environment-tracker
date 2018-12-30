@@ -3,6 +3,11 @@
   width: 50%;
   flex-direction: column;
 
+  @media(max-width: 400px) {
+    width: 100%;
+    height: 265px;
+  }
+
   .header {
     padding: 5px;
     padding-left: 60px;

@@ -74,8 +74,8 @@ const SummnaryCell = (props: Props) => {
   const summaryECO2 = (pressure && getSummary(eco2.samples)) || null;
 
   return (
-    <Cell title="Summary">
-      <table className={styles.container}>
+    <Cell title="Summary" containerStyles={styles.container}>
+      <table>
         <tbody>
           <tr>
             <th />

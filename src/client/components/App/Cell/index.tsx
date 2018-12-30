@@ -7,14 +7,15 @@ import Summary from './Summary';
 interface Props {
   title: string;
   children: React.ReactNode;
+  containerStyles?: any;
   contentStyles?: any;
 }
 
 const Cell = (props: Props) => {
-  const { title, children, contentStyles } = props;
+  const { title, children, containerStyles, contentStyles } = props;
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, containerStyles)}>
       <header className={styles.header}>
         <label className={styles.label}>{title}</label>
       </header>
