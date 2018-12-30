@@ -70,7 +70,7 @@ const ChartCell = (props: Props) => {
 
   return (
     <Cell title={title(type)} contentStyles={styles.content}>
-      {data.sensor && (
+      {samples.length > 0 && (
         <Chart
           syncId="sync-charts"
           isLoading={isLoading}
