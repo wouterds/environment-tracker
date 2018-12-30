@@ -9,6 +9,7 @@
     padding: 6px 4px;
     cursor: pointer;
     text-align: center;
+    user-select: none;
 
     &:hover {
       color: rgba(200, 200, 255, 0.4);
