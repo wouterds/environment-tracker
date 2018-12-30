@@ -5,14 +5,14 @@
   font-weight: 600;
 
   li {
-    color: rgba(200, 200, 255, 0.25);
+    color: rgba(150, 150, 255, 0.25);
     padding: 6px 4px;
     cursor: pointer;
     text-align: center;
     user-select: none;
 
     &:hover {
-      color: rgba(200, 200, 255, 0.4);
+      color: rgba(150, 150, 255, 0.4);
     }
 
     &.active {

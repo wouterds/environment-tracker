@@ -5,7 +5,7 @@
   opacity: 0.25;
 
   & .circle {
-    stroke: rgba(200, 200, 255, 0.75);
+    stroke: rgba(150, 150, 255, 0.75);
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
