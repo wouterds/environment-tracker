@@ -9,10 +9,10 @@
 
     .label {
       color: rgba(200, 200, 255, 0.75);
-      font-size: 0.6em;
+      font-size: 0.55em;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      word-spacing: 0.1em;
+      letter-spacing: 0.2em;
+      word-spacing: 0.2em;
       text-transform: uppercase;
     }
   }
