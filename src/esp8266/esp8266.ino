@@ -15,7 +15,7 @@ WiFiServer server(80);
 
 void setupSerial(void)
 {
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.println();
 }
 
