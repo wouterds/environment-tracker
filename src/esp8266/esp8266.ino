@@ -70,6 +70,11 @@ void setupSensors(void)
   }
 }
 
+void setupLed()
+{
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
 /* return absolute humidity [mg/m^3] with approximation formula
 * @param temperature [°C]
 * @param humidity [%RH]
@@ -84,6 +89,7 @@ uint32_t getAbsoluteHumidity(float temperature, float humidity) {
 void setup(void)
 {
   setupSerial();
+  setupLed();
   setupI2C();
   setupWifi();
   setupWebServer();
@@ -95,7 +101,8 @@ void loop()
   WiFiClient client = server.available();
   if (client)
   {
-    Serial.println("Request opened!");
+    // Led indicator
+    digitalWrite(LED_BUILTIN, HIGH);
 
     boolean blank_line = true;
     while (client.connected())
@@ -161,6 +168,8 @@ void loop()
 
     delay(1);
     client.stop();
-    Serial.println("Request closed!");
+
+    // Led indicator
+    digitalWrite(LED_BUILTIN, LOW);
   }
 }
