@@ -22,7 +22,6 @@ void setupSerial(void)
 void setupI2C(void)
 {
   Wire.begin(D2, D1);
-  Wire.setClock(100000);
 }
 
 void setupWifi(void)
