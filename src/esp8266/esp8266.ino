@@ -11,7 +11,6 @@ const char *password = "";
 Adafruit_BME280 bme280;
 Adafruit_SGP30 sgp30;
 BH1750 bh1750;
-
 WiFiServer server(80);
 
 void setupSerial(void)
@@ -37,8 +36,8 @@ void setupWifi(void)
     delay(500);
     Serial.print(".");
   }
-  Serial.println();
 
+  Serial.println();
   Serial.print("Connected to wifi, ip: ");
   Serial.println(WiFi.localIP());
 }
@@ -99,19 +98,21 @@ void setup(void)
 void loop()
 {
   WiFiClient client = server.available();
+
   if (client)
   {
     // Led indicator
     digitalWrite(LED_BUILTIN, HIGH);
 
-    boolean blank_line = true;
+    boolean blankLine = true;
+
     while (client.connected())
     {
       if (client.available())
       {
         char c = client.read();
 
-        if (c == '\n' && blank_line)
+        if (c == '\n' && blankLine)
         {
           // Read illuminance
           float illuminance = bh1750.readLightLevel();
@@ -157,11 +158,11 @@ void loop()
 
         if (c == '\n')
         {
-          blank_line = true;
+          blankLine = true;
         }
         else if (c != '\r')
         {
-          blank_line = false;
+          blankLine = false;
         }
       }
     }
