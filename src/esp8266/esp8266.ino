@@ -73,10 +73,11 @@ void setupLed()
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
-/* return absolute humidity [mg/m^3] with approximation formula
-* @param temperature [°C]
-* @param humidity [%RH]
-*/
+/*
+ * @param float temperature [°C]
+ * @param float humidity [%RH]
+ * @return uint32_t absoluteHumidityScaled [mg/m^3]
+ */
 uint32_t getAbsoluteHumidity(float temperature, float humidity) {
   // approximation formula from Sensirion SGP30 Driver Integration chapter 3.15
   const float absoluteHumidity = 216.7f * ((humidity / 100.0f) * 6.112f * exp((17.62f * temperature) / (243.12f + temperature)) / (273.15f + temperature)); // [g/m^3]
