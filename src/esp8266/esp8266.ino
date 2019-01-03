@@ -138,6 +138,7 @@ void loop()
             eco2 = sgp30.eCO2;
           }
 
+          // Print response
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: application/json");
           client.println("Connection: close");
