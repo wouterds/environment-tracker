@@ -10,3 +10,6 @@
 [submodule "src/esp8266/libs/bh1750"]
 	path = src/esp8266/libs/bh1750
 	url = https://github.com/claws/BH1750.git
+[submodule "src/esp8266/libs/adafruit-tsl2561"]
+	path = src/esp8266/libs/adafruit-tsl2561
+	url = https://github.com/adafruit/TSL2561-Arduino-Library.git
