@@ -78,7 +78,7 @@ void setupLed()
  * @param float relativeHumidity [%RH]
  * @return int absoluteHumidityScaled [mg/m^3]
  */
-int getAbsoluteHumidity(float temperature, float relativeHumidity) {
+int calculateAbsoluteHumidity(float temperature, float relativeHumidity) {
   const float absoluteHumidity = 216.7f * (
     (relativeHumidity / 100.0f) * 6.112f * exp(
       (17.62f * temperature) / (243.12f + temperature)
@@ -121,16 +121,19 @@ void loop()
           float illuminance = bh1750.readLightLevel();
 
           // Read relative humidity
-          float humidity = bme280.readHumidity();
+          float relativeHumidity = bme280.readHumidity();
 
           // Read temperature
           float temperature = bme280.readTemperature();
+
+          // Calculate absolute humidity
+          int absoluteHumidity = calculateAbsoluteHumidity(temperature, relativeHumidity)
 
           // Read pressure
           float pressure = bme280.readPressure() / 100.0F;
 
           // Enable humidity compensation for more accurate results
-          sgp30.setHumidity(getAbsoluteHumidity(temperature, humidity));
+          sgp30.setHumidity(absoluteHumidity);
 
           // eCO2 placeholder
           float eco2;
@@ -149,7 +152,12 @@ void loop()
           client.print("{\"temperature\":");
           client.print(temperature);
           client.print(",\"humidity\":");
-          client.print(humidity);
+          client.print("{");
+          client.print("\"relative\":");
+          client.print(relativeHumidity);
+          client.print(",\"absolute\":");
+          client.print(absoluteHumidity);
+          client.print("}");
           client.print(",\"pressure\":");
           client.print(pressure);
           client.print(",\"eco2\":");
