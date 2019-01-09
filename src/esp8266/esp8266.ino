@@ -3,14 +3,14 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include <Adafruit_SGP30.h>
-#include <BH1750.h>
+#include <TSL2561.h>
 
 const char *ssid = "Wouter's Place";
 const char *password = "";
 
 Adafruit_BME280 bme280;
 Adafruit_SGP30 sgp30;
-BH1750 bh1750;
+TSL2561 tsl2561(TSL2561_ADDR_FLOAT);
 WiFiServer server(80);
 
 void setupSerial(void)
@@ -61,9 +61,9 @@ void setupSensors(void)
     while (1);
   }
 
-  if (!bh1750.begin())
+  if (!tsl2561.begin())
   {
-    Serial.println("Could not find BH1750 sensor, check wiring!");
+    Serial.println("Could not find TSL2561 sensor, check wiring!");
     while (1);
   }
 }
@@ -118,7 +118,9 @@ void loop()
         if (c == '\n' && blankLine)
         {
           // Read illuminance
-          float illuminance = bh1750.readLightLevel();
+          float illuminanceVisibleLight = tsl2561.getLuminosity(TSL2561_VISIBLE);
+          float illuminanceFullSpectrum = tsl2561.getLuminosity(TSL2561_FULLSPECTRUM);
+          float illuminanceIRLight = tsl2561.getLuminosity(TSL2561_INFRARED);
 
           // Read relative humidity
           float relativeHumidity = bme280.readHumidity();
@@ -174,8 +176,19 @@ void loop()
           client.print(",");
 
           client.print("\"illuminance\":");
-          client.print(illuminance);
-          client.println("}");
+          client.print("{");
+          client.print("\"visible\":");
+          client.print(illuminanceVisibleLight);
+          client.print(",");
+          client.print("\"full\":");
+          client.print(illuminanceFullSpectrum);
+          client.print(",");
+          client.print("\"ir\":");
+          client.print(illuminanceIRLight);
+          client.print("}");
+          client.print("}");
+
+          client.println();
           break;
         }
 
