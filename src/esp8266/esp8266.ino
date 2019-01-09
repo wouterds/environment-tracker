@@ -149,20 +149,31 @@ void loop()
           client.println("Content-Type: application/json");
           client.println("Connection: close");
           client.println();
-          client.print("{\"temperature\":");
+
+          client.print("{");
+          client.print("\"temperature\":");
           client.print(temperature);
-          client.print(",\"humidity\":");
+          client.print(",");
+
+          client.print("\"humidity\":");
           client.print("{");
           client.print("\"relative\":");
           client.print(relativeHumidity);
-          client.print(",\"absolute\":");
+          client.print(",");
+          client.print("\"absolute\":");
           client.print(absoluteHumidity);
           client.print("}");
-          client.print(",\"pressure\":");
+          client.print(",");
+
+          client.print("\"pressure\":");
           client.print(pressure);
-          client.print(",\"eco2\":");
+          client.print(",");
+
+          client.print("\"eco2\":");
           client.print(eco2);
-          client.print(",\"illuminance\":");
+          client.print(",");
+
+          client.print("\"illuminance\":");
           client.print(illuminance);
           client.println("}");
           break;
