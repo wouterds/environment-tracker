@@ -13,66 +13,6 @@ Adafruit_SGP30 sgp30;
 TSL2561 tsl2561(TSL2561_ADDR_FLOAT);
 WiFiServer server(80);
 
-void setupSerial(void)
-{
-  Serial.begin(9600);
-  Serial.println();
-}
-
-void setupI2C(void)
-{
-  Wire.begin(D2, D1);
-}
-
-void setupWifi(void)
-{
-  Serial.print("Connecting to: ");
-  Serial.println(ssid);
-
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.println();
-  Serial.print("Connected to wifi, ip: ");
-  Serial.println(WiFi.localIP());
-}
-
-void setupWebServer(void)
-{
-  server.begin();
-  Serial.println("Web server running!");
-}
-
-void setupSensors(void)
-{
-  if (!bme280.begin())
-  {
-    Serial.println("Could not find BME280 sensor, check wiring!");
-    while (1);
-  }
-
-  if (!sgp30.begin())
-  {
-    Serial.println("Could not find SGP30 sensor, check wiring!");
-    while (1);
-  }
-
-  if (!tsl2561.begin())
-  {
-    Serial.println("Could not find TSL2561 sensor, check wiring!");
-    while (1);
-  }
-}
-
-void setupLed()
-{
-  pinMode(LED_BUILTIN, OUTPUT);
-}
-
 /*
  * @param float temperature [°C]
  * @param float relativeHumidity [%RH]
@@ -90,12 +30,47 @@ int calculateAbsoluteHumidity(float temperature, float relativeHumidity) {
 
 void setup(void)
 {
-  setupSerial();
-  setupLed();
-  setupI2C();
-  setupWifi();
-  setupWebServer();
-  setupSensors();
+  Serial.begin(9600);
+  Serial.println();
+
+  Wire.begin(D2, D1);
+
+  Serial.print("Connecting to: ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println();
+  Serial.print("Connected to wifi, ip: ");
+  Serial.println(WiFi.localIP());
+
+  server.begin();
+  Serial.println("Web server running!");
+
+  if (!bme280.begin())
+  {
+    Serial.println("Could not find BME280 sensor, check wiring!");
+    while (1);
+  }
+
+  if (!sgp30.begin())
+  {
+    Serial.println("Could not find SGP30 sensor, check wiring!");
+    while (1);
+  }
+
+  if (!tsl2561.begin())
+  {
+    Serial.println("Could not find TSL2561 sensor, check wiring!");
+    while (1);
+  }
+
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
