@@ -1,12 +1,12 @@
-[submodule "src/esp8266/libs/adafruit-bme280"]
-	path = src/esp8266/libs/adafruit-bme280
+[submodule "src/arduino/libs/adafruit-bme280"]
+	path = src/arduino/libs/adafruit-bme280
 	url = https://github.com/adafruit/Adafruit_BME280_Library.git
-[submodule "src/esp8266/libs/adafruit-sensor"]
-	path = src/esp8266/libs/adafruit-sensor
+[submodule "src/arduino/libs/adafruit-sensor"]
+	path = src/arduino/libs/adafruit-sensor
 	url = https://github.com/adafruit/Adafruit_Sensor.git
-[submodule "src/esp8266/libs/adafruit-sgp30"]
-	path = src/esp8266/libs/adafruit-sgp30
+[submodule "src/arduino/libs/adafruit-sgp30"]
+	path = src/arduino/libs/adafruit-sgp30
 	url = https://github.com/adafruit/Adafruit_SGP30.git
-[submodule "src/esp8266/libs/adafruit-tsl2561"]
-	path = src/esp8266/libs/adafruit-tsl2561
+[submodule "src/arduino/libs/adafruit-tsl2561"]
+	path = src/arduino/libs/adafruit-tsl2561
 	url = https://github.com/adafruit/TSL2561-Arduino-Library.git
