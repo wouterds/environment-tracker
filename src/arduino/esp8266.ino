@@ -5,12 +5,16 @@
 #include <Adafruit_SGP30.h>
 #include <TSL2561.h>
 
+// Wifi credentials
 const char *ssid = "Wouter's Place";
 const char *password = "";
 
+// Initialize sensors
 Adafruit_BME280 bme280;
 Adafruit_SGP30 sgp30;
 TSL2561 tsl2561(TSL2561_ADDR_FLOAT);
+
+// Initialize server
 WiFiServer server(80);
 
 /*
@@ -31,7 +35,6 @@ int calculateAbsoluteHumidity(float temperature, float relativeHumidity) {
 void setup(void)
 {
   Serial.begin(9600);
-  Serial.println();
 
   Wire.begin(D2, D1);
 
@@ -79,11 +82,9 @@ void loop()
 
   if (client)
   {
-    // Led indicator
     digitalWrite(LED_BUILTIN, HIGH);
 
     boolean blankLine = true;
-
     while (client.connected())
     {
       if (client.available())
@@ -118,10 +119,10 @@ void loop()
           // Mesure air quality
           if (sgp30.IAQmeasure())
           {
+            // Read eCO2
             eco2 = sgp30.eCO2;
           }
 
-          // Print response
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: application/json");
           client.println("Connection: close");
@@ -181,7 +182,6 @@ void loop()
     delay(1);
     client.stop();
 
-    // Led indicator
     digitalWrite(LED_BUILTIN, LOW);
   }
 }
