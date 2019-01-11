@@ -14,4 +14,4 @@ COPY ./tslint.json /code/tslint.json
 # Workdir
 WORKDIR /code
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "http-app:watch"]
