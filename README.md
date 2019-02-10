@@ -37,3 +37,7 @@ Added the following to your VSCode workspace config;
   "tslint.autoFixOnSave": true,
 }
 ```
+
+## ESP8266 / Arduino code
+
+Initially that was inside this repo, but I moved it to a [separate repo](https://github.com/wouterds/esp8266-nodemcu-sensors). Read more about it [here](https://wouterdeschuyter.be/blog/sensor-readings-as-json-api-using-an-esp8266-nodemcu-dev-kit).
