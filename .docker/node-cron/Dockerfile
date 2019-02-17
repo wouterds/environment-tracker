@@ -11,8 +11,14 @@ COPY ./package.json /code/package.json
 COPY ./tsconfig.json /code/tsconfig.json
 COPY ./.docker/node-cron/crons ./crons
 
+# Add qemu bin
+COPY ./qemu-arm-static /usr/bin/qemu-arm-static
+
 # Enable crontab
 RUN crontab ./crons
+
+# Remove qemu bin
+RUN rm /usr/bin/qemu-arm-static
 
 # Start cron deamon in foreground as main process
 CMD ["crond", "-f"]
