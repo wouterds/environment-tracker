@@ -47,13 +47,11 @@ lint: dependencies
 	touch .build-nginx
 
 build: qemu-arm-static .build-node .build-node-cron .build-nginx
-
-tag: build
 	docker tag $(TAG_NGINX) $(TAG_NGINX):$(VERSION)
 	docker tag $(TAG_NODE) $(TAG_NODE):$(VERSION)
 	docker tag $(TAG_NODE_CRON) $(TAG_NODE_CRON):$(VERSION)
 
-push: tag
+push: build
 	docker push $(TAG_NGINX):$(VERSION)
 	docker push $(TAG_NODE):$(VERSION)
 	docker push $(TAG_NODE_CRON):$(VERSION)
