@@ -17,3 +17,12 @@ jobs:
       - run:
           name: Build
           command: make build
+      - run:
+          name: Tag & push images
+          command: |
+            if [ "$CIRCLE_BRANCH" == "master" ]; then
+              docker login $DOCKER_REGISTRY_HOST -u $DOCKER_REGISTRY_LOGIN -p $DOCKER_REGISTRY_PASSWORD
+              make push-latest
+            else
+              echo "Not master branch, skipping"
+            fi
