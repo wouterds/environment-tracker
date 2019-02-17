@@ -17,15 +17,15 @@ clean:
 	-rm -rf ./dist
 
 node_modules: package.json
-	docker run --rm -v $(PWD):/code -w /code node:9-alpine npm install
+	docker run --rm -v $(PWD):/code -w /code node:9 npm install
 
 dependencies: node_modules
 
 lint: dependencies
-	docker run --rm -v $(PWD):/code -w /code node:9-alpine npm run lint
+	docker run --rm -v $(PWD):/code -w /code node:9 npm run lint
 
 .build-app: dependencies
-	docker run --rm -v $(PWD):/code -w /code node:9-alpine npm run client:build
+	docker run --rm -v $(PWD):/code -w /code node:9 npm run client:build
 	touch .build-app
 
 .build-node: dependencies $(DOCKERFILE_NODE)
