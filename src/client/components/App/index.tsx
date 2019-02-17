@@ -18,7 +18,6 @@ interface Props {
     [Type.HUMIDITY]: Data;
     [Type.TEMPERATURE]: Data;
     [Type.PRESSURE]: Data;
-    [Type.ECO2]: Data;
   };
 }
 
@@ -39,17 +38,12 @@ class App extends React.Component<Props> {
     const { [Type.HUMIDITY]: humidity } = data;
     const { [Type.TEMPERATURE]: temperature } = data;
     const { [Type.PRESSURE]: pressure } = data;
-    const { [Type.ECO2]: eco2 } = data;
 
     return (
       <div className={styles.container}>
         <Sidebar isLoading={isLoading} />
 
         <div className={styles.content}>
-          <div className={styles.row}>
-            <Cell.Summary data={data} />
-            <Cell.Chart data={eco2} isLoading={isLoading} />
-          </div>
           <div className={styles.row}>
             <Cell.Chart data={temperature} isLoading={isLoading} />
             <Cell.Chart data={illuminance} isLoading={isLoading} />
