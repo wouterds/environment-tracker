@@ -5,18 +5,18 @@
   width: 100%;
 
   li {
-    color: #62718e;
+    color: #4b576d;
     padding: 10px;
     cursor: pointer;
     user-select: none;
     display: block;
 
     &:hover {
-      color: #8e9aaf;
+      color: #667084;
     }
 
     &.active {
-      color: #c3cfe5;
+      color: #a6b0c1;
       cursor: default;
     }
   }

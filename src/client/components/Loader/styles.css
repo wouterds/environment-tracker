@@ -5,7 +5,7 @@
   opacity: 0.25;
 
   & .circle {
-    stroke: #62718e;
+    stroke: #4b576d;
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
