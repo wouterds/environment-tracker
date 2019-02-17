@@ -13,7 +13,6 @@ DOCKERFILE_NODE_CRON = ./.docker/node-cron/Dockerfile
 
 clean:
 	-rm -rf ./node_modules
-	-rm -rf ./package-lock.json
 	-rm -rf ./.build-*
 	-rm -rf ./dist
 
