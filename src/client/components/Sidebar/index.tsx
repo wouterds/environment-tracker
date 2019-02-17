@@ -14,7 +14,7 @@ const Sidebar = (props: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <Icons.Logo color="#667084" />
+        <Icons.Logo color="#4b576d" />
         <div className={styles.logoText}>
           Raspberry Pi
           <br />
