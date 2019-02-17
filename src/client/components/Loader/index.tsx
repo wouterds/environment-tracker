@@ -13,16 +13,19 @@ const Loader = (props: Props) => {
   }
 
   return (
-    <svg className={styles.container} viewBox="0 0 50 50">
-      <circle
-        className={styles.circle}
-        cx="25"
-        cy="25"
-        r="20"
-        fill="none"
-        strokeWidth="5"
-      />
-    </svg>
+    <div className={styles.container}>
+      <svg viewBox="0 0 50 50" className={styles.indicator}>
+        <circle
+          className={styles.circle}
+          cx="25"
+          cy="25"
+          r="20"
+          fill="none"
+          strokeWidth="5"
+        />
+      </svg>
+      <span className={styles.text}>Loading..</span>
+    </div>
   );
 };
 
