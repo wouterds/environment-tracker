@@ -1,14 +1,12 @@
 all: tag
 
-DOCKER_REPO = docker.wouterdeschuyter.be
-
 PWD = $(shell pwd)
 VERSION = $(shell cat package.json | grep "\"version\"" | sed -e 's/^.*: "\(.*\)".*/\1/')
 PROJECT = $(shell cat package.json | grep "\"name\"" | sed -e 's/^.*: "\(.*\)".*/\1/')
 
-TAG_NGINX = $(DOCKER_REPO)/$(PROJECT)-nginx
-TAG_NODE = $(DOCKER_REPO)/$(PROJECT)-node
-TAG_NODE_CRON = $(DOCKER_REPO)/$(PROJECT)-node-cron
+TAG_NGINX = $(DOCKER_REGISTRY_HOST)/$(PROJECT)-nginx
+TAG_NODE = $(DOCKER_REGISTRY_HOST)/$(PROJECT)-node
+TAG_NODE_CRON = $(DOCKER_REGISTRY_HOST)/$(PROJECT)-node-cron
 DOCKERFILE_NGINX = ./.docker/nginx/Dockerfile
 DOCKERFILE_NODE = ./.docker/node/Dockerfile
 DOCKERFILE_NODE_CRON = ./.docker/node-cron/Dockerfile
