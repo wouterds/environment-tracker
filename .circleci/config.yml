@@ -14,3 +14,6 @@ jobs:
       - run:
           name: Linting
           command: make lint
+      - run:
+          name: Build
+          command: make build
