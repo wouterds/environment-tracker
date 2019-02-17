@@ -57,16 +57,13 @@ class Chart extends React.Component<Props> {
             margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
             syncId={syncId}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(200, 200, 255, 0.2)"
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="#414c63" />
             <YAxis
               yAxisId={identifier}
               scale={scale || 'auto'}
               domain={['auto', 'auto']}
               unit={unit}
-              stroke="#4c506b"
+              stroke="#414c63"
             />
             <Area
               type="monotone"
@@ -82,7 +79,7 @@ class Chart extends React.Component<Props> {
               dataKey="date"
               name={name}
               padding={{ left: 0, right: 0 }}
-              stroke="#4c506b"
+              stroke="#414c63"
               tickFormatter={time => format(time, 'HH:mm a')}
             />
             {!isLoading && (
