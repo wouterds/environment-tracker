@@ -19,7 +19,15 @@ const Navigation = (props: Props) => {
           className={(item === timeframe && styles.active) || null}
           onClick={() => setTimeframe(item)}
         >
-          {item}H
+          {item === 6 && '6 hours'}
+          {item === 12 && '12 hours'}
+          {item === 24 && '24 hours'}
+          {item === 48 && '2 days'}
+          {item === 72 && '3 days'}
+          {item === 168 && '1 week'}
+          {item === 336 && '2 weeks'}
+          {item === 672 && '1 month'}
+          {item === 1344 && '2 months'}
         </li>
       ))}
     </ul>

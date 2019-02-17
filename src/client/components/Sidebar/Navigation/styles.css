@@ -1,23 +1,22 @@
 .container {
-  border: 1px solid #1f293d;
-  border-radius: 3px;
   font-size: 0.6em;
   font-weight: 600;
+  text-transform: uppercase;
+  width: 100%;
 
   li {
-    color: #263044;
-    padding: 6px 4px;
+    color: #62718e;
+    padding: 10px;
     cursor: pointer;
-    text-align: center;
     user-select: none;
+    display: block;
 
     &:hover {
-      color: #414c63;
+      color: #8e9aaf;
     }
 
     &.active {
-      background: #1f293d;
-      color: #62718e;
+      color: #c3cfe5;
       cursor: default;
     }
   }
