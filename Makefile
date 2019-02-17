@@ -53,12 +53,10 @@ build: qemu-arm-static .build-node .build-node-cron .build-nginx
 
 push: build
 	docker push $(TAG_NGINX):$(VERSION)
-	docker push $(TAG_NODE):$(VERSION)
-	docker push $(TAG_NODE_CRON):$(VERSION)
-
-push-latest: push
 	docker push $(TAG_NGINX):latest
+	docker push $(TAG_NODE):$(VERSION)
 	docker push $(TAG_NODE):latest
+	docker push $(TAG_NODE_CRON):$(VERSION)
 	docker push $(TAG_NODE_CRON):latest
 
 deploy:
