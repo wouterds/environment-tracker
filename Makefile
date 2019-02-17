@@ -57,3 +57,11 @@ push-latest: push
 	docker push $(TAG_NGINX):latest
 	docker push $(TAG_NODE):latest
 	docker push $(TAG_NODE_CRON):latest
+
+deploy:
+	ssh ${DEPLOY_USER}@${DEPLOY_SERVER} "mkdir -p ${DEPLOY_LOCATION}"
+
+	scp ./.docker/docker-compose.yml ${DEPLOY_USER}@${DEPLOY_SERVER}:${DEPLOY_LOCATION}/docker-compose.yml
+
+	ssh ${DEPLOY_USER}@${DEPLOY_SERVER} "cd ${DEPLOY_LOCATION}; docker-compose pull"
+	ssh ${DEPLOY_USER}@${DEPLOY_SERVER} "cd ${DEPLOY_LOCATION}; docker-compose up -d"
