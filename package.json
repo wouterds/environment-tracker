@@ -9,7 +9,7 @@
     "http-app:watch": "./node_modules/.bin/nodemon",
     "client:dev": "webpack-dev-server --mode development --inline --hot --open",
     "client:build": "webpack --mode production",
-    "sync:db": "./node_modules/.bin/ts-node ./src/server/cripts/sync-models-database.ts",
+    "sync:db": "./node_modules/.bin/ts-node ./src/server/scripts/sync-models-database.ts",
     "take-sample": "./node_modules/.bin/ts-node ./src/server/scripts/take-sample.ts",
     "lint": "./node_modules/.bin/tslint --format stylish 'src/**/*.ts' 'src/**/*.tsx'",
     "lint:fix": "./node_modules/.bin/tslint --format stylish --fix 'src/**/*.ts' 'src/**/*.tsx'"
