@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Icons from '../Icons';
 import Loader from '../Loader';
 import Navigation from './Navigation';
 import styles from './styles.css';
@@ -12,6 +13,14 @@ const Sidebar = (props: Props) => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.logo}>
+        <Icons.Logo color="#667084" />
+        <div className={styles.logoText}>
+          Raspberry Pi
+          <br />
+          Env Tracker
+        </div>
+      </div>
       <div className={styles.navigation}>
         <Navigation />
       </div>
