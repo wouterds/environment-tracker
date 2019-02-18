@@ -28,6 +28,7 @@ jobs:
             fi
       - run:
           name: Deploy
+          no_output_timeout: 30m
           command: |
             if [ "$CIRCLE_BRANCH" == "master" ]; then
               make deploy
