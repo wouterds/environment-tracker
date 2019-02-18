@@ -12,7 +12,11 @@ interface ApiResponse {
   temperature: number;
   humidity: number;
   pressure: number;
-  illuminance: number;
+  illuminance: {
+    visible: number;
+    full: number;
+    ir: number;
+  };
 }
 
 (async () => {
@@ -50,9 +54,20 @@ interface ApiResponse {
         const averagePressure = meanBy(samples, 'pressure');
         await SampleRepository.add(sensor.id, averagePressure);
         break;
-      case Type.ILLUMINANCE:
-        const averageIlluminance = meanBy(samples, 'illuminance');
-        await SampleRepository.add(sensor.id, averageIlluminance);
+      case Type.ILLUMINANCE_IR:
+        const averageIlluminanceIr = meanBy(samples, 'illuminance.ir');
+        await SampleRepository.add(sensor.id, averageIlluminanceIr);
+        break;
+      case Type.ILLUMINANCE_VISIBLE:
+        const averageIlluminanceVisible = meanBy(
+          samples,
+          'illuminance.visible',
+        );
+        await SampleRepository.add(sensor.id, averageIlluminanceVisible);
+        break;
+      case Type.ILLUMINANCE_FULL:
+        const averageIlluminanceFull = meanBy(samples, 'illuminance.full');
+        await SampleRepository.add(sensor.id, averageIlluminanceFull);
         break;
     }
   }
