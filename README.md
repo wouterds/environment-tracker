@@ -6,7 +6,7 @@
 ![CircleCI](https://circleci.com/gh/wouterds/tracker.wouterdeschuyter.be.svg?style=shield)
 ![Dependencies](https://img.shields.io/david/wouterds/tracker.wouterdeschuyter.be.svg)
 
-![Screenshot](resources/images/screenshot.jpg?raw=true)
+![Screenshot](https://i.imgur.com/5Ctp9Ut.jpg)
 
 ## Setup
 
