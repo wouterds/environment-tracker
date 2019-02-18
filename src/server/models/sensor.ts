@@ -27,7 +27,7 @@ export default db.define<Definition, Partial<Definition>>(
       defaultValue: sequelize.UUIDV4,
     },
     description: { type: sequelize.STRING(64), allowNull: false },
-    type: { type: sequelize.STRING(16), allowNull: false },
+    type: { type: sequelize.STRING(32), allowNull: false },
     unit: { type: sequelize.STRING(4), allowNull: false },
   },
   {
