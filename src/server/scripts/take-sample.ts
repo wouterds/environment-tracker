@@ -25,7 +25,7 @@ interface ApiResponse {
   const samples: ApiResponse[] = [];
   while (isFuture(endTime)) {
     try {
-      const response = await axios.get('http://esp8266');
+      const response = await axios.get('http://esp8266-sensors');
 
       if (response.status !== 200) {
         continue;
