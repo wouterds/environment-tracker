@@ -1,11 +1,7 @@
-export enum Name {
-  BME280 = 'BME280',
-  SGP30 = 'SGP30',
-  BH1750 = 'BH1750',
-}
-
 export enum Type {
-  ILLUMINANCE = 'ILLUMINANCE',
+  ILLUMINANCE_FULL = 'ILLUMINANCE_FULL',
+  ILLUMINANCE_IR = 'ILLUMINANCE_IR',
+  ILLUMINANCE_VISIBLE = 'ILLUMINANCE_VISIBLE',
   HUMIDITY = 'HUMIDITY',
   PRESSURE = 'PRESSURE',
   TEMPERATURE = 'TEMPERATURE',
@@ -14,7 +10,6 @@ export enum Type {
 export interface Sensor {
   id: string;
   description: string;
-  sensor: Name;
   type: Type;
   unit: string;
 }

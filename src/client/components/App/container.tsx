@@ -24,7 +24,9 @@ const wrapApp = (WrappedComponent: any) => {
     public render() {
       const { sensors, samples, isLoading } = this.props;
 
-      const illuminanceSensor = find(sensors, { type: Type.ILLUMINANCE });
+      const illuminanceSensor = find(sensors, {
+        type: Type.ILLUMINANCE_VISIBLE,
+      });
       const humiditySensor = find(sensors, { type: Type.HUMIDITY });
       const temperatureSensor = find(sensors, { type: Type.TEMPERATURE });
       const pressureSensor = find(sensors, { type: Type.PRESSURE });
@@ -32,7 +34,7 @@ const wrapApp = (WrappedComponent: any) => {
       const props = {
         isLoading,
         data: {
-          [Type.ILLUMINANCE]: {
+          [Type.ILLUMINANCE_VISIBLE]: {
             sensor: illuminanceSensor,
             samples:
               (illuminanceSensor

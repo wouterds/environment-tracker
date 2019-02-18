@@ -17,8 +17,8 @@ interface Props {
 
 const title = (type: Type): string => {
   switch (type) {
-    case Type.ILLUMINANCE:
-      return 'Illuminance';
+    case Type.ILLUMINANCE_VISIBLE:
+      return 'Illuminance (visible spectrum)';
     case Type.PRESSURE:
       return 'Pressure';
     case Type.TEMPERATURE:
@@ -32,7 +32,7 @@ const title = (type: Type): string => {
 
 const color = (type: Type): string => {
   switch (type) {
-    case Type.ILLUMINANCE:
+    case Type.ILLUMINANCE_VISIBLE:
       return '255, 234, 167';
     case Type.PRESSURE:
       return '181, 175, 255';
@@ -47,7 +47,7 @@ const color = (type: Type): string => {
 
 const scale = (type: Type): Scale => {
   switch (type) {
-    case Type.ILLUMINANCE:
+    case Type.ILLUMINANCE_VISIBLE:
       return Scale.LOG;
   }
 

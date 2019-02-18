@@ -13,7 +13,7 @@ interface Data {
 
 interface Props {
   data: {
-    [Type.ILLUMINANCE]: Data;
+    [Type.ILLUMINANCE_VISIBLE]: Data;
     [Type.HUMIDITY]: Data;
     [Type.TEMPERATURE]: Data;
     [Type.PRESSURE]: Data;
@@ -22,8 +22,8 @@ interface Props {
 
 const title = (type: Type): string => {
   switch (type) {
-    case Type.ILLUMINANCE:
-      return 'Illuminance';
+    case Type.ILLUMINANCE_VISIBLE:
+      return 'Illuminance (visible spectrum)';
     case Type.PRESSURE:
       return 'Pressure';
     case Type.TEMPERATURE:
@@ -56,7 +56,7 @@ const getSummary = (
 
 const SummnaryCell = (props: Props) => {
   const { data } = props;
-  const { [Type.ILLUMINANCE]: illuminance } = data;
+  const { [Type.ILLUMINANCE_VISIBLE]: illuminance } = data;
   const { [Type.HUMIDITY]: humidity } = data;
   const { [Type.TEMPERATURE]: temperature } = data;
   const { [Type.PRESSURE]: pressure } = data;

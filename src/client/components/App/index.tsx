@@ -14,7 +14,7 @@ interface Data {
 interface Props {
   isLoading: boolean;
   data: {
-    [Type.ILLUMINANCE]: Data;
+    [Type.ILLUMINANCE_VISIBLE]: Data;
     [Type.HUMIDITY]: Data;
     [Type.TEMPERATURE]: Data;
     [Type.PRESSURE]: Data;
@@ -34,7 +34,7 @@ class App extends React.Component<Props> {
 
   public render() {
     const { data, isLoading } = this.props;
-    const { [Type.ILLUMINANCE]: illuminance } = data;
+    const { [Type.ILLUMINANCE_VISIBLE]: illuminance } = data;
     const { [Type.HUMIDITY]: humidity } = data;
     const { [Type.TEMPERATURE]: temperature } = data;
     const { [Type.PRESSURE]: pressure } = data;
