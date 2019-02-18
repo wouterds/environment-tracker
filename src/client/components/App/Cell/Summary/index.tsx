@@ -17,14 +17,11 @@ interface Props {
     [Type.HUMIDITY]: Data;
     [Type.TEMPERATURE]: Data;
     [Type.PRESSURE]: Data;
-    [Type.ECO2]: Data;
   };
 }
 
 const title = (type: Type): string => {
   switch (type) {
-    case Type.ECO2:
-      return 'eCO2';
     case Type.ILLUMINANCE:
       return 'Illuminance';
     case Type.PRESSURE:
@@ -63,7 +60,6 @@ const SummnaryCell = (props: Props) => {
   const { [Type.HUMIDITY]: humidity } = data;
   const { [Type.TEMPERATURE]: temperature } = data;
   const { [Type.PRESSURE]: pressure } = data;
-  const { [Type.ECO2]: eco2 } = data;
 
   const summaryIlluminance =
     (illuminance && getSummary(illuminance.samples)) || null;
@@ -71,7 +67,6 @@ const SummnaryCell = (props: Props) => {
   const summaryTemperature =
     (temperature && getSummary(temperature.samples)) || null;
   const summaryPressure = (pressure && getSummary(pressure.samples)) || null;
-  const summaryECO2 = (pressure && getSummary(eco2.samples)) || null;
 
   return (
     <Cell title="Summary" containerStyles={styles.container}>
@@ -88,10 +83,6 @@ const SummnaryCell = (props: Props) => {
             <th>
               {humidity.sensor &&
                 `${title(humidity.sensor.type)} (${humidity.sensor.unit})`}
-            </th>
-            <th>
-              {eco2.sensor &&
-                `${title(eco2.sensor.type)} (${eco2.sensor.unit})`}
             </th>
             <th>
               {illuminance.sensor &&
@@ -113,9 +104,6 @@ const SummnaryCell = (props: Props) => {
               <HighlightedNumber value={summaryHumidity.current} />
             </td>
             <td>
-              <HighlightedNumber value={summaryECO2.current} />
-            </td>
-            <td>
               <HighlightedNumber value={summaryIlluminance.current} />
             </td>
             <td>
@@ -129,9 +117,6 @@ const SummnaryCell = (props: Props) => {
             </td>
             <td>
               <HighlightedNumber value={summaryHumidity.min} />
-            </td>
-            <td>
-              <HighlightedNumber value={summaryECO2.min} />
             </td>
             <td>
               <HighlightedNumber value={summaryIlluminance.min} />
@@ -149,9 +134,6 @@ const SummnaryCell = (props: Props) => {
               <HighlightedNumber value={summaryHumidity.max} />
             </td>
             <td>
-              <HighlightedNumber value={summaryECO2.max} />
-            </td>
-            <td>
               <HighlightedNumber value={summaryIlluminance.max} />
             </td>
             <td>
@@ -165,9 +147,6 @@ const SummnaryCell = (props: Props) => {
             </td>
             <td>
               <HighlightedNumber value={summaryHumidity.diff} />
-            </td>
-            <td>
-              <HighlightedNumber value={summaryECO2.diff} />
             </td>
             <td>
               <HighlightedNumber value={summaryIlluminance.diff} />

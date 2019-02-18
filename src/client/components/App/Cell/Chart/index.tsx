@@ -17,8 +17,6 @@ interface Props {
 
 const title = (type: Type): string => {
   switch (type) {
-    case Type.ECO2:
-      return 'eCO2';
     case Type.ILLUMINANCE:
       return 'Illuminance';
     case Type.PRESSURE:
@@ -34,8 +32,6 @@ const title = (type: Type): string => {
 
 const color = (type: Type): string => {
   switch (type) {
-    case Type.ECO2:
-      return '129, 236, 236';
     case Type.ILLUMINANCE:
       return '255, 234, 167';
     case Type.PRESSURE:

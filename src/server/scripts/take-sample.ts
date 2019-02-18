@@ -12,7 +12,6 @@ interface ApiResponse {
   temperature: number;
   humidity: number;
   pressure: number;
-  eco2: number;
   illuminance: number;
 }
 
@@ -50,10 +49,6 @@ interface ApiResponse {
       case Type.PRESSURE:
         const averagePressure = meanBy(samples, 'pressure');
         await SampleRepository.add(sensor.id, averagePressure);
-        break;
-      case Type.ECO2:
-        const averageEco2 = meanBy(samples, 'eco2');
-        await SampleRepository.add(sensor.id, averageEco2);
         break;
       case Type.ILLUMINANCE:
         const averageIlluminance = meanBy(samples, 'illuminance');

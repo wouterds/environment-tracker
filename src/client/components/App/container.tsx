@@ -28,7 +28,6 @@ const wrapApp = (WrappedComponent: any) => {
       const humiditySensor = find(sensors, { type: Type.HUMIDITY });
       const temperatureSensor = find(sensors, { type: Type.TEMPERATURE });
       const pressureSensor = find(sensors, { type: Type.PRESSURE });
-      const eco2Sensor = find(sensors, { type: Type.ECO2 });
 
       const props = {
         isLoading,
@@ -59,13 +58,6 @@ const wrapApp = (WrappedComponent: any) => {
             samples:
               (pressureSensor
                 ? filter(samples, { sensorId: pressureSensor.id })
-                : []) || [],
-          },
-          [Type.ECO2]: {
-            sensor: eco2Sensor,
-            samples:
-              (eco2Sensor
-                ? filter(samples, { sensorId: eco2Sensor.id })
                 : []) || [],
           },
         },
