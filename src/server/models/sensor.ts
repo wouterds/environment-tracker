@@ -2,7 +2,9 @@ import * as sequelize from 'sequelize';
 import db from '../services/database';
 
 export enum Type {
-  ILLUMINANCE = 'ILLUMINANCE',
+  ILLUMINANCE_FULL = 'ILLUMINANCE_FULL',
+  ILLUMINANCE_IR = 'ILLUMINANCE_IR',
+  ILLUMINANCE_VISIBLE = 'ILLUMINANCE_VISIBLE',
   HUMIDITY = 'HUMIDITY',
   PRESSURE = 'PRESSURE',
   TEMPERATURE = 'TEMPERATURE',
