@@ -19,7 +19,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "styled-components": "^4.3.2",
-    "styled-components-breakpoint": "^2.1.1"
+    "styled-components-breakpoint": "^2.1.1",
+    "tsconfig-paths": "^3.8.0"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
