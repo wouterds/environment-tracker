@@ -15,14 +15,15 @@ const Layout = (props: Props) => {
       <Head>
         <title>Hello World</title>
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+        />
         <meta key="robots" name="robots" content="index, follow" />
       </Head>
 
       <ThemeProvider theme={theme}>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </ThemeProvider>
     </>
   );
