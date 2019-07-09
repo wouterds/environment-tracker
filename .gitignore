@@ -1,6 +1,0 @@
-.env
-.build-*
-.vscode/
-node_modules/
-dist/
-data/
