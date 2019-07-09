@@ -1,4 +1,5 @@
 .vscode/
 .env
+.build-*
 node_modules/
 dist/
