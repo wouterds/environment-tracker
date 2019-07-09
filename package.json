@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "NODE_ENV=production next start",
     "dev": "next ./src",
     "build": "NODE_ENV=production next build ./src",
     "lint": "npm run tslint && npm run stylelint",
