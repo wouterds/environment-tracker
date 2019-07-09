@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "@resources/*": ["./resources/*"],
-      "*": ["./src/*"],
+      "*": ["./src/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -12,7 +12,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext",
+      "esnext"
     ],
     "module": "esnext",
     "moduleResolution": "node",
@@ -38,10 +38,10 @@
   },
   "exclude": [
     "dist",
-    "node_modules",
+    "node_modules"
   ],
   "include": [
     "./src/**/*.ts",
-    "./src/**/*.tsx",
-  ],
+    "./src/**/*.tsx"
+  ]
 }
