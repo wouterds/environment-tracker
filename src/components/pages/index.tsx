@@ -1,3 +1,7 @@
+import Layout from '../Layout';
+
 export default () => (
-  <h1>Hello World</h1>
+  <Layout>
+    <h1>Hello World</h1>
+  </Layout>
 );
