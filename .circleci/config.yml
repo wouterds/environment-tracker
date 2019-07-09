@@ -10,11 +10,11 @@ jobs:
           - dependencies-{{ checksum "package.json" }}
       - run:
           name: Dependencies
-          command: npm i
+          command: make node_modules
       - save_cache:
           paths:
           - ./node_modules
           key: dependencies-{{ checksum "package.json" }}
       - run:
           name: Linting
-          command: npm run lint
+          command: make lint
