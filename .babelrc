@@ -2,5 +2,15 @@
   "presets": [
     "next/babel",
     "@zeit/next-typescript/babel",
-  ]
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "@resources": "./resources",
+        "components": "./src/components",
+        "styles": "./src/styles"
+      },
+    }],
+  ],
 }
