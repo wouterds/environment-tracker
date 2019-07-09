@@ -36,3 +36,13 @@ lint: node_modules
 build: .build-node .build-nginx
 	docker tag $(TAG_NODE) $(TAG_NODE):$(VERSION)
 	docker tag $(TAG_NGINX) $(TAG_NGINX):$(VERSION)
+
+push: build
+	docker push $(TAG_NGINX)
+	docker push $(TAG_NGINX):$(VERSION)
+	docker push $(TAG_NODE)
+	docker push $(TAG_NODE):$(VERSION)
+
+deploy:
+	ssh ${DEPLOY_USER}@${DEPLOY_SERVER} "cd ${DEPLOY_LOCATION}${ENV_SUFFIX}; docker-compose pull"
+	ssh ${DEPLOY_USER}@${DEPLOY_SERVER} "cd ${DEPLOY_LOCATION}${ENV_SUFFIX}; docker-compose up -d"

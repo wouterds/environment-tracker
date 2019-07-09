@@ -21,3 +21,16 @@ jobs:
       - run:
           name: Build
           command: make build
+      - run:
+          name: Upload images
+          command: |
+            if [ "$CIRCLE_BRANCH" == "master" ]; then
+              docker login $DOCKER_REGISTRY_HOST -u $DOCKER_REGISTRY_LOGIN -p $DOCKER_REGISTRY_PASSWORD
+              make push
+            fi
+      - run:
+          name: Deploy
+          command: |
+            if [ "$CIRCLE_BRANCH" == "master" ]; then
+               make deploy
+            fi
