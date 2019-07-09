@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next ./src"
+    "dev": "next ./src",
+    "stylelint": "stylelint './src/**/*.ts'",
+    "stylelint:fix": "stylelint --fix './src/**/*.ts'"
   },
   "dependencies": {
     "next": "^8.1.0",
