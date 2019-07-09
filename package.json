@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next ./src",
+    "tslint": "tslint --format stylish './src/**/*.ts' './src/**/*.tsx'",
+    "tslint:fix": "tslint --format stylish --fix './src/**/*.ts' './src/**/*.tsx'",
     "stylelint": "stylelint './src/**/*.ts'",
     "stylelint:fix": "stylelint --fix './src/**/*.ts'"
   },
