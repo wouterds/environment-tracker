@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  nginx:
+    image: docker.wouterdeschuyter.be/environment-tracker-nginx
+    restart: unless-stopped
+    mem_limit: 8m
+    environment:
+      - VIRTUAL_HOST=tracker.wouterdeschuyter.be
+      - LETSENCRYPT_HOST=tracker.wouterdeschuyter.be
+      - LETSENCRYPT_EMAIL=wouter.de.schuyter@gmail.com
+    networks:
+      - default
+      - webproxy
+
+  node:
+    image: docker.wouterdeschuyter.be/environment-tracker-node
+    restart: unless-stopped
+    mem_limit: 128m
+    env_file: .env
+
+networks:
+  webproxy:
+    external: true
