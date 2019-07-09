@@ -7,7 +7,8 @@
     "sourceMap": false,
     "noEmit": false,
     "listEmittedFiles": true,
-    "outDir": "./dist/server"
+    "outDir": "./dist/server",
+    "alwaysStrict": false
   },
   "include": [],
   "files": [
