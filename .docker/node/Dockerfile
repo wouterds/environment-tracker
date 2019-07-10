@@ -16,8 +16,10 @@ FROM arm32v6/node:12-alpine
 WORKDIR /code
 
 COPY --from=0 /code /code
+COPY ./qemu-arm-static /usr/bin/qemu-arm-static
 
 RUN crontab ./crons
+RUN rm /usr/bin/qemu-arm-static
 
 ARG VERSION
 ENV VERSION=$VERSION
