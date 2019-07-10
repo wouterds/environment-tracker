@@ -14,6 +14,7 @@ clean:
 	-rm -rf node_modules
 	-rm -rf dist
 	-rm -rf .build-*
+	-rm -rf .env
 
 node_modules: package.json
 	docker run --rm -v $(PWD):/code -w /code node:10-slim npm install
