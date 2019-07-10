@@ -3,6 +3,7 @@ FROM arm32v6/node:10-alpine
 WORKDIR /code
 
 COPY ./package*.json ./
+COPY ./qemu-arm-static /usr/bin/qemu-arm-static
 RUN npm install --only=production
 
 COPY ./dist/server/ ./
