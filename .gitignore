@@ -4,3 +4,4 @@
 .docker/data
 dist/
 node_modules/
+qemu-arm-static
