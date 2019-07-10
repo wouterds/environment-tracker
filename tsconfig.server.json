@@ -13,6 +13,7 @@
   "include": [],
   "files": [
     "./src/bootstrap.ts",
-    "./src/server/index.ts"
+    "./src/server/index.ts",
+    "./src/scripts/store-sample.ts"
   ]
 }
