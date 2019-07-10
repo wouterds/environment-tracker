@@ -18,7 +18,12 @@ services:
     restart: unless-stopped
     mem_limit: 128m
     env_file: .env
+    networks:
+      - default
+      - mariadb
 
 networks:
   webproxy:
+    external: true
+  mariadb:
     external: true
