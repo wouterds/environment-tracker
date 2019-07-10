@@ -8,11 +8,10 @@
       "root": ["./src"],
       "alias": {
         "@resources": "./resources",
-        "components": "./src/components",
-        "models": "./src/models",
-        "repositories": "./src/repositories",
-        "services": "./src/services",
-        "styles": "./src/styles"
+        "components": "./src/application/client/components",
+        "application": "./src/application",
+        "domain": "./src/domain",
+        "infrastructure": "./src/infrastructure",
       },
     }],
   ],

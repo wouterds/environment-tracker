@@ -1,12 +1,6 @@
+import { Sensor } from 'domain/measurements/measurement';
+import sequelize from 'infrastructure/database/service';
 import { DataTypes, Model } from 'sequelize';
-import sequelize from 'services/database';
-
-export interface Definition {
-  id: string;
-  sensor: string;
-  value: number;
-  createdAt: Date;
-}
 
 class Measurement extends Model {}
 Measurement.init(
@@ -18,14 +12,7 @@ Measurement.init(
     },
     sensor: {
       type: DataTypes.ENUM,
-      values: [
-        'illuminance:full',
-        'illuminance:visible',
-        'illuminance:ir',
-        'temperature',
-        'humidity',
-        'pressure',
-      ],
+      values: Object.values(Sensor),
     },
     value: { type: DataTypes.FLOAT(8, 2), allowNull: false },
   },

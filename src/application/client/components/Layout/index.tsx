@@ -1,7 +1,7 @@
+import { theme } from 'application/client/styles';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { theme } from 'styles';
 
 interface Props {
   children: ReactNode;
