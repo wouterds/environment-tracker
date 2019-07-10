@@ -17,6 +17,7 @@
     "stylelint:fix": "stylelint --fix './src/**/*.ts'"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "mariadb": "^2.0.5",
