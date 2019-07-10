@@ -5,7 +5,6 @@
   "scripts": {
     "start": "NODE_ENV=production node -r ./src/bootstrap ./src/server",
     "dev": "next ./src",
-    "sync:models": "ts-node -r ./src/bootstrap ./src/scripts/sync-models",
     "build": "npm run build:app && npm run build:server",
     "build:app": "NODE_ENV=production next build ./src",
     "build:server": "NODE_ENV=production tsc -p ./tsconfig.server.json",
@@ -14,7 +13,8 @@
     "tslint": "tslint --format stylish './src/**/*.ts' './src/**/*.tsx'",
     "tslint:fix": "tslint --format stylish --fix './src/**/*.ts' './src/**/*.tsx'",
     "stylelint": "stylelint './src/**/*.ts'",
-    "stylelint:fix": "stylelint --fix './src/**/*.ts'"
+    "stylelint:fix": "stylelint --fix './src/**/*.ts'",
+    "sync:models": "ts-node -r ./src/bootstrap ./src/scripts/sync-models"
   },
   "dependencies": {
     "axios": "^0.19.0",
