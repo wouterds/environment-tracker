@@ -10,6 +10,7 @@
         "@resources": "./resources",
         "components": "./src/components",
         "models": "./src/models",
+        "repositories": "./src/repositories",
         "services": "./src/services",
         "styles": "./src/styles"
       },
