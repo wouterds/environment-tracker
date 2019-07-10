@@ -2,7 +2,7 @@ import Measurrement, { Definition } from 'models/measurement';
 
 const add = async (data: {
   sensor: string;
-  value: string;
+  value: number;
 }): Promise<Definition> => {
   const measurement = await Measurrement.create(data);
 
