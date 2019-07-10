@@ -23,13 +23,13 @@ qemu-arm-static:
 	chmod +x qemu-arm-static
 
 node_modules: package.json
-	docker run --rm -v $(PWD):/code -w /code node:10-slim npm install
+	docker run --rm -v $(PWD):/code -w /code node:12-slim npm install
 
 lint: node_modules
-	docker run --rm -v $(PWD):/code -w /code node:10-slim npm run lint
+	docker run --rm -v $(PWD):/code -w /code node:12-slim npm run lint
 
 .build-app: node_modules
-	docker run --rm -v $(PWD):/code -w /code --env=VERSION=$(VERSION) node:10-slim npm run build
+	docker run --rm -v $(PWD):/code -w /code --env=VERSION=$(VERSION) node:12-slim npm run build
 	touch .build-app
 
 .build-nginx: $(DOCKERFILE_NGINX)
