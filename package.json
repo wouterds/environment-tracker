@@ -15,7 +15,8 @@
     "stylelint": "stylelint './src/**/*.ts'",
     "stylelint:fix": "stylelint --fix './src/**/*.ts'",
     "sync:models": "ts-node -r ./src/bootstrap ./src/scripts/sync-models",
-    "store:sample": "ts-node -r ./src/bootstrap ./src/scripts/store-sample"
+    "store:sample": "node -r ./src/bootstrap ./src/scripts/store-sample",
+    "store:sample:dev": "ts-node -r ./src/bootstrap ./src/scripts/store-sample"
   },
   "dependencies": {
     "axios": "^0.19.0",
