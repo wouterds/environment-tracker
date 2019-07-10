@@ -1,9 +1,8 @@
 // tslint:disable-next-line
 require('dotenv').config();
-import MeasurementRepository from 'application/measurements/repository';
 import axios from 'axios';
-import { Sensor } from 'domain/measurements/measurement';
 import { config } from 'dotenv';
+import MeasurementRepository from '../repositories/measurement';
 
 config();
 
@@ -31,32 +30,32 @@ config();
   };
 
   await MeasurementRepository.add({
-    sensor: Sensor.ILLUMINANCE_FULL,
+    sensor: 'illuminance:full',
     value: data.illuminance.full,
   });
 
   await MeasurementRepository.add({
-    sensor: Sensor.ILLUMINANCE_VISIBLE,
+    sensor: 'illuminance:visible',
     value: data.illuminance.visible,
   });
 
   await MeasurementRepository.add({
-    sensor: Sensor.ILLUMINANCE_IR,
+    sensor: 'illuminance:ir',
     value: data.illuminance.ir,
   });
 
   await MeasurementRepository.add({
-    sensor: Sensor.TEMPERATURE,
+    sensor: 'temperature',
     value: data.temperature,
   });
 
   await MeasurementRepository.add({
-    sensor: Sensor.HUMIDITY,
+    sensor: 'humidity',
     value: data.humidity,
   });
 
   await MeasurementRepository.add({
-    sensor: Sensor.PRESSURE,
+    sensor: 'pressure',
     value: data.pressure,
   });
 

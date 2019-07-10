@@ -3,8 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "@resources/*": ["./resources/*"],
-      "*": ["./src/*"],
-      "components/*": ["./src/application/client/components/*"]
+      "*": ["./src/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

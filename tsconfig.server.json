@@ -12,8 +12,8 @@
   },
   "include": [],
   "files": [
-    "./src/infrastructure/bootstrap.ts",
-    "./src/application/http/index.ts",
-    "./src/application/measurements/store-sample.ts"
+    "./src/bootstrap.ts",
+    "./src/server/index.ts",
+    "./src/scripts/store-sample.ts"
   ]
 }
