@@ -1,4 +1,4 @@
-FROM node:10-slim
+FROM arm32v6/node:10-alpine
 
 WORKDIR /code
 
@@ -10,7 +10,7 @@ COPY ./dist/app ./.next
 COPY ./.docker/node/crons ./crons
 COPY ./.docker/node/entrypoint.sh ./entrypoint.sh
 
-FROM node:10-alpine
+FROM arm32v6/node:10-alpine
 
 WORKDIR /code
 
