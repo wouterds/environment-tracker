@@ -1,10 +1,10 @@
-import Measurrement, { Definition } from 'models/measurement';
+import Measurement, { Definition } from 'models/measurement';
 
 const add = async (data: {
   sensor: string;
   value: number;
 }): Promise<Definition> => {
-  const measurement = await Measurrement.create(data);
+  const measurement = await Measurement.create(data);
 
   return measurement.get({ plain: true });
 };
