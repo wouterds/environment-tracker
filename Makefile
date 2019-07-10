@@ -15,6 +15,12 @@ clean:
 	-rm -rf dist
 	-rm -rf .build-*
 	-rm -rf .env
+	-rm -rf qemu-arm-static
+
+qemu-arm-static:
+	docker run --rm --privileged multiarch/qemu-user-static:register --reset
+	curl -OL https://github.com/multiarch/qemu-user-static/releases/download/v4.0.0-5/qemu-arm-static
+	chmod +x qemu-arm-static
 
 node_modules: package.json
 	docker run --rm -v $(PWD):/code -w /code node:10-slim npm install
@@ -34,7 +40,7 @@ lint: node_modules
 	docker build --build-arg=VERSION=$(VERSION) -f $(DOCKERFILE_NODE) -t $(TAG_NODE) .
 	touch .build-node
 
-build: .build-node .build-nginx
+build: qemu-arm-static .build-node .build-nginx
 	docker tag $(TAG_NODE) $(TAG_NODE):$(VERSION)
 	docker tag $(TAG_NGINX) $(TAG_NGINX):$(VERSION)
 
