@@ -3,6 +3,7 @@ import Layout from 'components/Layout';
 import { useEffect, useState } from 'react';
 import { Line, LineChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
 import { Chart, Container } from './styles';
+import CustomTooltip from './Tooltip';
 
 export default () => {
   const [data, setData] = useState([]);
@@ -40,7 +41,12 @@ export default () => {
                 dot={false}
               />
               <YAxis domain={['auto', 'auto']} hide={true} />
-              <Tooltip cursor={false} />
+              <Tooltip
+                cursor={false}
+                content={(props: any) => (
+                  <CustomTooltip {...props} unit={'°C'} name={name} />
+                )}
+              />
             </LineChart>
           </ResponsiveContainer>
         </Chart>
