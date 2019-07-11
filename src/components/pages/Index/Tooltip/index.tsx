@@ -25,7 +25,8 @@ const ToolTip = (props: Props) => {
     return (
       <Container>
         <Value>
-          {name} {average && average.toFixed(2)} {unit}
+          {name} {average && average.toFixed(2)}
+          {unit}
         </Value>
         <Label>{format(dtime, 'MMMM Do, YYYY HH:mm a')}</Label>
       </Container>
