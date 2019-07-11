@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins');
 const typescript = require('@zeit/next-typescript');
 const css = require('@zeit/next-css');
 const fonts = require('next-fonts');
+const optimizedImages = require('next-optimized-images');
 const dotenv = require('dotenv-webpack');
 
 const config = {
@@ -13,6 +14,7 @@ module.exports = withPlugins([
   [typescript],
   [css],
   [fonts],
+  [optimizedImages],
 ], {
   webpack: (config) => {
     config.plugins = config.plugins || [];
