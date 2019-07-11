@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'Public Sans';
+  src: url('../../resources/fonts/PublicSans-Regular.eot');
+  src: url('../../resources/fonts/PublicSans-Regular.eot?#iefix') format('embedded-opentype'),
+      url('../../resources/fonts/PublicSans-Regular.woff2') format('woff2'),
+      url('../../resources/fonts/PublicSans-Regular.woff') format('woff'),
+      url('../../resources/fonts/PublicSans-Regular.ttf') format('truetype'),
+      url('../../resources/fonts/PublicSans-Regular.svg#PublicSans-Regular') format('svg');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  src: url('../../resources/fonts/PublicSans-Italic.eot');
+  src: url('../../resources/fonts/PublicSans-Italic.eot?#iefix') format('embedded-opentype'),
+      url('../../resources/fonts/PublicSans-Italic.woff2') format('woff2'),
+      url('../../resources/fonts/PublicSans-Italic.woff') format('woff'),
+      url('../../resources/fonts/PublicSans-Italic.ttf') format('truetype'),
+      url('../../resources/fonts/PublicSans-Italic.svg#PublicSans-Italic') format('svg');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../resources/fonts/PublicSans-SemiBold.eot');
+    src: url('../../resources/fonts/PublicSans-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('../../resources/fonts/PublicSans-SemiBold.woff2') format('woff2'),
+        url('../../resources/fonts/PublicSans-SemiBold.woff') format('woff'),
+        url('../../resources/fonts/PublicSans-SemiBold.ttf') format('truetype'),
+        url('../../resources/fonts/PublicSans-SemiBold.svg#PublicSans-SemiBold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../resources/fonts/PublicSans-SemiBoldItalic.eot');
+    src: url('../../resources/fonts/PublicSans-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('../../resources/fonts/PublicSans-SemiBoldItalic.woff2') format('woff2'),
+        url('../../resources/fonts/PublicSans-SemiBoldItalic.woff') format('woff'),
+        url('../../resources/fonts/PublicSans-SemiBoldItalic.ttf') format('truetype'),
+        url('../../resources/fonts/PublicSans-SemiBoldItalic.svg#PublicSans-SemiBoldItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../resources/fonts/PublicSans-Bold.eot');
+    src: url('../../resources/fonts/PublicSans-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../../resources/fonts/PublicSans-Bold.woff2') format('woff2'),
+        url('../../resources/fonts/PublicSans-Bold.woff') format('woff'),
+        url('../../resources/fonts/PublicSans-Bold.ttf') format('truetype'),
+        url('../../resources/fonts/PublicSans-Bold.svg#PublicSans-Bold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../resources/fonts/PublicSans-BoldItalic.eot');
+    src: url('../../resources/fonts/PublicSans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('../../resources/fonts/PublicSans-BoldItalic.woff2') format('woff2'),
+        url('../../resources/fonts/PublicSans-BoldItalic.woff') format('woff'),
+        url('../../resources/fonts/PublicSans-BoldItalic.ttf') format('truetype'),
+        url('../../resources/fonts/PublicSans-BoldItalic.svg#PublicSans-BoldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../resources/fonts/PublicSans-Black.eot');
+    src: url('../../resources/fonts/PublicSans-Black.eot?#iefix') format('embedded-opentype'),
+        url('../../resources/fonts/PublicSans-Black.woff2') format('woff2'),
+        url('../../resources/fonts/PublicSans-Black.woff') format('woff'),
+        url('../../resources/fonts/PublicSans-Black.ttf') format('truetype'),
+        url('../../resources/fonts/PublicSans-Black.svg#PublicSans-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../resources/fonts/PublicSans-BlackItalic.eot');
+    src: url('../../resources/fonts/PublicSans-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('../../resources/fonts/PublicSans-BlackItalic.woff2') format('woff2'),
+        url('../../resources/fonts/PublicSans-BlackItalic.woff') format('woff'),
+        url('../../resources/fonts/PublicSans-BlackItalic.ttf') format('truetype'),
+        url('../../resources/fonts/PublicSans-BlackItalic.svg#PublicSans-BlackItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}

@@ -1,0 +1,21 @@
+@import './fonts.css';
+
+html,
+body,
+#__next {
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  background: #fff;
+  color: #000;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: "Public Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 300;
+}

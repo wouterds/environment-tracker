@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles';
+import 'styles/base.css';
 
 interface Props {
   children: ReactNode;
