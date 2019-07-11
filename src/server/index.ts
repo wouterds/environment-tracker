@@ -1,5 +1,6 @@
 // tslint:disable-next-line
 require('dotenv').config();
+import cors from 'cors';
 import express from 'express';
 import next from 'next';
 import handlers from './handlers';
@@ -19,6 +20,7 @@ app
   .then(() => {
     const server = express();
 
+    server.use(cors());
     server.get('/api/measurements', handlers.Measurements);
     server.get('*', handlers.Wildcard(app));
 
