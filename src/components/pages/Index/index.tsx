@@ -1,44 +1,39 @@
 import axios from 'axios';
 import Layout from 'components/Layout';
-import { useState } from 'react';
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { useEffect, useState } from 'react';
+import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
 export default () => {
   const [data, setData] = useState([]);
 
-  try {
-    (async () => {
-      const { data: response } = await axios.get(
-        '/api/measurements?sensor=temperature&groupByMinutes=5',
-      );
+  useEffect(() => {
+    try {
+      (async () => {
+        const { data: response } = await axios.get(
+          'https://tracker.wouterdeschuyter.be/api/measurements?sensor=temperature&groupByMinutes=10',
+        );
 
-      setData(response);
-    })().catch();
-  } catch (e) {
-    // silent catch error
-  }
+        setData(response);
+      })().catch();
+    } catch (e) {
+      // silent catch error
+    }
+  }, [true]);
 
   return (
     <Layout>
-      <AreaChart width={500} height={400} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="dtime" />
-        <YAxis />
-        <Tooltip />
-        <Area
+      <LineChart width={768} height={300} data={data}>
+        <Line
           type="monotone"
           dataKey="average"
-          stroke="#8884d8"
-          fill="#8884d8"
+          stroke="#e74c3c"
+          strokeWidth={2}
+          dot={false}
         />
-      </AreaChart>
+        <YAxis domain={['auto', 'auto']} unit={' °C'} stroke="#aaa" />
+        <XAxis dataKey="dtime" stroke="#aaa" />
+        <Tooltip />
+      </LineChart>
     </Layout>
   );
 };
