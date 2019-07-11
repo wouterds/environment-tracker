@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Layout from 'components/Layout';
 import { useEffect, useState } from 'react';
-import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { Line, LineChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
+import { Chart, Container } from './styles';
 
 export default () => {
   const [data, setData] = useState([]);
@@ -22,18 +23,28 @@ export default () => {
 
   return (
     <Layout>
-      <LineChart width={768} height={300} data={data}>
-        <Line
-          type="monotone"
-          dataKey="average"
-          stroke="#e74c3c"
-          strokeWidth={2}
-          dot={false}
-        />
-        <YAxis domain={['auto', 'auto']} unit={' °C'} stroke="#aaa" />
-        <XAxis dataKey="dtime" stroke="#aaa" />
-        <Tooltip />
-      </LineChart>
+      <Container>
+        <Chart>
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              width={768}
+              height={300}
+              data={data}
+              margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+            >
+              <Line
+                type="monotone"
+                dataKey="average"
+                stroke="#e74c3c"
+                strokeWidth={2}
+                dot={false}
+              />
+              <YAxis domain={['auto', 'auto']} hide={true} />
+              <Tooltip cursor={false} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Chart>
+      </Container>
     </Layout>
   );
 };
