@@ -19,6 +19,7 @@ app
   .then(() => {
     const server = express();
 
+    server.get('/api/measurements', handlers.Measurements);
     server.get('*', handlers.Wildcard(app));
 
     server.listen(port, () => {
