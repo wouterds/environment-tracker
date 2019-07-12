@@ -67,7 +67,7 @@ export default (props: Props) => {
             <span>{unit}</span>
           </LastValue>
         )}
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="99.9%" height="99.8%">
           <LineChart data={data} margin={{ left: 0, right: 0 }} syncId={syncId}>
             <Line
               type="monotone"
