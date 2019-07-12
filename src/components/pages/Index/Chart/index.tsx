@@ -63,7 +63,7 @@ export default (props: Props) => {
       <ChartContent>
         {lastValue && (
           <LastValue>
-            {lastValue}
+            {lastValue.toFixed(2)}
             <span>{unit}</span>
           </LastValue>
         )}
