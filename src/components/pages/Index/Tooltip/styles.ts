@@ -19,4 +19,12 @@ export const Label = styled.p`
 
 export const Value = styled.p`
   color: #fff;
+
+  span {
+    display: inline-block;
+    font-size: 0.7rem;
+    margin-top: -10px;
+    margin-left: 3px;
+    vertical-align: middle;
+  }
 `;

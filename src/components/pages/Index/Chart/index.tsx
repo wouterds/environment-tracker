@@ -33,7 +33,7 @@ export default (props: Props) => {
   }, [true]);
 
   const high = maxBy(data, 'average');
-  const average = meanBy(data, 'average');
+  const average = meanBy(data, 'average') || null;
   const low = minBy(data, 'average');
   const last = data ? data[data.length - 1] : null;
 
@@ -69,29 +69,53 @@ export default (props: Props) => {
         <li>
           <label>Low</label>
           <span>
-            {low ? low.average.toFixed(2) : ''}
-            {unit}
+            {low ? (
+              <>
+                {low.average.toFixed(2)}
+                <span>{unit}</span>
+              </>
+            ) : (
+              '--'
+            )}
           </span>
         </li>
         <li>
           <label>High</label>
           <span>
-            {high ? high.average.toFixed(2) : ''}
-            {unit}
+            {high ? (
+              <>
+                {high.average.toFixed(2)}
+                <span>{unit}</span>
+              </>
+            ) : (
+              '--'
+            )}
           </span>
         </li>
         <li>
           <label>Average</label>
           <span>
-            {average ? average.toFixed(2) : ''}
-            {unit}
+            {average ? (
+              <>
+                {average.toFixed(2)}
+                <span>{unit}</span>
+              </>
+            ) : (
+              '--'
+            )}
           </span>
         </li>
         <li>
           <label>Last</label>
           <span>
-            {last ? last.average.toFixed(2) : ''}
-            {unit}
+            {last ? (
+              <>
+                {last.average.toFixed(2)}
+                <span>{unit}</span>
+              </>
+            ) : (
+              '--'
+            )}
           </span>
         </li>
       </ChartFooter>

@@ -46,6 +46,14 @@ export const ChartFooter = styled.ul`
     span {
       color: #050f18;
       font-size: 1rem;
+
+      span {
+        display: inline-block;
+        font-size: 0.7rem;
+        margin-top: -10px;
+        margin-left: 3px;
+        vertical-align: middle;
+      }
     }
   }
 `;
