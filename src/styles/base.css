@@ -1,5 +1,13 @@
 @import './fonts.css';
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
 html,
 body,
 #__next {
@@ -9,13 +17,20 @@ body,
   padding: 0;
 }
 
-#__next {
-  display: flex;
+html {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: #fff;
   color: #000;
+}
+
+#__next {
+  display: flex;
 }
 
 body,
