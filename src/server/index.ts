@@ -25,6 +25,7 @@ app
       '/api/measurements/:sensor/averages',
       handlers.measurements.averages,
     );
+    server.get('/api/measurements/:sensor/last', handlers.measurements.last);
     server.get('*', handlers.wildcard(app));
 
     server.listen(port, () => {
