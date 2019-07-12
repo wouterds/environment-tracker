@@ -13,12 +13,13 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.p`
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.75rem;
 `;
 
 export const Value = styled.p`
   color: #fff;
+  font-weight: 400;
 
   span {
     display: inline-block;
