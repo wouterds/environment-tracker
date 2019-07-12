@@ -5,7 +5,7 @@ import minBy from 'lodash/minBy';
 import { useEffect, useState } from 'react';
 import { Line, LineChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
 import CustomTooltip from '../Tooltip';
-import { Chart, ChartContent, ChartFooter } from './styles';
+import { Chart, ChartContent, ChartFooter, LastValue } from './styles';
 
 interface Props {
   sensor: string;
@@ -17,6 +17,7 @@ interface Props {
 export default (props: Props) => {
   const { sensor, unit, color, syncId } = props;
   const [data, setData] = useState<Array<{ average: number }>>([]);
+  const [lastValue, setLastValue] = useState<number | null>(null);
 
   useEffect(() => {
     try {
@@ -30,6 +31,22 @@ export default (props: Props) => {
     } catch (e) {
       // silent catch error
     }
+
+    const interval = setInterval(() => {
+      try {
+        (async () => {
+          const { data: response } = await axios.get(
+            `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/last`,
+          );
+
+          setLastValue(response.value);
+        })().catch();
+      } catch (e) {
+        // silent catch error
+      }
+    }, 30000);
+
+    return clearInterval(interval);
   }, [true]);
 
   const high = maxBy(data, 'average');
@@ -40,6 +57,12 @@ export default (props: Props) => {
   return (
     <Chart>
       <ChartContent>
+        {lastValue && (
+          <LastValue>
+            {lastValue}
+            <span>{unit}</span>
+          </LastValue>
+        )}
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={768}

@@ -23,7 +23,7 @@ export const Value = styled.p`
 
   span {
     display: inline-block;
-    font-size: 0.7rem;
+    font-size: 0.7em;
     margin-top: -10px;
     margin-left: 3px;
     vertical-align: middle;

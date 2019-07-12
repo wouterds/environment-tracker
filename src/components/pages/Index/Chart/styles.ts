@@ -13,6 +13,27 @@ export const Chart = styled.div`
 
 export const ChartContent = styled.div`
   flex: 1;
+  position: relative;
+`;
+
+export const LastValue = styled.div`
+  color: #050f18;
+  font-size: 2.25rem;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  display: inline-block;
+
+  span {
+    display: inline-block;
+    font-size: 0.7em;
+    margin-top: -20px;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
 `;
 
 export const ChartFooter = styled.ul`
@@ -50,7 +71,7 @@ export const ChartFooter = styled.ul`
 
       span {
         display: inline-block;
-        font-size: 0.7rem;
+        font-size: 0.7em;
         margin-top: -10px;
         margin-left: 3px;
         vertical-align: middle;
