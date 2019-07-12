@@ -20,19 +20,19 @@ export default (props: Props) => {
   const [lastValue, setLastValue] = useState<number | null>(null);
 
   useEffect(() => {
-    try {
-      (async () => {
-        const { data: response } = await axios.get(
-          `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/averages?groupByMinutes=10`,
-        );
+    const fetchData = () => {
+      try {
+        (async () => {
+          const { data: response } = await axios.get(
+            `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/averages?groupByMinutes=10`,
+          );
 
-        setData(response);
-      })().catch();
-    } catch (e) {
-      // silent catch error
-    }
+          setData(response);
+        })().catch();
+      } catch (e) {
+        // silent catch error
+      }
 
-    const interval = setInterval(() => {
       try {
         (async () => {
           const { data: response } = await axios.get(
@@ -44,9 +44,13 @@ export default (props: Props) => {
       } catch (e) {
         // silent catch error
       }
-    }, 30000);
+    };
 
-    return clearInterval(interval);
+    fetchData();
+
+    const interval = setInterval(fetchData, 30000);
+
+    return () => clearInterval(interval);
   }, [true]);
 
   const high = maxBy(data, 'value');
