@@ -21,8 +21,11 @@ app
     const server = express();
 
     server.use(cors());
-    server.get('/api/measurements', handlers.Measurements);
-    server.get('*', handlers.Wildcard(app));
+    server.get(
+      '/api/measurements/:sensor/averages',
+      handlers.measurements.averages,
+    );
+    server.get('*', handlers.wildcard(app));
 
     server.listen(port, () => {
       // tslint:disable-next-line

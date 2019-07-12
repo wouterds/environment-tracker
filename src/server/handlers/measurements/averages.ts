@@ -3,7 +3,8 @@ import { BAD_REQUEST } from 'http-status';
 import MeasurementRepository from 'repositories/measurement';
 
 export default async (req: Request, res: Response): Promise<void> => {
-  const { sensor, groupByMinutes } = req.query;
+  const { sensor } = req.params;
+  const { groupByMinutes } = req.query;
 
   if (!sensor) {
     res.sendStatus(BAD_REQUEST);

@@ -1,7 +1,7 @@
-import Measurements from './measurements';
-import Wildcard from './wildcard';
+import measurements from './measurements';
+import wildcard from './wildcard';
 
 export default {
-  Wildcard,
-  Measurements,
+  wildcard,
+  measurements,
 };
