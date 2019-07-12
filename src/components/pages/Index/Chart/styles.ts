@@ -10,8 +10,8 @@ export const Chart = styled.div`
 `;
 
 export const ChartContent = styled.div`
-  height: 225px;
-  width: 600px;
+  height: 230px;
+  width: 670px;
 `;
 
 export const ChartFooter = styled.ul`
@@ -25,6 +25,7 @@ export const ChartFooter = styled.ul`
     list-style: inside;
     list-style-type: none;
     display: inline-block;
+    min-width: 100px;
 
     + li {
       margin-left: 25px;

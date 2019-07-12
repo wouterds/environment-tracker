@@ -11,10 +11,11 @@ interface Props {
   sensor: string;
   unit: string;
   color: string;
+  syncId?: string;
 }
 
 export default (props: Props) => {
-  const { sensor, unit, color } = props;
+  const { sensor, unit, color, syncId } = props;
   const [data, setData] = useState<Array<{ average: number }>>([]);
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export default (props: Props) => {
   const high = maxBy(data, 'average');
   const average = meanBy(data, 'average');
   const low = minBy(data, 'average');
+  const last = data ? data[data.length - 1] : null;
 
   return (
     <Chart>
@@ -44,6 +46,7 @@ export default (props: Props) => {
             height={300}
             data={data}
             margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+            syncId={syncId}
           >
             <Line
               type="monotone"
@@ -64,6 +67,13 @@ export default (props: Props) => {
       </ChartContent>
       <ChartFooter>
         <li>
+          <label>Low</label>
+          <span>
+            {low ? low.average.toFixed(2) : ''}
+            {unit}
+          </span>
+        </li>
+        <li>
           <label>High</label>
           <span>
             {high ? high.average.toFixed(2) : ''}
@@ -78,9 +88,9 @@ export default (props: Props) => {
           </span>
         </li>
         <li>
-          <label>Low</label>
+          <label>Last</label>
           <span>
-            {low ? low.average.toFixed(2) : ''}
+            {last ? last.average.toFixed(2) : ''}
             {unit}
           </span>
         </li>
