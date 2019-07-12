@@ -4,14 +4,15 @@ export const Chart = styled.div`
   border: 1px solid rgb(236, 239, 241);
   border-radius: 5px;
   box-shadow: rgba(17, 51, 83, 0.02) 0px 4px 12px 0px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   margin: 15px;
   overflow: hidden;
 `;
 
 export const ChartContent = styled.div`
-  height: 230px;
-  width: 670px;
+  flex: 1;
 `;
 
 export const ChartFooter = styled.ul`

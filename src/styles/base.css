@@ -9,6 +9,10 @@ body,
   padding: 0;
 }
 
+#__next {
+  display: flex;
+}
+
 body {
   background: #fff;
   color: #000;

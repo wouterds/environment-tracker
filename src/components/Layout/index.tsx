@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'styles';
 import 'styles/base.css';
+import { Container } from './styles';
 
 interface Props {
   children: ReactNode;
@@ -24,7 +25,7 @@ const Layout = (props: Props) => {
       </Head>
 
       <ThemeProvider theme={theme}>
-        <div>{children}</div>
+        <Container>{children}</Container>
       </ThemeProvider>
     </>
   );
