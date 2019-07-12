@@ -37,7 +37,24 @@ const getBySensorGroupedPerMinutes = async (
   return rows;
 };
 
+const getLastValueBySensor = async (
+  sensor: string,
+): Promise<Definition | null> => {
+  const measurement = await Measurement.findOne({
+    where: { sensor },
+    limit: 1,
+    order: [['createdAt', 'DESC']],
+  });
+
+  if (!measurement) {
+    return null;
+  }
+
+  return measurement;
+};
+
 export default {
   add,
   getBySensorGroupedPerMinutes,
+  getLastValueBySensor,
 };
