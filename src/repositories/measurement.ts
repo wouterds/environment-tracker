@@ -18,7 +18,7 @@ const getBySensorGroupedPerMinutes = async (
   const rows = await db.query(
     `
       SELECT
-      AVG(\`value\`) AS \`average\`,
+      AVG(\`value\`) AS \`value\`,
       CONVERT((MIN(\`createdAt\`) DIV :groupedPerMinutes) * :groupedPerMinutes, DATETIME) AS \`dtime\`
       FROM \`Measurements\`
       WHERE \`sensor\` = :sensor

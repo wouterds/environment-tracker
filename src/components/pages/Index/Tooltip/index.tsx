@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { Container, Label, Value } from './styles';
 
 interface Sample {
-  average: number | null;
+  value: number | null;
   dtime: string;
 }
 
@@ -20,12 +20,12 @@ const ToolTip = (props: Props) => {
   if (active) {
     const { unit, name } = props;
     const { payload } = props.payload[0];
-    const { average, dtime } = payload;
+    const { value, dtime } = payload;
 
     return (
       <Container>
         <Value>
-          {name} {average && average.toFixed(2)}
+          {name} {value && value.toFixed(2)}
           <span>{unit}</span>
         </Value>
         <Label>{format(dtime, 'MMMM Do, YYYY HH:mm a')}</Label>

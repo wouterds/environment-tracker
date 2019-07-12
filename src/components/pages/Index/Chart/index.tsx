@@ -16,14 +16,14 @@ interface Props {
 
 export default (props: Props) => {
   const { sensor, unit, color, syncId } = props;
-  const [data, setData] = useState<Array<{ average: number }>>([]);
+  const [data, setData] = useState<Array<{ value: number }>>([]);
   const [lastValue, setLastValue] = useState<number | null>(null);
 
   useEffect(() => {
     try {
       (async () => {
         const { data: response } = await axios.get(
-          `${process.env.WEB_API_ENDPOINT}/measurements?sensor=${sensor}&groupByMinutes=10`,
+          `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/averages?groupByMinutes=10`,
         );
 
         setData(response);
@@ -49,9 +49,9 @@ export default (props: Props) => {
     return clearInterval(interval);
   }, [true]);
 
-  const high = maxBy(data, 'average');
-  const average = meanBy(data, 'average') || null;
-  const low = minBy(data, 'average');
+  const high = maxBy(data, 'value');
+  const average = meanBy(data, 'value') || null;
+  const low = minBy(data, 'value');
   const last = data ? data[data.length - 1] : null;
 
   return (
@@ -73,7 +73,7 @@ export default (props: Props) => {
           >
             <Line
               type="monotone"
-              dataKey="average"
+              dataKey="value"
               stroke={color}
               strokeWidth={2}
               dot={false}
@@ -94,7 +94,7 @@ export default (props: Props) => {
           <span>
             {low ? (
               <>
-                {low.average.toFixed(2)}
+                {low.value.toFixed(2)}
                 <span>{unit}</span>
               </>
             ) : (
@@ -107,7 +107,7 @@ export default (props: Props) => {
           <span>
             {high ? (
               <>
-                {high.average.toFixed(2)}
+                {high.value.toFixed(2)}
                 <span>{unit}</span>
               </>
             ) : (
@@ -133,7 +133,7 @@ export default (props: Props) => {
           <span>
             {last ? (
               <>
-                {last.average.toFixed(2)}
+                {last.value.toFixed(2)}
                 <span>{unit}</span>
               </>
             ) : (
