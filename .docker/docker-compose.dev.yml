@@ -9,3 +9,16 @@ services:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
+
+  node:
+    image: node:12-slim
+    command: ["./node_modules/.bin/ts-node", "-r", "./src/bootstrap", "./src/server"]
+    volumes:
+      - ./../:/code
+    environment:
+      - DATABASE_HOST=mariadb
+      - PORT=3001
+    working_dir: /code
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
