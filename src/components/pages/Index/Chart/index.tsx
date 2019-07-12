@@ -83,12 +83,14 @@ export default (props: Props) => {
               dot={false}
             />
             <YAxis domain={['auto', 'auto']} hide={true} />
-            <Tooltip
-              cursor={false}
-              content={(tooltipProps: any) => (
-                <CustomTooltip {...tooltipProps} unit={unit} name={name} />
-              )}
-            />
+            {data.length > 0 && (
+              <Tooltip
+                cursor={false}
+                content={(tooltipProps: any) => (
+                  <CustomTooltip {...tooltipProps} unit={unit} name={name} />
+                )}
+              />
+            )}
           </LineChart>
         </ResponsiveContainer>
       </ChartContent>
