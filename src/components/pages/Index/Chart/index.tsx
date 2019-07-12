@@ -22,7 +22,7 @@ export default (props: Props) => {
     try {
       (async () => {
         const { data: response } = await axios.get(
-          `https://tracker.wouterdeschuyter.be/api/measurements?sensor=${sensor}&groupByMinutes=10`,
+          `${process.env.WEB_API_ENDPOINT}/measurements?sensor=${sensor}&groupByMinutes=10`,
         );
 
         setData(response);
