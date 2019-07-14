@@ -12,7 +12,7 @@ services:
 
   node:
     image: node:12-slim
-    command: ["./node_modules/.bin/ts-node", "-r", "./src/bootstrap", "./src/server/http"]
+    command: ["npm", "run", "start:dev"]
     volumes:
       - ./../:/code
     environment:
