@@ -12,10 +12,11 @@ interface Props {
   unit: string;
   color: string;
   syncId?: string;
+  resolution: string;
 }
 
 export default (props: Props) => {
-  const { sensor, unit, color, syncId } = props;
+  const { sensor, unit, color, resolution, syncId } = props;
   const [data, setData] = useState<Array<{ value: number }>>([]);
   const [lastValue, setLastValue] = useState<number | null>(null);
 
@@ -24,7 +25,7 @@ export default (props: Props) => {
       try {
         (async () => {
           const { data: response } = await axios.get(
-            `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/averages?groupByMinutes=10`,
+            `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/averages?resolution=${resolution}`,
           );
 
           setData(response);
