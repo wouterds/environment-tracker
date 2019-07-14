@@ -3,7 +3,10 @@
   "version": "1.0.0-alpha.1",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production node -r ./src/bootstrap ./src/server/http",
+    "start": "npm run server",
+    "start:dev": "nodemon",
+    "server": "NODE_ENV=production node -r ./src/bootstrap ./src/server/http",
+    "server:dev": "NODE_ENV=local ts-node -r ./src/bootstrap ./src/server/http",
     "dev": "next ./src",
     "build": "npm run build:app && npm run build:server",
     "build:app": "NODE_ENV=production next build ./src",
