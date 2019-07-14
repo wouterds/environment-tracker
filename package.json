@@ -57,6 +57,7 @@
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^0.17.0",
     "next-optimized-images": "^2.5.3",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0",
