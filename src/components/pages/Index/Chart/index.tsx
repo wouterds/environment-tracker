@@ -73,7 +73,7 @@ export default (props: Props) => {
               type="monotone"
               dataKey="value"
               stroke={color}
-              strokeWidth={2}
+              strokeWidth="0.1rem"
               dot={false}
             />
             <YAxis domain={['auto', 'auto']} hide={true} />

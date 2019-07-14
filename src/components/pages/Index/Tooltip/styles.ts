@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background: #13222c;
-  padding: 10px;
-  border-radius: 3px;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
   text-align: center;
   line-height: 1.6;
 
@@ -24,8 +24,8 @@ export const Value = styled.p`
   span {
     display: inline-block;
     font-size: 0.7em;
-    margin-top: -10px;
-    margin-left: 3px;
+    margin-top: -1em;
+    margin-left: 0.2em;
     vertical-align: middle;
   }
 `;
