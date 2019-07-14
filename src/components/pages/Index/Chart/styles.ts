@@ -58,7 +58,7 @@ export const ChartFooter = styled.ul`
   }
 
   li {
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     list-style: inside;
     list-style-type: none;
     display: inline-block;
@@ -83,7 +83,7 @@ export const ChartFooter = styled.ul`
       font-weight: 400;
       color: #6f8597;
       font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     span {
