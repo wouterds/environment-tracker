@@ -16,7 +16,6 @@ services:
     volumes:
       - ./../:/code
     environment:
-      - DATABASE_HOST=mariadb
       - PORT=3001
     working_dir: /code
     restart: unless-stopped
