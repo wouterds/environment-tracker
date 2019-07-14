@@ -44,7 +44,7 @@ export const ResolutionItem = styled.li<{ active: boolean }>`
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
-  color: #BAC4CE;
+  color: #bac4ce;
 
   ${({ active }) =>
     active &&
