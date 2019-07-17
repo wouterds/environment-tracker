@@ -62,7 +62,7 @@ export default (props: Props) => {
   return (
     <Chart>
       <ChartContent>
-        {lastValue && (
+        {lastValue !== null && (
           <LastValue>
             {lastValue.toFixed(2)}
             <span>{unit}</span>
