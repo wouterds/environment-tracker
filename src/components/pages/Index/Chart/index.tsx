@@ -52,7 +52,7 @@ export default (props: Props) => {
     const interval = setInterval(fetchData, 30000);
 
     return () => clearInterval(interval);
-  }, [true]);
+  }, [sensor, resolution]);
 
   const high = maxBy(data, 'value');
   const average = meanBy(data, 'value') || null;
