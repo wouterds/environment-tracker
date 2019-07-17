@@ -19,6 +19,6 @@ export default async (req: Request, res: Response): Promise<void> => {
 
   res.json({
     value: measurement.value,
-    dtime: measurement.createdAt,
+    time: measurement.createdAt,
   });
 };

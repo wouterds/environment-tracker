@@ -11,23 +11,32 @@ const add = async (data: {
   return measurement.get({ plain: true });
 };
 
-const getBySensorGroupedPerMinutes = async (
+const getBySensorAndBetweenDatesAndWithDataPoints = async (
   sensor: string,
-  groupedPerMinutes: number,
-): Promise<Array<{ average: number; dtime: string }>> => {
+  from: Date,
+  to: Date,
+  dataPoints: number,
+): Promise<Array<{ average: number; time: string }>> => {
   const rows = await db.query(
     `
       SELECT
-      AVG(\`value\`) AS \`value\`,
-      CONVERT((MIN(\`createdAt\`) DIV :groupedPerMinutes) * :groupedPerMinutes, DATETIME) AS \`dtime\`
-      FROM \`Measurements\`
-      WHERE \`sensor\` = :sensor
-      GROUP BY \`createdAt\` DIV :groupedPerMinutes
+        AVG(\`value\`) AS \`value\`,
+        createdAt AS time
+      FROM Measurements
+      WHERE sensor = :sensor
+        AND createdAt >= :from
+        AND createdAt <= :to
+      GROUP BY FLOOR((
+        TIMESTAMPDIFF(MINUTE, :from, createdAt) / TIMESTAMPDIFF(MINUTE, :from, :to)
+      ) * :dataPoints)
+      ORDER BY createdAt ASC
   `,
     {
       replacements: {
         sensor,
-        groupedPerMinutes: groupedPerMinutes * 100,
+        from,
+        to,
+        dataPoints,
       },
       type: QueryTypes.SELECT,
       raw: true,
@@ -55,6 +64,6 @@ const getLastValueBySensor = async (
 
 export default {
   add,
-  getBySensorGroupedPerMinutes,
+  getBySensorAndBetweenDatesAndWithDataPoints,
   getLastValueBySensor,
 };

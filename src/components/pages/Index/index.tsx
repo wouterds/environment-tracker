@@ -9,7 +9,7 @@ import {
   ResolutionItem,
 } from './styles';
 
-const resolutions = ['1h', '1d', '1w', '1m', '1y'];
+const resolutions = ['1d', '1w', '1m', '1y'];
 
 const Index = () => {
   const [resolution, setResolution] = useState('1d');

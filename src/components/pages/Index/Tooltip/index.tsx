@@ -3,7 +3,7 @@ import { Container, Label, Value } from './styles';
 
 interface Sample {
   value: number | null;
-  dtime: string;
+  time: string;
 }
 
 interface Props {
@@ -20,7 +20,7 @@ const ToolTip = (props: Props) => {
   if (active) {
     const { unit, name } = props;
     const { payload } = props.payload[0];
-    const { value, dtime } = payload;
+    const { value, time } = payload;
 
     return (
       <Container>
@@ -28,7 +28,7 @@ const ToolTip = (props: Props) => {
           {name} {value && value.toFixed(2)}
           <span>{unit}</span>
         </Value>
-        <Label>{format(dtime, 'MMMM Do, YYYY HH:mm a')}</Label>
+        <Label>{format(time, 'MMMM Do, YYYY HH:mm a')}</Label>
       </Container>
     );
   }
