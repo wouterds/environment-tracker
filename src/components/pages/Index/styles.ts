@@ -27,13 +27,26 @@ export const HeaderRow = styled(Row)`
     margin: 0;
     padding: 0;
     line-height: 1;
-    font-weight: 600;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    letter-spacing: 0.25rem;
+    word-spacing: 0.25rem;
+    color: #333;
+  }
+
+  @media (max-width: ${breakpoints.lg}px) {
+    min-height: 75px;
   }
 `;
 
 export const Resolution = styled.ul`
   list-style: inside;
   list-style-type: none;
+
+  @media (max-width: ${breakpoints.lg}px) {
+    margin-top: 15px;
+  }
 `;
 
 export const ResolutionItem = styled.li<{ active: boolean }>`

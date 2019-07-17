@@ -32,7 +32,7 @@ export const LastValue = styled.div`
   position: absolute;
   top: 1.25rem;
   left: 1.25rem;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 0.25rem;
   padding: 0.5rem;
   display: inline-block;
