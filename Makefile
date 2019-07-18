@@ -29,7 +29,7 @@ lint: node_modules
 	docker run --rm -v $(PWD):/code -w /code node:12-slim npm run lint
 
 .build-app: node_modules
-	docker run --rm -v $(PWD):/code -w /code --env=VERSION=$(VERSION) --env=WEB_API_ENDPOINT=$(WEB_API_ENDPOINT) node:12-slim npm run build
+	docker run --rm -v $(PWD):/code -w /code --env=VERSION=$(VERSION) --env=WEB_API_ENDPOINT=$(WEB_API_ENDPOINT) --env=SENSORS_API_ENDPOINT=$(SENSORS_API_ENDPOINT) node:12-slim npm run build
 	touch .build-app
 
 .build-nginx: $(DOCKERFILE_NGINX)
