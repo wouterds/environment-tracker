@@ -21,7 +21,7 @@ export default (props: Props) => {
   const [currentValue, setCurrentValue] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchChart = () => {
       try {
         (async () => {
           const { data: response } = await axios.get(
@@ -33,7 +33,9 @@ export default (props: Props) => {
       } catch (e) {
         // silent catch error
       }
+    };
 
+    const fetchCurrentValue = () => {
       try {
         (async () => {
           const { data: response } = await axios.get(
@@ -47,11 +49,16 @@ export default (props: Props) => {
       }
     };
 
-    fetchData();
+    fetchChart();
+    fetchCurrentValue();
 
-    const interval = setInterval(fetchData, 20000);
+    const chartInterval = setInterval(fetchChart, 30000);
+    const currentValueInterval = setInterval(fetchCurrentValue, 3000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(chartInterval);
+      clearInterval(currentValueInterval);
+    };
   }, [sensor, resolution]);
 
   const high = maxBy(data, 'value');
