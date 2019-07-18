@@ -21,36 +21,34 @@ export default (props: Props) => {
   const [currentValue, setCurrentValue] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchChart = () => {
+    const fetchChart = async () => {
       try {
-        (async () => {
-          const { data: response } = await axios.get(
-            `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/averages?resolution=${resolution}`,
-          );
+        const { data: response } = await axios.get(
+          `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/averages?resolution=${resolution}`,
+        );
 
-          setData(response);
-        })().catch();
+        setData(response);
       } catch (e) {
-        // silent catch error
+        // tslint:disable-next-line
+        console.error(e);
       }
     };
 
-    const fetchCurrentValue = () => {
+    const fetchCurrentValue = async () => {
       try {
-        (async () => {
-          const { data: response } = await axios.get(
-            `${process.env.SENSORS_API_ENDPOINT}/${sensor.replace(':', '/')}`,
-          );
+        const { data: response } = await axios.get(
+          `${process.env.SENSORS_API_ENDPOINT}/${sensor.replace(':', '/')}`,
+        );
 
-          setCurrentValue(response);
-        })().catch();
+        setCurrentValue(response);
       } catch (e) {
-        // silent catch error
+        // tslint:disable-next-line
+        console.error(e);
       }
     };
 
-    fetchChart();
-    fetchCurrentValue();
+    fetchChart().catch();
+    fetchCurrentValue().catch();
 
     const chartInterval = setInterval(fetchChart, 30000);
     const currentValueInterval = setInterval(fetchCurrentValue, 3000);
