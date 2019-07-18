@@ -20,6 +20,8 @@ export const Label = styled.p`
 export const Value = styled.p`
   color: #fff;
   font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
 
   span {
     display: inline-block;
@@ -27,5 +29,6 @@ export const Value = styled.p`
     margin-top: -1em;
     margin-left: 0.2em;
     vertical-align: middle;
+    letter-spacing: 0;
   }
 `;

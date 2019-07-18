@@ -39,6 +39,8 @@ export const CurrentValue = styled.div`
   display: inline-block;
   z-index: 1;
   pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
 
   span {
     display: inline-block;
@@ -46,6 +48,7 @@ export const CurrentValue = styled.div`
     margin-top: -1em;
     margin-left: 0.2em;
     vertical-align: middle;
+    letter-spacing: 0;
   }
 `;
 
@@ -91,6 +94,8 @@ export const ChartFooter = styled.ul`
     span {
       color: #050f18;
       font-size: 1rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.05em;
 
       span {
         display: inline-block;
@@ -98,6 +103,7 @@ export const ChartFooter = styled.ul`
         margin-top: -1em;
         margin-left: 0.2em;
         vertical-align: middle;
+        letter-spacing: 0;
       }
     }
   }
