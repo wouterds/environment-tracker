@@ -15,7 +15,7 @@ const Layout = (props: Props) => {
   return (
     <>
       <Head>
-        <title>Hello World</title>
+        <title>Environment Tracker {process.env.VERSION}</title>
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <meta
           name="viewport"
