@@ -27,7 +27,7 @@ export const ChartContent = styled.div`
   position: relative;
 `;
 
-export const LastValue = styled.div`
+export const CurrentValue = styled.div`
   color: #050f18;
   font-size: 2rem;
   position: absolute;

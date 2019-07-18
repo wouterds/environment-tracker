@@ -5,7 +5,7 @@ import minBy from 'lodash/minBy';
 import { useEffect, useState } from 'react';
 import { Line, LineChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
 import CustomTooltip from '../Tooltip';
-import { Chart, ChartContent, ChartFooter, LastValue } from './styles';
+import { Chart, ChartContent, ChartFooter, CurrentValue } from './styles';
 
 interface Props {
   sensor: string;
@@ -18,7 +18,7 @@ interface Props {
 export default (props: Props) => {
   const { sensor, unit, color, resolution, syncId } = props;
   const [data, setData] = useState<Array<{ value: number }>>([]);
-  const [lastValue, setLastValue] = useState<number | null>(null);
+  const [currentValue, setCurrentValue] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = () => {
@@ -40,7 +40,7 @@ export default (props: Props) => {
             `${process.env.SENSORS_API_ENDPOINT}/${sensor.replace(':', '/')}`,
           );
 
-          setLastValue(response);
+          setCurrentValue(response);
         })().catch();
       } catch (e) {
         // silent catch error
@@ -62,11 +62,11 @@ export default (props: Props) => {
   return (
     <Chart>
       <ChartContent>
-        {lastValue !== null && (
-          <LastValue>
-            {lastValue.toFixed(2)}
+        {currentValue !== null && (
+          <CurrentValue>
+            {currentValue.toFixed(2)}
             <span>{unit}</span>
-          </LastValue>
+          </CurrentValue>
         )}
         <ResponsiveContainer width="99.9%" height="99.8%">
           <LineChart data={data} margin={{ left: 0, right: 0 }} syncId={syncId}>
