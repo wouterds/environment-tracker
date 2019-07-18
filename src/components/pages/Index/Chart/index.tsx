@@ -37,10 +37,10 @@ export default (props: Props) => {
       try {
         (async () => {
           const { data: response } = await axios.get(
-            `${process.env.WEB_API_ENDPOINT}/measurements/${sensor}/last`,
+            `${process.env.SENSORS_API_ENDPOINT}/${sensor.replace(':', '/')}`,
           );
 
-          setLastValue(response.value);
+          setLastValue(response);
         })().catch();
       } catch (e) {
         // silent catch error
