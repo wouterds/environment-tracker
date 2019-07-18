@@ -10,6 +10,7 @@ export const Chart = styled.div`
   flex: 1;
   margin: 1rem;
   overflow: hidden;
+  user-select: none;
 
   @media (max-width: ${breakpoints.lg}px) {
     flex: auto;
@@ -37,6 +38,7 @@ export const LastValue = styled.div`
   padding: 0.5rem;
   display: inline-block;
   z-index: 1;
+  pointer-events: none;
 
   span {
     display: inline-block;
