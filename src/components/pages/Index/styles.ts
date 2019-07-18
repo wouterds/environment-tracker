@@ -27,12 +27,12 @@ export const HeaderRow = styled(Row)`
     margin: 0;
     padding: 0;
     line-height: 1;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
-    font-size: 1.6rem;
-    letter-spacing: 0.25rem;
-    word-spacing: 0.25rem;
-    color: #333;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    word-spacing: 0.1rem;
+    color: #050f18;
   }
 
   @media (max-width: ${breakpoints.lg}px) {
