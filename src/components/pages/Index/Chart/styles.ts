@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import { breakpoints } from 'styles';
 
 export const Chart = styled.div`
-  border: 0.05rem solid rgb(236, 239, 241);
+  border: 0.05rem solid #eceff1;
   border-radius: 0.25rem;
   box-shadow: rgba(17, 51, 83, 0.02) 0 0.25rem 1rem 0;
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin: 1rem;
   overflow: hidden;
   user-select: none;
 
@@ -24,7 +23,10 @@ export const Chart = styled.div`
 
 export const ChartContent = styled.div`
   flex: 1;
+  display: flex;
   position: relative;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const CurrentValue = styled.div`
@@ -53,7 +55,7 @@ export const CurrentValue = styled.div`
 `;
 
 export const ChartFooter = styled.ul`
-  border-top: 0.05rem solid rgb(236, 239, 241);
+  border-top: 0.05rem solid #eceff1;
   margin: 0;
   background: #fcfcfc;
 

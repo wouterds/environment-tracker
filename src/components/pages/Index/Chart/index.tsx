@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Spinner from 'components/Spinner';
 import maxBy from 'lodash/maxBy';
 import meanBy from 'lodash/meanBy';
 import minBy from 'lodash/minBy';
@@ -73,26 +74,32 @@ export default (props: Props) => {
             <span>{unit}</span>
           </CurrentValue>
         )}
-        <ResponsiveContainer width="99.9%" height="99.8%">
-          <LineChart data={data} margin={{ left: 0, right: 0 }} syncId={syncId}>
-            <Line
-              type="monotone"
-              dataKey="value"
-              stroke={color}
-              strokeWidth="0.1rem"
-              dot={false}
-            />
-            <YAxis domain={['auto', 'auto']} hide={true} />
-            {data.length > 0 && (
+        {data.length === 0 && <Spinner />}
+        {data.length > 0 && (
+          <ResponsiveContainer width="99.9%" height="99.8%">
+            <LineChart
+              data={data}
+              margin={{ left: 0, right: 0 }}
+              syncId={syncId}
+            >
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke={color}
+                strokeWidth="0.1rem"
+                dot={false}
+              />
+              <YAxis domain={['auto', 'auto']} hide={true} />
+
               <Tooltip
                 cursor={false}
                 content={(tooltipProps: any) => (
                   <CustomTooltip {...tooltipProps} unit={unit} name={name} />
                 )}
               />
-            )}
-          </LineChart>
-        </ResponsiveContainer>
+            </LineChart>
+          </ResponsiveContainer>
+        )}
       </ChartContent>
       <ChartFooter>
         <li>

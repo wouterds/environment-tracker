@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  padding: 0.5rem 0;
 `;
 
 export const Row = styled.div`
@@ -17,10 +18,32 @@ export const Row = styled.div`
   }
 `;
 
-export const HeaderRow = styled(Row)`
-  padding: 0.5rem 1rem;
-  display: flex;
+export const ChartRow = styled(Row)`
+  flex: 1;
+  margin: 0.25rem 0.5rem;
+`;
+
+export const LoadingRow = styled(Row)`
+  flex: 1;
+  margin: 0.25rem 0.5rem;
   align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 300;
+  color: #aeb9c2;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex: 1;
+  margin: 0.25rem 0.5rem;
+`;
+
+export const HeaderColumn = styled(Column)`
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 1rem;
+  min-height: 30px;
 
   h1 {
     flex: 1;
@@ -38,6 +61,50 @@ export const HeaderRow = styled(Row)`
   @media (max-width: ${breakpoints.lg}px) {
     min-height: 75px;
   }
+`;
+
+export const FooterColumn = styled(Column)`
+  padding: 0 0.5rem;
+  color: #aeb9c2;
+  font-size: 0.8rem;
+  font-weight: 400;
+
+  > div {
+    flex: 1;
+    vertical-align: middle;
+
+    + div {
+      text-align: right;
+    }
+  }
+`;
+
+export const Status = styled.div<{ status: string | null }>`
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-radius: 4px;
+  background: #eee;
+  margin-left: 3px;
+  margin-bottom: 1px;
+
+${({ status }) =>
+  !status &&
+  css`
+    background: #f9ca24;
+  `}
+
+${({ status }) =>
+  status === 'error' &&
+  css`
+    background: #eb4d4b;
+  `}
+
+${({ status }) =>
+  status === 'ok' &&
+  css`
+    background: #6ab04c;
+  `}
 `;
 
 export const Resolution = styled.ul`
@@ -72,8 +139,4 @@ export const ResolutionItem = styled.li<{ active: boolean }>`
   + li {
     margin-left: 0.5rem;
   }
-`;
-
-export const ChartRow = styled(Row)`
-  flex: 1;
 `;

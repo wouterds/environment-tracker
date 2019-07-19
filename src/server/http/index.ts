@@ -26,6 +26,7 @@ app
       handlers.measurements.averages,
     );
     server.get('/api/measurements/:sensor/last', handlers.measurements.last);
+    server.get('/api/ping', handlers.ping);
     server.get('*', handlers.wildcard(app));
 
     server.listen(port, () => {
