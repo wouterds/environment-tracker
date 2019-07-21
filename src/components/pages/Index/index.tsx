@@ -21,6 +21,7 @@ const resolutions = ['1d', '1w', '1m', '1y'];
 const Index = () => {
   const [resolution, setResolution] = useState('1d');
   const [status, setStatus] = useState<string | null>(null);
+  const [statusTitle, setStatusTitle] = useState('');
   const [delay, setDelay] = useState(500);
 
   useEffect(() => {
@@ -61,6 +62,18 @@ const Index = () => {
 
       setStatus('ok');
     })().catch();
+
+    switch (status) {
+      case 'ok':
+        setStatusTitle('API is reachable');
+        break;
+      case 'error':
+        setStatusTitle('API is not reachable');
+        break;
+      case null:
+        setStatusTitle('Checking API connection');
+        break;
+    }
   }, [status]);
 
   return (
@@ -128,7 +141,8 @@ const Index = () => {
           <FooterColumn>
             <div>&copy; {new Date().getFullYear()} Wouter De Schuyter</div>
             <div>
-              v{process.env.VERSION} - API <Status status={status} />
+              v{process.env.VERSION}{' '}
+              <Status status={status} title={statusTitle} />
             </div>
           </FooterColumn>
         </Row>
