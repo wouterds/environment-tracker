@@ -52,7 +52,7 @@ export default (props: Props) => {
     fetchCurrentValue().catch();
 
     const chartInterval = setInterval(fetchChart, 30000);
-    const currentValueInterval = setInterval(fetchCurrentValue, 3000);
+    const currentValueInterval = setInterval(fetchCurrentValue, 10000);
 
     return () => {
       clearInterval(chartInterval);
