@@ -16,10 +16,10 @@ import {
   Status,
 } from './styles';
 
-const resolutions = ['1d', '1w', '1m', '1y'];
+const resolutions = ['6h', '12h', '1d', '1w', '1m', '1y'];
 
 const Index = () => {
-  const [resolution, setResolution] = useState('1d');
+  const [resolution, setResolution] = useState('12h');
   const [status, setStatus] = useState<string | null>(null);
   const [statusTitle, setStatusTitle] = useState('');
   const [delay, setDelay] = useState(500);

@@ -1,4 +1,4 @@
-import { subDays, subMonths, subWeeks, subYears } from 'date-fns';
+import { subDays, subHours, subMonths, subWeeks, subYears } from 'date-fns';
 import { Request, Response } from 'express';
 import { BAD_REQUEST } from 'http-status';
 import MeasurementRepository from 'repositories/measurement';
@@ -21,6 +21,12 @@ export default async (req: Request, res: Response): Promise<void> => {
   let from: Date | null = null;
 
   switch (resolution) {
+    case '6h':
+      from = subHours(to, 6);
+      break;
+    case '12h':
+      from = subHours(to, 12);
+      break;
     case '1d':
       from = subDays(to, 1);
       break;
