@@ -1,6 +1,6 @@
 {
   "name": "environment-tracker",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "private": true,
   "scripts": {
     "start": "npm run server",
