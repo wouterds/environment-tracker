@@ -29,18 +29,37 @@ export const ChartContent = styled.div`
   justify-content: center;
 `;
 
-export const CurrentValue = styled.div`
-  color: #050f18;
-  font-size: 2rem;
+export const Title = styled.div`
+  z-index: 1;
   position: absolute;
-  top: 1.25rem;
-  left: 1.25rem;
+  background: #fcfcfc;
+  border-right: 0.05rem solid #eceff1;
+  border-bottom: 0.05rem solid #eceff1;
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 0.25rem;
+  padding: 0.35rem 0.5rem;
+  line-height: 1;
+  color: #6f8597;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  letter-spacing: 0.1rem;
+  word-spacing: 0.1rem;
+`;
+
+export const CurrentValue = styled.div`
+  z-index: 1;
+  position: absolute;
+  top: 2rem;
+  left: 1.5rem;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.25rem;
   display: inline-block;
-  z-index: 1;
   pointer-events: none;
+  color: #050f18;
+  font-size: 2rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.05em;
 

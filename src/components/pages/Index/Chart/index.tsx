@@ -6,7 +6,13 @@ import minBy from 'lodash/minBy';
 import { useEffect, useState } from 'react';
 import { Line, LineChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
 import CustomTooltip from '../Tooltip';
-import { Chart, ChartContent, ChartFooter, CurrentValue } from './styles';
+import {
+  Chart,
+  ChartContent,
+  ChartFooter,
+  CurrentValue,
+  Title,
+} from './styles';
 
 interface Props {
   sensor: string;
@@ -68,6 +74,7 @@ export default (props: Props) => {
   return (
     <Chart>
       <ChartContent>
+        <Title>{sensor}</Title>
         {currentValue !== null && (
           <CurrentValue>
             {currentValue.toFixed(2)}
