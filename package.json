@@ -35,7 +35,7 @@
     "react-dom": "^16.8.6",
     "recharts": "^1.6.2",
     "remove": "^0.1.5",
-    "sequelize": "^5.9.4",
+    "sequelize": "^5.15.1",
     "styled-components": "^4.3.2",
     "styled-components-breakpoint": "^2.1.1",
     "tsconfig-paths": "^3.8.0"
